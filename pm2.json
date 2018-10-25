@@ -1,0 +1,18 @@
+{
+  "apps": [
+    {
+      "name": "doodooke",
+      "script": "app.js",
+      "watch": false,
+      "exec_mode": "fork",
+      "error_file": "./logs/error.log",
+      "out_file": "./logs/out.log",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss",
+      "node_args": [],
+      "args": [],
+      "env": {
+        "NODE_ENV":"docker" 
+      }
+    }
+  ]
+}

@@ -1,0 +1,591 @@
+<template>
+    <el-row>
+        <el-dialog title="选择绑定事件" :visible.sync="showLink" @close="cancel" width="800px" top="20px" :modal-append-to-body="false">
+            <el-tabs v-model="tabname" type="card" @tab-click="changeTabs">
+                <el-tab-pane label="页面" name="1">
+                    <el-table :data="pageData" stripe style="margin-bottom:60px">
+                        <el-table-column prop="name" label="页面" header-align="center" align="center">
+                        </el-table-column>
+                        <el-table-column label="创建时间" header-align="center" align="center">
+                            <template slot-scope="scope">
+                                <el-row>{{format(scope.row.created_at)}}</el-row>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="操作" align="center" header-align="center">
+                            <template slot-scope="scope">
+                                <el-button type="text" size="mini" @click="selectPage(scope.row)">选择</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-tab-pane>
+                <el-tab-pane label="营销" name="2">
+                    <el-row style='border:1px solid #eee'>
+                        <el-col :span='17' class='ump'>
+                            <div class='ump-comp' v-for='(item,index) in umpData' :key='index' :style='{borderColor:item.id==umpSelect?"#06a0fd":"#eee"}' @click='selectUmp(item.id)' v-if="item.status">
+                                <img :src="item.icon">
+                                <div style='text-align: center'>{{item.name}}</div>
+                            </div>
+                        </el-col>
+                        <el-col :span='7' style='padding:0 10px'>
+                            <div style='font-size: 14px;margin:8px 0'>示例</div>
+                            <div style='width:100%;'>
+                                <img :src="umpData[umpSelect-1].img" style='width:100%;height:100%'>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </el-tab-pane>
+            </el-tabs>
+            <p slot="footer">
+                <el-button type='primary' v-show='tabname==2' @click='okUmp'>确定</el-button>
+            </p>
+        </el-dialog>
+        <!-- 集赞 -->
+        <el-dialog title="集赞活动" :visible.sync="jizanModal" width='800px' top="20px" :modal-append-to-body="false">
+            <el-alert title="提示" :closable="false" show-icon v-show='!jizanData.length' style="margin-bottom:24px">
+                <p>暂无活动，请先去
+                    <nuxt-link to='/jizan/config'>设置活动</nuxt-link>
+                </p>
+            </el-alert>
+            <el-table :data="jizanData" stripe>
+                <el-table-column prop="name" label="活动名称" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column prop="time" label="时间" header-align="center" align="center">
+                    <template slot-scope="scoped">
+                        <el-row>{{format(scoped.row.started_at)}}</el-row>
+                        <el-row>{{format(scoped.row.ended_at)}}</el-row>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="status" label="状态" header-align="center" align="center">
+                    <template slot-scope="scoped">
+                        <el-row style="font-weight:700;color:#19be6b" v-if="scoped.row.status">开启</el-row>
+                        <el-row style="font-weight:700;color:#f50" v-else>关闭</el-row>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" align="center" header-align="center">
+                    <template slot-scope="scope">
+                        <el-button type="text" size="mini" @click="selectedJizan(scope.row)">选择</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <el-row>
+                <el-pagination background layout="total,prev,pager,next" :total="pagination.rowCount" :page-size="pagination.pageSize" @current-change="changePage" style="float:right;margin:24px 0"></el-pagination>
+            </el-row>
+            <p slot="footer"></p>
+        </el-dialog>
+        <!-- 小程序 -->
+        <el-dialog title="小程序" :visible.sync="wxaModal" width='800px' top="20px" :modal-append-to-body="false">
+            <el-alert title="提示" :closable="false" show-icon v-show='!wxaData.length' style="margin-bottom:24px">
+                <p>暂无小程序，请先去
+                    <nuxt-link to='/miniapps'>设置小程序</nuxt-link>
+                </p>
+            </el-alert>
+            <el-table :data="wxaData" stripe>
+                <el-table-column prop="name" label="名称" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column prop="appid" label="appid" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column label="操作" align="center" header-align="center">
+                    <template slot-scope="scope">
+                        <el-button type="text" size="mini" @click="selectWxa(scope.row)">选择</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <el-row>
+                <el-pagination background layout="total,prev,pager,next" :total="pagination.rowCount" :page-size="pagination.pageSize" @current-change="changePage" style="float:right;margin:24px 0"></el-pagination>
+            </el-row>
+            <p slot="footer"></p>
+        </el-dialog>
+        <!-- 拨号 -->
+        <el-dialog title="拨号" :visible.sync="phoneModal" width='800px' top="20px" :modal-append-to-body="false">
+            <el-alert title="提示" :closable="false" show-icon v-show='!phoneData.length' style="margin-bottom:24px">
+                <p>暂无联系人，请先去
+                    <nuxt-link to='/contacts'>设置联系人</nuxt-link>
+                </p>
+            </el-alert>
+            <el-table :data="phoneData" stripe>
+                <el-table-column prop="name" label="姓名" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column prop="phone" label="电话" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column label="操作" align="center" header-align="center">
+                    <template slot-scope="scope">
+                        <el-button type="text" size="mini" @click="selectPhone(scope.row)">选择</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <el-row>
+                <el-pagination background layout="total,prev,pager,next" :total="pagination.rowCount" :page-size="pagination.pageSize" @current-change="changePage" style="float:right;margin:24px 0"></el-pagination>
+            </el-row>
+            <p slot="footer"></p>
+        </el-dialog>
+        <!-- 小程序插件 -->
+        <el-dialog title="小程序插件" :visible.sync="pluginModal" width='800px' top="20px" :modal-append-to-body="false">
+            <el-alert title="提示" :closable="false" show-icon v-show='!pluginData.length' style="margin-bottom:24px">
+                <p>暂无小程序插件，请先去
+                    <nuxt-link to='/plugin'>设置小程序插件</nuxt-link>
+                </p>
+            </el-alert>
+            <el-table :data="pluginData" stripe>
+                <el-table-column prop="name" label="名称" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column prop="appid" label="appid" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column label="操作" align="center" header-align="center">
+                    <template slot-scope="scope">
+                        <el-button type="text" size="mini" @click="selectPlugin(scope.row)">选择</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <el-row>
+                <el-pagination background layout="total,prev,pager,next" :total="pagination.rowCount" :page-size="pagination.pageSize" @current-change="changePage" style="float:right;margin:24px 0"></el-pagination>
+            </el-row>
+            <p slot="footer"></p>
+        </el-dialog>
+        <!-- 商品 -->
+        <el-dialog title="选择商品" :visible.sync="showProduct" width='800px' top="20px" :modal-append-to-body="false">
+            <el-alert title="提示" :closable="false" show-icon v-show='!productData.length' style="margin-top:-24px">
+                <p>暂无商品，请先去
+                    <nuxt-link to='/plugin'>设置商品</nuxt-link>
+                </p>
+            </el-alert>
+            <el-row style="padding:24px;background:#f8f8f8;margin:10px 0">
+                <el-col :span="13">
+                    <span style="font-size:14px">商品名称：</span>
+                    <el-input style="width:280px" v-model="keyword" size="small" placeholder="请输入关键字搜索"></el-input>
+                </el-col>
+                <el-col :span="10">
+                    <el-button type="primary" size="small" @click="searchProduct">搜索</el-button>
+                    <el-button type="text" size="small" @click="clearSearch">清空</el-button>
+                </el-col>
+            </el-row>
+            <el-table :data="productData" stripe>
+                <el-table-column label="商品" header-align="center" align="center">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.img_url" alt="" style="width:50px;height:50px">
+                    </template>
+                </el-table-column>
+                <el-table-column prop="name" label="名称" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column prop="price" label="价格" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column label="操作" align="center" header-align="center">
+                    <template slot-scope="scope">
+                        <el-button type="text" size="mini" @click="selectProduct(scope.row)">选择</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <el-row>
+                <el-pagination background layout="total,prev,pager,next" :total="pagination.rowCount" :page-size="pagination.pageSize" @current-change="changePage" style="float:right;margin:24px 0"></el-pagination>
+            </el-row>
+            <p slot="footer"></p>
+        </el-dialog>
+    </el-row>
+</template>
+<script>
+export default {
+    props: {
+        showModal: {
+            default: false
+        }
+    },
+    watch: {
+        showModal(newVal, oldVal) {
+            this.showLink = newVal;
+            this.tabname = "1";
+            if (newVal) {
+                this.getPage();
+            }
+        }
+    },
+    data() {
+        return {
+            showLink: false,
+            tabname: "1",
+            pageData: [],
+            //营销组件
+            umpData: [
+                {
+                    id: 1,
+                    name: "社区",
+                    icon: "/assets/bbs-img.png",
+                    img: "/assets/ump_1.png",
+                    status: true
+                },
+                {
+                    id: 2,
+                    name: "集赞",
+                    icon: "/assets/jizan-img.png",
+                    img: "/assets/ump_2.png",
+                    status: true
+                },
+                {
+                    id: 3,
+                    name: "文章",
+                    icon: "/assets/article-img.png",
+                    img: "/assets/ump_3.png",
+                    status: true
+                },
+                {
+                    id: 4,
+                    name: "小程序",
+                    icon: "/assets/xcx.png",
+                    img: "/assets/ump_4.jpg",
+                    status: true
+                },
+                {
+                    id: 5,
+                    name: "拨号",
+                    icon: "/assets/phone-img.png",
+                    img: "/assets/ump_5.jpg",
+                    status: true
+                },
+                {
+                    id: 6,
+                    name: "买单",
+                    icon: "/assets/storepay-img.png",
+                    img: "/assets/ump_6.jpg",
+                    status: true
+                },
+                {
+                    id: 7,
+                    name: "WIFI",
+                    icon: "/assets/wifi-img.png",
+                    img: "/assets/ump_7.jpg",
+                    status: true
+                },
+                {
+                    id: 8,
+                    name: "小程序插件",
+                    icon: "/assets/plugin-img.png",
+                    img: "/assets/ump_8.jpg",
+                    status: true
+                },
+                {
+                    id: 9,
+                    name: "添加到我的小程序",
+                    icon: "/assets/mywxa-img.png",
+                    img: "/assets/ump_9.jpg",
+                    status: true
+                },
+                {
+                    id: 10,
+                    name: "商品详情",
+                    icon: "/assets/product_detail.png",
+                    img: "/assets/detail_1.jpg",
+                    status: this.$cookies.get("layout") == "shop" ? true : false
+                },
+                {
+                    id: 11,
+                    name: "红包",
+                    icon: "/assets/hongbao-img.png",
+                    img: "/assets/ump_11.jpg",
+                    status: this.$cookies.get("layout") == "shop" ? true : false
+                },
+                {
+                    id: 12,
+                    name: "我的",
+                    icon: "/assets/mine-img.png",
+                    img: "/assets/ump_12.jpg",
+                    status: this.$cookies.get("layout") == "shop" ? true : false
+                },
+                {
+                    id: 13,
+                    name: "购物车",
+                    icon: "/assets/cart-img.png",
+                    img: "/assets/ump_13.jpg",
+                    status: this.$cookies.get("layout") == "shop" ? true : false
+                }
+            ],
+            umpSelect: 1,
+            jizanModal: false,
+            jizanData: [],
+            pagination: {
+                page: 1,
+                pageCount: 0,
+                pageSize: 0,
+                rowCount: 0
+            },
+            wxaModal: false,
+            wxaData: [],
+            phoneModal: false,
+            phoneData: [],
+            pluginModal: false,
+            pluginData: [],
+            showProduct: false,
+            keyword: "",
+            productData: []
+        };
+    },
+    methods: {
+        changeTabs(tab) {
+            this.pagination.page = 1;
+            if (this.tabname == 1) {
+                this.getPage();
+            }
+            if (this.tabname == 2) {
+                this.umpSelect = 1;
+            }
+        },
+        async getPage() {
+            const page = await this.$axios.$get("/api/diy/home/page/index");
+            if (page && page.errmsg === "ok") {
+                this.pageData = page.data;
+            }
+        },
+        //选择页面
+        selectPage(item) {
+            this.$emit("on-select", {
+                targetUrl: "/pages/index/index?id=" + item.id,
+                targetType: "page"
+            });
+        },
+        //选择营销组件
+        selectUmp(id) {
+            this.umpSelect = id;
+        },
+        okUmp() {
+            this.pagination.page = 1;
+            if (this.umpSelect == 1) {
+                //社区
+                this.$emit("on-select", {
+                    targetUrl: "/pages/bbs/index/index",
+                    targetType: "page"
+                });
+            }
+            if (this.umpSelect == 2) {
+                //集赞
+                this.jizanModal = true;
+                this.getJizan();
+            }
+            if (this.umpSelect == 3) {
+                //文章
+                this.$emit("on-select", {
+                    targetUrl: "/pages/article/index",
+                    targetType: "page"
+                });
+            }
+            if (this.umpSelect == 4) {
+                //小程序
+                this.wxaModal = true;
+                this.getWxa();
+            }
+            if (this.umpSelect == 5) {
+                //拨号
+                this.phoneModal = true;
+                this.getPhone();
+            }
+            if (this.umpSelect == 6) {
+                //到店付
+                this.$emit("on-select", {
+                    targetUrl: "/pages/bill/index",
+                    targetType: "page"
+                });
+            }
+            if (this.umpSelect == 7) {
+                //wifi
+                this.$emit("on-select", {
+                    targetUrl: "/pages/wifi/index/index",
+                    targetType: "page"
+                });
+            }
+            if (this.umpSelect == 8) {
+                //小程序插件
+                this.pluginModal = true;
+                this.getPlugin();
+            }
+            if (this.umpSelect == 9) {
+                this.$emit("on-select", {
+                    targetUrl: "添加到我的小程序",
+                    targetType: "addMyMiniapp"
+                });
+            }
+            if (this.umpSelect == 10) {
+                //商品详情
+                this.showProduct = true;
+                this.getProduct();
+            }
+            if (this.umpSelect == 11) {
+                //红包
+                this.$emit("on-select", {
+                    targetUrl: "/pages/shop/coupons/open/index",
+                    targetType: "page"
+                });
+            }
+            if (this.umpSelect == 12) {
+                //我的
+                this.$emit("on-select", {
+                    targetUrl: "/pages/shop/user/index",
+                    targetType: "page"
+                });
+            }
+            if (this.umpSelect == 13) {
+                //购物车
+                this.$emit("on-select", {
+                    targetUrl: "/pages/shop/cart/index",
+                    targetType: "page"
+                });
+            }
+        },
+        //集赞
+        async getJizan() {
+            let jizan_data = await this.$axios.$get(
+                `/api/jizan/home/jizan/index?page=${this.pagination.page}`
+            );
+            if (jizan_data && jizan_data.errmsg === "ok") {
+                this.jizanData = jizan_data.data.data;
+                this.pagination = jizan_data.data.pagination;
+            }
+        },
+        selectedJizan(item) {
+            this.$emit("on-select", {
+                targetUrl: `/pages/jizan/index?id=${item.id}`,
+                targetType: "page"
+            });
+            this.jizanModal = false;
+        },
+        //小程序列表
+        async getWxa() {
+            const res = await this.$axios.$get(
+                `/api/miniapps/home/miniapps/index?page=${this.pagination.page}`
+            );
+            if (res && res.errmsg === "ok") {
+                this.wxaData = res.data.data;
+                this.pagination = res.data.pagination;
+            }
+        },
+        selectWxa(item) {
+            this.$emit("on-select", {
+                targetUrl: item.appid,
+                targetType: "wxa"
+            });
+            this.wxaModal = false;
+        },
+        //联系人列表
+        async getPhone() {
+            const res = await this.$axios.$get(
+                `/api/contacts/home/contacts/index?page=${this.pagination.page}`
+            );
+            if (res && res.errmsg === "ok") {
+                this.phoneData = res.data.data;
+                this.pagination = res.data.pagination;
+            }
+        },
+        selectPhone(item) {
+            this.$emit("on-select", {
+                targetUrl: item.phone,
+                targetType: "tel"
+            });
+            this.phoneModal = false;
+        },
+        //小程序插件列表
+        async getPlugin() {
+            const res = await this.$axios.$get(
+                `/api/wxaplugins/home/wxaplugins/index?page=${
+                    this.pagination.page
+                }`
+            );
+            if (res && res.errmsg === "ok") {
+                this.pluginData = res.data.data;
+            }
+        },
+        selectPlugin(item) {
+            this.$emit("on-select", {
+                targetUrl: item.appid,
+                targetType: "plugin"
+            });
+            this.pluginModal = false;
+        },
+        changePage(page) {
+            this.pagination.page = page;
+            if (this.umpSelect == 2) {
+                this.getJizan();
+            }
+            if (this.umpSelect == 4) {
+                this.getWxa();
+            }
+            if (this.umpSelect == 5) {
+                this.getPhone();
+            }
+            if (this.umpSelect == 8) {
+                this.getPlugin();
+            }
+            if (this.umpSelect == 10) {
+                this.getProduct();
+            }
+        },
+        //商品
+        async getProduct() {
+            let url = `/api/shop/home/shop/product/product/index?page=${
+                this.pagination.page
+            }`;
+            if (this.keyword) {
+                url += `&keyword=${this.keyword}`;
+            }
+            const product = await this.$axios.$get(url);
+            if (product && product.errmsg === "ok") {
+                this.productData = product.data.data;
+                this.pagination = product.data.pagination;
+            }
+        },
+        //搜索
+        searchProduct() {
+            this.pagination.page = 1;
+            this.getProduct();
+        },
+        clearSearch() {
+            this.keyword = "";
+            this.pagination.page = 1;
+            this.getProduct();
+        },
+        selectProduct(row) {
+            this.$emit("on-select", {
+                targetUrl: `/pages/shop/product/product-detail/index?id=${
+                    row.id
+                }`,
+                targetType: "page"
+            });
+            this.showProduct = false;
+        },
+        //取消
+        cancel() {
+            this.$emit("on-select", false);
+        }
+    }
+};
+</script>
+<style scoped>
+.ump {
+    height: 450px;
+    padding: 12px;
+    border-right: 1px solid #eee;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.ump::-webkit-scrollbar {
+    display: none;
+}
+
+.ump-comp {
+    width: 118px;
+    height: 110px;
+    padding: 10px 20px;
+    border: 1px solid #eee;
+    overflow: hidden;
+    text-align: center;
+    display: inline-block;
+    margin-right: 12px;
+    margin-bottom: 12px;
+}
+
+.ump-comp:nth-child(4n) {
+    margin-right: 0;
+}
+
+.ump-comp img {
+    width: 50px;
+    height: 50px;
+}
+</style>
+
+

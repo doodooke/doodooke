@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+<html class=" portrait">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>青否小程序-智慧零售</title>
+    <meta name="Description" content="青否小程序，小程序平台，国内首家小程序平台，提供完整的行业小程序解决方案。一键绑定！自动更新，30秒生成自己的小程序！">
+    <meta name="Keywords" content="青否小程序，小程序平台，小程序，微信小程序，小程序定制，小程序开发，小程序制作">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" href="/www/old/public/css/typo.css">
+    <link rel="stylesheet" href="/www/old/public/css/base.css">
+    <link rel="stylesheet" href="/www/old/public/css/style.css">
+    <link rel="stylesheet" href="/www/old/public/css/swiper.min.css">
+    <script type="text/javascript" src="/www/old/public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/kefu.js"></script>
+    <script>
+        coolsite360 = {
+            PlayerPlugins: []
+        };
+    </script>
+    <style type="text/css">
+        .fl>li:nth-child(2)>a {
+            color: #39f;
+        }
+    </style>
+    <link href="/www/old/public/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/www/old/public/css/jquery.fancybox.min.css" rel="stylesheet">
+
+    <link type="text/css" href="/www/old/public/css/play.built.f82c0c2f.cache.css" rel="stylesheet" media="all">
+
+    <!--[if lt ie 9]>
+      <script type="text/javascript" src="http://o3bnyc.creatby.com/play-coolsite360/thirdparty_js/html5shiv.js"></script>
+      <script type="text/javascript" src="http://o3bnyc.creatby.com/play-coolsite360/thirdparty_js/selectivizr-min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/www/old/public/js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+    <link type="text/css" href="/www/old/public/css/global_main.css" rel="stylesheet">
+
+    <!--[if lte IE 8]>
+      <link type="text/css" href="/sites/ywldfg_draft/styles_forie.css" rel="stylesheet">
+      <script type="text/javascript" src="http://o3bnyc.creatby.com/diazo/c_play/thirdparty_js/respond.src.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        if (navigator.appVersion.match(/MSIE [678]./i) == null) {
+            document.writeln('<link type="text/css" href="/www/old/public/css/styles1.css" rel="stylesheet">')
+        }
+    </script>
+    <link type="text/css" href="/www/old/public/css/styles1.css" rel="stylesheet">
+
+
+
+    <style>
+        @font-face {
+            font-family: 'Caudex';
+            font-style: normal;
+            font-weight: 400;
+            src: local(Caudex), url(http://gfonts.coolsite360.com/s/caudex/v6/6CwZGTsjYRXUiSDlabVS2n-_kf6ByYO6CLYdB4HQE-Y.woff2) format("woff2");
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: 'Caudex';
+            font-style: normal;
+            font-weight: 400;
+            src: local(Caudex), url(http://gfonts.coolsite360.com/s/caudex/v6/uKDHrXVo0UKVEKBdFH13fH-_kf6ByYO6CLYdB4HQE-Y.woff2) format("woff2");
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: 'Caudex';
+            font-style: normal;
+            font-weight: 400;
+            src: local(Caudex), url(http://gfonts.coolsite360.com/s/caudex/v6/M9hv5IlpxEaNftgkD8754H-_kf6ByYO6CLYdB4HQE-Y.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Caudex';
+            font-style: normal;
+            font-weight: 400;
+            src: local(Caudex), url(http://gfonts.coolsite360.com/s/caudex/v6/oK9B5EatFn1pC05ZmnkMduvvDin1pK8aKteLpeZ5c0A.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Oswald';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Oswald Bold'), local(Oswald-Bold), url(http://gfonts.coolsite360.com/s/oswald/v13/smkSb2csQFrK-wxLDSe5R4X0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Oswald';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Oswald Bold'), local(Oswald-Bold), url(http://gfonts.coolsite360.com/s/oswald/v13/69aXBpgQONjr_rHWADjBuYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: 'Oswald';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Oswald Bold'), local(Oswald-Bold), url(http://gfonts.coolsite360.com/s/oswald/v13/dI-qzxlKVQA6TUC5RKSb34X0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Oswald';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Oswald Bold'), local(Oswald-Bold), url(http://gfonts.coolsite360.com/s/oswald/v13/bH7276GfdCjMjApa_dkG6ZBw1xU1rKptJj_0jans920.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Playfair Display'), local(PlayfairDisplay-Regular), url(http://gfonts.coolsite360.com/s/playfairdisplay/v10/2NBgzUtEeyB-Xtpr9bm1CRw5vVFbIG7DatP53f3SWfE.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Playfair Display'), local(PlayfairDisplay-Regular), url(http://gfonts.coolsite360.com/s/playfairdisplay/v10/2NBgzUtEeyB-Xtpr9bm1CSVudZg2I_9CBJalMPResNk.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Playfair Display'), local(PlayfairDisplay-Regular), url(http://gfonts.coolsite360.com/s/playfairdisplay/v10/2NBgzUtEeyB-Xtpr9bm1CRD8Ne_KjP89kA3_zOrHj8E.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/ty9dfvLAziwdqQ2dHoyjphkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/frNV30OaYdlFRtH2VnZZdhkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/gwVJDERN2Amz39wrSoZ7FxkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/aZMswpodYeVhtRvuABJWvBkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/VvXUGKZXbHtX_S_VCTLpGhkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/e7MeVAyvogMqFwwl61PKhBkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/2tsd397wLxj96qwHyNIkxHYhjbSpvc47ee6xR_80Hnw.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/0eC6fl06luXEYWpBSJvXCIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/Fl4y0QdOxyyTHEGMXX8kcYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/-L14Jk06m6pUHB-5mXQQnYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/I3S1wsgSg9YCurV6PUkTOYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/NYDWBdD4gIq26G5XYbHsFIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/Pru33qjShpZSmG3z6VYwnYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/Hgo13k-tfSpn0qi1SFdUfZBw1xU1rKptJj_0jans920.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/s7gftie1JANC-QmDJvMWZoX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/3Y_xCyt7TNunMGg0Et2pnoX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/WeQRRE07FDkIrr29oHQgHIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/jyIYROCkJM3gZ4KV00YXOIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/phsu-QZXz1JBv0PbFoPmEIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/9_7S_tWeGDh5Pq3u05RVkoX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/mnpfi9pxYH-Go5UiibESIpBw1xU1rKptJj_0jans920.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+    </style>
+
+</head>
+
+
+<body class="body_jpiUJh" data-c_tl_id="M_7cdf39fd27785094">
+    <div class="container-fluid c-section section_4sDf1z c-scrollIn" data-c_tl_id="M_5e9db67a2cea63ff" id="section_8751193e">
+        <div class="c-div div_0reQVT" style="margin-top: 0px;">
+            <div class="container c-container container_EubgaZ">
+                <h1 class="c-heading heading_0Ymksv 0 animated" data-c_cssani="0|1|0|0" style="animation-delay: 0s; animation-duration: 1s;">智慧零售</h1>
+                <img class="c-image image_UmnJfe" src="/www/old/public/img/49daf7bc7669131672cc29c8b10abf31_origin.png">
+            </div>
+            <p class="c-paragraph paragraph_U1NfZr 0 animated" data-c_cssani="0|1|0|0" style="animation-delay: 0s; animation-duration: 1s;width:100%;text-align: center;">线上线下同步运营、打造属于自己的智慧零售店铺 </p>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_oC21Ot c-scrollIn" data-c_tl_id="M_995342a3062c4ca0" id="section_dd3a1d8f">
+        <div class="c-div div_VS3uzB">
+            <div class="row c-row row_zKQdUE">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_x1kfAm">
+                    <img class="c-image image_dIc677" data-c_cssani="zoomIn|1|1|0" src="/www/old/public/img/8de3b29ccc11c166b9619a7d671f1bd6_origin_cPYbBMq.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <div class="textblock_aHFBun" data-c_cssani="zoomIn|1|1|0" style="animation-delay: 0s; animation-duration: 0s;">
+                        <p>推荐商品</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_YHELKO">
+                    <img class="c-image image_dIc677" data-c_cssani="zoomIn|1|1|0" src="/www/old/public/img/a6dfa20c982ec8e9e329ec89b902a0b8_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <div class="textblock_aHFBun" data-c_cssani="zoomIn|1|1|0" style="animation-delay: 0s; animation-duration: 0s;">
+                        <p>多属性设置</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_0GAfzP">
+                    <img class="c-image image_dIc677" data-c_cssani="zoomIn|1|1|0" src="/www/old/public/img/fb2002ed48e09fd9b1ac8d6186de967c_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <div class="textblock_aHFBun" data-c_cssani="zoomIn|1|1|0" style="animation-delay: 0s; animation-duration: 0s;">
+                        <p>商品搜索</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_mdlDg3">
+                    <img class="c-image image_dIc677" data-c_cssani="zoomIn|1|1|0" src="/www/old/public/img/3dfd3e39c7c9e15497b8490edbec839f_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <div class="textblock_aHFBun" data-c_cssani="zoomIn|1|1|0" style="animation-delay: 0s; animation-duration: 0s;">
+                        <p>销量排行</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row c-row row_zKQdUE">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_x1kfAm">
+                    <img class="c-image image_dIc677" data-c_cssani="zoomIn|1|1|0" src="/www/old/public/img/ed970db299bb5d497daff16eb3214433_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <div class="textblock_aHFBun" data-c_cssani="zoomIn|1|1|0" style="animation-delay: 0s; animation-duration: 0s;">
+                        <p>商品收藏</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_YHELKO">
+                    <img class="c-image image_dIc677" data-c_cssani="zoomIn|1|1|0" src="/www/old/public/img/f20d17d27e6425fcc45f66dda48e86b8_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <div class="textblock_aHFBun" data-c_cssani="zoomIn|1|1|0" style="animation-delay: 0s; animation-duration: 0s;">
+                        <p>客服消息</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_0GAfzP">
+                    <img class="c-image image_dIc677" data-c_cssani="zoomIn|1|1|0" src="/www/old/public/img/5b286f96f3b7bf34018851cfce9d008c_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <div class="textblock_aHFBun" data-c_cssani="zoomIn|1|1|0" style="animation-delay: 0s; animation-duration: 0s;">
+                        <p>地址管理</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_mdlDg3">
+                    <img class="c-image image_dIc677" data-c_cssani="zoomIn|1|1|0" src="/www/old/public/img/a3005de5c3a43fda342b5519da5a7889_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <div class="textblock_aHFBun" data-c_cssani="zoomIn|1|1|0" style="animation-delay: 0s; animation-duration: 0s;">
+                        <p>运费模板</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_8yH8M0" data-c_tl_id="M_febbdf07e501f3c0" id="section_4845c897">
+        <div class="c-div div_Zlywot">
+            <div class="row c-row row_tToCcJ">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_anfoNo">
+                    <img class="c-image image_dljCGW" data-c_cssani="0|1|0|0" src="/www/old/public/img/277fd56ce67f702012b3257bb27f51b1_origin.png">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_1BbbAO">
+                    <h2 class="c-heading heading_qODPlj text1 text11 c-action-click" data-c_act_id="act_6f4ec8f3">三级分类设置、分类多级化</h2>
+                    <img class="c-image image_7htq85 spite" src="/www/old/public/img/7115067c3de4304c45e3263a648092b5_origin.png">
+                    <p class="c-paragraph paragraph_0XcPE0 text11 dec">支持设置三级分类、并可切换销量排行、价格排行显
+                        <br>示多种模式更加多样化选择</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_j3bife" id="section_60d3c7de">
+        <div class="c-div div_gebX93">
+            <img class="c-image image_4XN1cG" data-c_cssani="bounceInDown|1|0|0" src="/www/old/public/img/c6ee56b6149de5184a909b10e94ae8dc_origin.png">
+            <h1 class="c-heading heading_FZZoAH" data-c_cssani="0|1|0|0">扫一扫查看演示</h1>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_YQQpos" data-c_tl_id="M_f28a8c9ac72ee8c8" id="section_a246375d">
+        <div class="c-div div_qY7wIe">
+            <div class="row c-row row_Cz3jAX">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_i2b1Ca">
+                    <h2 class="c-heading heading_qODPlj text1 text11 text2 c-action-click" data-c_act_id="act_df0eae8d">多商品属性选择、更加便捷</h2>
+                    <p class="c-paragraph paragraph_kKPBwU">支持商品多属性设置、展示商品多规格，根据需求选择喜爱的商品</p>
+                    <img class="c-image image_7htq85 tip" src="/www/old/public/img/7115067c3de4304c45e3263a648092b5_origin.png">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_TGXahC">
+                    <img class="c-image image_qWjVE3" src="/www/old/public/img/ef62fe7a5c806500cb828c2940e7a239_origin.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_R75otV" data-c_tl_id="M_64ea0387d40bb356" id="section_dae59a0e">
+        <div class="c-div div_DcEOer">
+            <div class="row c-row row_XCiYEP">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_viIrUh">
+                    <img class="c-image image_S15iCx" data-c_cssani="0|1|0|0" src="/www/old/public/img/5646c6a85c005c3bda9cfd23ceffc972_origin.png">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_5RKlNU">
+                    <h2 class="c-heading heading_qODPlj text1 text11 c-action-click" data-c_act_id="act_fe0dec07" data-c_cssani="0|1|0|0">美观强大的个人中心</h2>
+                    <p class="c-paragraph paragraph_0XcPE0 text11">实时查看订单状态 、支持商品收藏 ， 收货地址管理
+                        <br>优惠券管理，并有领券中心领取更多优惠券，用户体验极佳</p>
+                    <img class="c-image image_7htq85" src="/www/old/public/img/7115067c3de4304c45e3263a648092b5_origin.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container c-container container_DaGLym">
+    <div class="c-div div_vA0rtn">
+        <h2 class="c-heading heading_gxzZo7">营销工具、快速吸引人气</h2>
+        <div class="textblock_BB36sK">
+            <p data-mce-style="text-align: center;" style="text-align: center;"><span data-mce-style="font-size: 18pt;" style="font-size: 18pt;">﻿</span>使用营销工具，快速吸粉，增加人气，吸引更多消费者</p>
+        </div>
+        <div class="row c-row row_N1ehkY">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 c-column column_DZadYv">
+                <img class="c-image image_37tVc6" data-c_cssani="zoomIn|1|5|0" src="/www/old/public/img/2015ddda2a24ac70f3ed568e309ce34e_origin.png" style="animation-delay: 0s; animation-duration: 0s;">
+                <div class="textblock_nLa1ch">
+                    <p>优惠券</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 c-column column_3wm0qK">
+                <img class="c-image image_j8wn0Y" data-c_cssani="zoomIn|1|5|0" src="/www/old/public/img/24bc5f7e68656c94635ca8b75be15472_origin.png" style="animation-delay: 0s; animation-duration: 0s;">
+                <div class="textblock_nLa1ch">
+                    <p>满减</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 c-column column_AY7wU8">
+                <img class="c-image image_9MHv8d" data-c_cssani="zoomIn|1|5|0" src="/www/old/public/img/bff206c3b085c2927dd922446c066794_origin.png" style="animation-delay: 0s; animation-duration: 0s;">
+                <div class="textblock_nLa1ch">
+                    <p data-mce-style="text-align: center;" style="text-align: center;">   更多...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+    <div class="container c-container container_DaGLym">
+        <div class="c-div div_vA0rtn">
+            <h2 class="c-heading heading_gxzZo7">营销工具、快速吸引人气</h2>
+            <div class="textblock_BB36sK">
+                <p data-mce-style="text-align: center;" style="text-align: center;">
+                    <span data-mce-style="font-size: 18pt;" style="font-size: 18pt;">﻿</span>使用营销工具，快速吸粉，增加人气，吸引更多消费者</p>
+            </div>
+            <div class="row c-row row_nzJ8kY">
+                <div class="col-lg-2_4 col-md-2_4 col-sm-2_4 col-xs-12 c-column column_aXCzpb">
+                    <img class="c-image image_Teb03R" data-c_cssani="zoomIn|1|3|0" src="/www/old/public/img/e310245975645c74e42f0c7f3ed85734_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <h1 class="c-heading heading_mDQNkB" data-c_cssani="zoomIn|1|3|0" style="animation-delay: 0s; animation-duration: 0s;">优惠券</h1>
+                </div>
+                <div class="col-lg-2_4 col-md-2_4 col-sm-2_4 col-xs-12 c-column column_kyMi0C">
+                    <img class="c-image image_Teb03R" data-c_cssani="zoomIn|1|3|0" src="/www/old/public/img/1d6bedb049c59489ca37670cf25748bc_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <h1 class="c-heading heading_mDQNkB" data-c_cssani="zoomIn|1|3|0" style="animation-delay: 0s; animation-duration: 0s;">满减</h1>
+                </div>
+                <div class="col-lg-2_4 col-md-2_4 col-sm-2_4 col-xs-12 c-column column_YRclpK">
+                    <img class="c-image image_Teb03R" data-c_cssani="zoomIn|1|3|0" src="/www/old/public/img/d9a559162c998c5629295fe2fe4a2e23_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <h1 class="c-heading heading_mDQNkB" data-c_cssani="zoomIn|1|3|0" style="animation-delay: 0s; animation-duration: 0s;">分销</h1>
+                </div>
+                <div class="col-lg-2_4 col-md-2_4 col-sm-2_4 col-xs-12 c-column column_YNz9CT">
+                    <img class="c-image image_Teb03R" data-c_cssani="zoomIn|1|3|0" src="/www/old/public/img/163eb75640d818cba17151b7cd5d3a17_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <h1 class="c-heading heading_mDQNkB" data-c_cssani="zoomIn|1|3|0" style="animation-delay: 0s; animation-duration: 0s;">团购</h1>
+                </div>
+                <div class="col-lg-2_4 col-md-2_4 col-sm-2_4 col-xs-12 c-column column_OsdsMk">
+                    <img class="c-image image_Teb03R" data-c_cssani="zoomIn|1|3|0" src="/www/old/public/img/6d5c6d8e6cfae8dbb41ce567d50c0db2_origin.png"
+                        style="animation-delay: 0s; animation-duration: 0s;">
+                    <h1 class="c-heading heading_mDQNkB" data-c_cssani="zoomIn|1|3|0" style="animation-delay: 0s; animation-duration: 0s;">开店</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/www/old/public/js/youziku.justtime.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/index_data.js"></script>
+    <script>
+        var portal_url = '/sites/ywldfg_draft/';
+
+        var page_slug = 'index';
+    </script>
+
+
+
+
+
+    <script type="text/javascript" src="/www/old/public/js/jarallax.min.js"></script>
+    <script src="/www/old/public/js/headroom.min.js"></script>
+    <script src="/www/old/public/js/jQuery.headroom.min.js"></script>
+    <script src="/www/old/public/js/jquery.fancybox.min.js"></script>
+
+    <!--<script type="text/javascript" src="http://o3bnyc.creatby.com/diazo/c-built/requireJS/require.js"></script>-->
+    <!--<script>-->
+    <!--define('jquery',function(){});-->
+    <!--</script>-->
+    <!--<script>-->
+    <!--define('bootstrap',function(){});-->
+    <!--</script>-->
+    <script type="text/javascript" src="/www/old/public/js/vendor_c.bundle.built.e43e22b1.cache.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/pack.built.c634ee44.cache.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/cst.built.438db8a8.cache.js"></script>
+
+
+    <!--[if lte IE 8]>
+  <script type="text/javascript" src="http://o3bnyc.creatby.com/play-coolsite360/thirdparty_js/respond.src.js"></script>
+<![endif]-->
+
+    <!-- ie8 以下版本提示信息 -->
+    <!--[if lt ie 8]>
+  <script type="text/javascript">
+    window.onload=function(){
+      document.getElementById('browser-tip').style.display = "block";
+      document.getElementsByTagName('body')[0].style.paddingTop = "50px";
+    }
+    function hide(){
+      document.getElementById('browser-tip').style.display = "none";
+      document.getElementsByTagName('body')[0].style.paddingTop = "0px";
+    }
+  </script>
+<![endif]-->
+    <div id="browser-tip" style="position:fixed; top:0; left:0; right:0; z-index:9999; height:30px; line-height:33px; padding:10px 0 9px; text-indent:30px; font-size:15px; background:#fcf8e3; border-bottom:1px solid #fbeed5; width:100%;display:none;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="display:block; float:right; z-index:9999; line-height:36px; margin-right: 0px;padding:0; font-size:32px; color:#666; box-shadow: 0; text-shadow:none; text-align:center; filter:alpha(opacity=100); -khtml-opacity:1; opacity:1;"
+            onclick="hide()">×</button>
+        <p style="text-align: center;">
+            您当前使用的浏览器版本较低，为使您获得更好的操作体验，我们推荐您使用：
+            <span style="margin-left:10px;">
+                <a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" target="_blank">
+                    <img src="/www/old/public/img/compatible_ie.gif" width="31" height="30" alt="Internet Explorer" title="Internet Explorer">
+                </a>
+                <a href="http://www.google.com/intl/zh-CN/chrome/" target="_blank">
+                    <img src="/www/old/public/img/compatible_chrome.gif" width="31" height="30" alt="Google Chrome" title="Google Chrome">
+                </a>
+                <a href="http://www.mozilla.org/zh-CN/firefox/new/" target="_blank">
+                    <img src="/www/old/public/img/compatible_firefox.gif" width="31" height="30" alt="Firefox" title="Firefox">
+                </a>
+                <a href="http://support.apple.com/zh_CN/downloads/#safari" target="_blank">
+                    <img src="/www/old/public/img/compatible_safari.gif" width="28" height="30" alt="Safari" title="Safari">
+                </a>
+            </span>
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        console.log(document.body.scrollHeight);
+    </script>
+
+</body>
+
+
+</html>

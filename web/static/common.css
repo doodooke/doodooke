@@ -1,0 +1,115 @@
+html {
+    font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    word-spacing: 1px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    background: rgb(250, 250, 250);
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #409EFF;
+    cursor: pointer;
+}
+
+:focus {
+    outline: 0;
+}
+
+/* 样式自定义 */
+
+.el-input__inner {
+    border-radius: 0;
+}
+
+.el-card,
+.el-message {
+    border-radius: 0;
+}
+
+.el-table{
+	border:1px solid #ebeef5;
+	border-bottom:0;
+}
+
+textarea {
+    border-radius: 0 !important;
+}
+
+.text_overflow_line_1 {
+	-webkit-line-clamp: 1;
+}
+
+.text_overflow_line_2 {
+	-webkit-line-clamp: 2;
+}
+.text_overflow_line_3 {
+	-webkit-line-clamp: 3;
+}
+
+.text_overflow {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.text_ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* layout */
+#layout {
+    min-width: 1200px;
+    min-height: 100vh;
+    height: 100%;
+    position: relative;
+    padding-bottom: 70px;
+}
+.pay-modal {
+    text-align: center;
+    background: #f8f8f8;
+    padding: 20px;
+}
+.pay-modal-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #222;
+}
+.pay-modal-price {
+    width: 240px;
+    line-height: 42px;
+    border: 1px solid #b0b0b0;
+    margin: 15px auto;
+    border-radius: 4px;
+    color: #333;
+    cursor: pointer;
+}
+.pay-modal-tag {
+    background: #fc5151;
+    color: #fffabe;
+    padding: 2px 5px;
+    border-radius: 2px;
+    margin-left: 6px;
+}
+.pay-btn {
+    width: 164px;
+    height: 36px;
+    background: #fc5151;
+    line-height: 36px;
+    text-align: center;
+    margin: 20px auto;
+    color: #fff;
+    cursor: pointer;
+}

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html class=" portrait">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>青否小程序-多门店单页</title>
+    <meta name="Description" content="青否小程序，小程序平台，国内首家小程序平台，提供完整的行业小程序解决方案。一键绑定！自动更新，30秒生成自己的小程序！">
+    <meta name="Keywords" content="青否小程序，小程序平台，小程序，微信小程序，小程序定制，小程序开发，小程序制作">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="/www/old/public/css/base.css">
+    <link rel="stylesheet" href="/www/old/public/css/swiper.min.css">
+    <script type="text/javascript" src="/www/old/public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/kefu.js"></script>
+    <script>
+        coolsite360 = {
+            PlayerPlugins: []
+        };
+        var _gaq = _gaq || [], _paq = _paq || [];
+        var weixin_initial = 0, preview_mode = 0, clear_loading_progress_waiting = 0, weixin_config_ready = 0, epub360_domain = 'epub360';
+    </script>
+    <!--[if lt ie 9]>
+    <!--
+    <script>
+           (function() {
+          var testObject = {};
+          if (!(Object.setPrototypeOf || testObject.__proto__)) {
+              var nativeGetPrototypeOf = Object.getPrototypeOf;
+
+              Object.getPrototypeOf = function(object) {
+                  if (object.__proto__) {
+                      return object.__proto__;
+                  } else {
+                      return nativeGetPrototypeOf.call(Object, object);
+                  }
+              }
+          }
+        })();
+    </script>
+    -->
+    <script src="/www/old/public/js/es5-shim.js"></script>
+    <!--<script src="https://cdn.bootcss.com/es6-shim/0.35.3/es6-shim.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/es6-shim/0.35.3/es6-sham.js"></script>-->
+    <script type="text/javascript" src="/www/old/public/js/object-assign.min.js"></script>
+    <script src="/www/old/public/js/object-assign.min1.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/promise.js"></script>
+    <script>
+        // Polyfill, modifying the global Object
+        window.ObjectAssign.polyfill();
+    </script>
+    <!--[endif]---->
+
+    <link rel="stylesheet" type="text/css" href="/www/old/public/css/jquery.fancybox.min2.css">
+
+    <link rel="stylesheet" type="text/css" href="/www/old/public/css/font-awesome.min2.css">
+
+    <link rel="stylesheet" type="text/css" href="/www/old/public/css/animate.css">
+
+
+
+
+
+    <link type="text/css" href="/www/old/public/css/play.built.4bcc4227.cache.css" rel="stylesheet" media="all">
+
+
+    <script type="text/javascript" src="/www/old/public/js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+    <link type="text/css" href="/www/old/public/css/global_main2.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        if (navigator.appVersion.match(/MSIE [678]./i) == null) {
+            document.writeln('<link type="text/css" href="/www/old/public/css/styles8.css" rel="stylesheet">')
+        }
+    </script>
+    <link type="text/css" href="/www/old/public/css/styles8.css" rel="stylesheet">
+
+
+
+    <style>
+        @font-face {
+            font-family: 'Caudex';
+            font-style: normal;
+            font-weight: 400;
+            src: local(Caudex), url(http://gfonts.coolsite360.com/s/caudex/v6/6CwZGTsjYRXUiSDlabVS2n-_kf6ByYO6CLYdB4HQE-Y.woff2) format("woff2");
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: 'Caudex';
+            font-style: normal;
+            font-weight: 400;
+            src: local(Caudex), url(http://gfonts.coolsite360.com/s/caudex/v6/uKDHrXVo0UKVEKBdFH13fH-_kf6ByYO6CLYdB4HQE-Y.woff2) format("woff2");
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: 'Caudex';
+            font-style: normal;
+            font-weight: 400;
+            src: local(Caudex), url(http://gfonts.coolsite360.com/s/caudex/v6/M9hv5IlpxEaNftgkD8754H-_kf6ByYO6CLYdB4HQE-Y.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Caudex';
+            font-style: normal;
+            font-weight: 400;
+            src: local(Caudex), url(http://gfonts.coolsite360.com/s/caudex/v6/oK9B5EatFn1pC05ZmnkMduvvDin1pK8aKteLpeZ5c0A.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Oswald';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Oswald Bold'), local(Oswald-Bold), url(http://gfonts.coolsite360.com/s/oswald/v13/smkSb2csQFrK-wxLDSe5R4X0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Oswald';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Oswald Bold'), local(Oswald-Bold), url(http://gfonts.coolsite360.com/s/oswald/v13/69aXBpgQONjr_rHWADjBuYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: 'Oswald';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Oswald Bold'), local(Oswald-Bold), url(http://gfonts.coolsite360.com/s/oswald/v13/dI-qzxlKVQA6TUC5RKSb34X0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Oswald';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Oswald Bold'), local(Oswald-Bold), url(http://gfonts.coolsite360.com/s/oswald/v13/bH7276GfdCjMjApa_dkG6ZBw1xU1rKptJj_0jans920.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Playfair Display'), local(PlayfairDisplay-Regular), url(http://gfonts.coolsite360.com/s/playfairdisplay/v10/2NBgzUtEeyB-Xtpr9bm1CRw5vVFbIG7DatP53f3SWfE.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Playfair Display'), local(PlayfairDisplay-Regular), url(http://gfonts.coolsite360.com/s/playfairdisplay/v10/2NBgzUtEeyB-Xtpr9bm1CSVudZg2I_9CBJalMPResNk.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Playfair Display'), local(PlayfairDisplay-Regular), url(http://gfonts.coolsite360.com/s/playfairdisplay/v10/2NBgzUtEeyB-Xtpr9bm1CRD8Ne_KjP89kA3_zOrHj8E.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/ty9dfvLAziwdqQ2dHoyjphkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/frNV30OaYdlFRtH2VnZZdhkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/gwVJDERN2Amz39wrSoZ7FxkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/aZMswpodYeVhtRvuABJWvBkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/VvXUGKZXbHtX_S_VCTLpGhkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/e7MeVAyvogMqFwwl61PKhBkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Roboto Thin'), local(Roboto-Thin), url(http://gfonts.coolsite360.com/s/roboto/v16/2tsd397wLxj96qwHyNIkxHYhjbSpvc47ee6xR_80Hnw.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/0eC6fl06luXEYWpBSJvXCIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/Fl4y0QdOxyyTHEGMXX8kcYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/-L14Jk06m6pUHB-5mXQQnYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/I3S1wsgSg9YCurV6PUkTOYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/NYDWBdD4gIq26G5XYbHsFIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/Pru33qjShpZSmG3z6VYwnYX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local(Roboto-Light), url(http://gfonts.coolsite360.com/s/roboto/v16/Hgo13k-tfSpn0qi1SFdUfZBw1xU1rKptJj_0jans920.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/s7gftie1JANC-QmDJvMWZoX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/3Y_xCyt7TNunMGg0Et2pnoX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/WeQRRE07FDkIrr29oHQgHIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/jyIYROCkJM3gZ4KV00YXOIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/phsu-QZXz1JBv0PbFoPmEIX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/9_7S_tWeGDh5Pq3u05RVkoX0hVgzZQUfRDuZrPvH3D8.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local(Roboto-Black), url(http://gfonts.coolsite360.com/s/roboto/v16/mnpfi9pxYH-Go5UiibESIpBw1xU1rKptJj_0jans920.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215
+        }
+    </style>
+
+    <style type="text/css">
+        .fl>li:nth-child(2)>a {
+            color: #39f;
+        }
+    </style>
+
+
+    <!--[if lt ie 9]>
+    <link type="text/css" href="/sites/impkvs_draft/styles_forie.css" rel="stylesheet">
+    <script type="text/javascript" src="http://o3bnyc.creatby.com/play-coolsite360/thirdparty_js/html5shiv.js"></script>
+    <script type="text/javascript" src="http://o3bnyc.creatby.com/play-coolsite360/thirdparty_js/selectivizr-min.js"></script>
+    <script type="text/javascript" src="http://o3bnyc.creatby.com/diazo/c_play/thirdparty_js/respond.src.js"></script>
+    <link href="http://o3bnyc.creatby.com/diazo/c_play/thirdparty_js/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+    <link href="/staticfs/diazo/c_play/thirdparty_js/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+    <script src="/staticfs/diazo/c_play/thirdparty_js/respond.proxy.js"></script>
+    <![endif]-->
+</head>
+
+
+<body class="body_eCY3We">
+    <div class="container-fluid c-section section_vYtvQy" id="section_ad69cc38">
+        <div class="c-div div_wZI4aj" style="margin-top: 0px;">
+            <div class="row c-row row_a7jDug">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_m1eemC">
+                    <h1 class="c-heading heading_o4NM2M">多门店单页</h1>
+                    <h1 class="c-heading heading_gWDG4h">
+                        <div>多门店管理、营销平台</div>
+                        <div>一个小程序，多个店铺</div>
+                        <div>实现实体门店一站式引流</div>
+                    </h1>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_IlLtYL">
+                    <img class="c-image image_QgcUN7" src="/www/old/public/img/b487f61b934d3521ff51b742cf4a395a_origin.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_W08Z4Z" id="section_84b73f57">
+        <div class="c-div div_6SvAA8">
+            <div class="row c-row row_DIDRWA">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_w4IqUL">
+                    <img class="c-image image_9GKy6k" src="/www/old/public/img/11d1789a2cab5bea8cb6fb467c21a182_origin.png">
+                    <h1 class="c-heading heading_XZGc04">商家入驻</h1>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_BykuO1">
+                    <img class="c-image image_wTb4xP" src="/www/old/public/img/c88ed117aeee8dd4031d0b10f1cb0873_origin.png">
+                    <h1 class="c-heading heading_JCA8ha">店铺管理</h1>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_gUAwfZ">
+                    <img class="c-image image_epuYYj" src="/www/old/public/img/b9144e3c206021d09b10b235aaa40a01_origin.png">
+                    <h1 class="c-heading heading_da8lTy">优惠券</h1>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_u0A10y">
+                    <img class="c-image image_H3Oe3I" src="/www/old/public/img/c77e771692add0d612f5589fc5af35a6_origin.png">
+                    <h1 class="c-heading heading_mknzXE">扫一扫</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_tAPgS0" id="section_7b9d2554">
+        <div class="c-div div_uM8jIY">
+            <div class="row c-row row_URUVvr">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_DTlFIj">
+                    <img class="c-image image_1fwuaM" src="/www/old/public/img/a71ec34590805c8141c074fc397c23cb_origin.png">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_gs6aJp">
+                    <h1 class="c-heading heading_z32BjF">轻松开店</h1>
+                    <img class="c-image image_uuEpWA" src="/www/old/public/img/efda4c412f2da6bf4d5e291e80def945_origin.png">
+                    <h1 class="c-heading heading_eYwhvN">
+                        <div>开店不再困难，让企业转眼之间开店成功！</div>
+                        <div>核心信息重点展示，让企业拥有专属的小程序店铺！</div>
+                        <div>共享微信内近10亿用户，0成本引流、获客！</div>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_rMcc1i" id="section_bd667abd">
+        <div class="c-div div_A0b6Un">
+            <div class="row c-row row_bCYfiG">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_hf1xfL">
+                    <h1 class="c-heading heading_Yj5FZ2">引客到店</h1>
+                    <img class="c-image image_LpDhD4" src="/www/old/public/img/efda4c412f2da6bf4d5e291e80def945_origin.png">
+                    <h1 class="c-heading heading_XhBL07">
+                        <div>导航+电话，用户进店更无忧！</div>
+                        <div>附近的店铺，离得近的用户进店更快！</div>
+                        <div>时间、服务、地址、优惠券，核心信息一个不少！</div>
+                    </h1>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_Iml6Yd">
+                    <img class="c-image image_ewU6I3" src="/www/old/public/img/aeb3a5a1c20e161bfff8e68b3e815dc3_origin.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_AZ8Ost c-scrollIn" id="section_cc9ea304">
+        <div class="c-div div_qBfAaF">
+            <div class="row c-row row_9sKKnb">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_uQDXZQ">
+                    <img class="c-image image_sdNdMT" src="/www/old/public/img/ca85c1e6449e94ac4985bdf85db37d71_origin.png">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 c-column column_1awblb">
+                    <h1 class="c-heading heading_95d4O1">双界面展示</h1>
+                    <img class="c-image image_2ZabnN" src="/www/old/public/img/efda4c412f2da6bf4d5e291e80def945_origin.png">
+                    <h1 class="c-heading heading_wM1RWz">
+                        <div>用户界面展示优惠券，用券更方便！</div>
+                        <div>商家界面实现对店铺的管理，操作更便捷！</div>
+                        <div>优惠券核销，做到进店用户心中有数！</div>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid c-section section_nIxKSH c-scrollIn" data-c_tl_id="M_1a1ea04b69692d3794a2360caa0c6806">
+        <div class="container c-container container_TenUu7">
+            <div class="c-div div_uk3Mpu">
+                <h1 class="c-heading heading_xHu8pY">适用线下门店商户</h1>
+            </div>
+            <div class="row c-row row_T7mneQ">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_2zu3ii">
+                    <div class="c-div div_PrT7o7 c-action-click" data-c_act_id="M_37d3794cbb5ef064">
+                        <img class="c-image image_vP2N2Z" src="/www/old/public/img/17135f55e23a56a6cda81d972395035d_origin.png">
+                        <h1 class="c-heading heading_hJvEUe">品牌餐饮</h1>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_4KGbo8">
+                    <div class="c-div div_4itu7k c-action-click" data-c_act_id="M_cceb14546d2e43d0">
+                        <img class="c-image image_bZ3Kzx" src="/www/old/public/img/3f76dab03c7c64572f35af7fdb1623bc_origin.png">
+                        <h1 class="c-heading heading_Ua5N3b">水果生鲜</h1>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_MgKM3s">
+                    <div class="c-div div_Pfv6sF">
+                        <img class="c-image image_qgMjOb" src="/www/old/public/img/8f7292aa0c12849ce4a30833f7326831_origin.png">
+                        <h1 class="c-heading heading_yNhbyG">休闲娱乐</h1>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_7yrnVZ">
+                    <div class="c-div div_i4vk0A">
+                        <img class="c-image image_cqgy1Z" src="/www/old/public/img/d7fb966d7abaf21ec305d840c6ad7800_origin.png">
+                        <h1 class="c-heading heading_FDyi1z">蛋糕烘焙</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row c-row row_T7mneQ industry">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_2zu3ii">
+                    <div class="c-div div_PrT7o7">
+                        <img class="c-image image_JKQHEu" src="/www/old/public/img/fc172d4ad549781a15d5328a84ec0904_origin.png">
+                        <h1 class="c-heading heading_hVBT1Q">品牌服饰</h1>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_4KGbo8">
+                    <div class="c-div div_4itu7k">
+                        <img class="c-image image_h7ABO3" src="/www/old/public/img/411a08ca3defe958472e19de927d4151_origin.png">
+                        <h1 class="c-heading heading_T8ShnW">运动健身</h1>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_MgKM3s">
+                    <div class="c-div div_Pfv6sF">
+                        <img class="c-image image_NZOZIp" src="/www/old/public/img/8e11c1becaa4611b6c4ca5e190ea9acd_origin.png">
+                        <h1 class="c-heading heading_sUcubD">美容美发</h1>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 c-column column_7yrnVZ">
+                    <div class="c-div div_i4vk0A">
+                        <img class="c-image image_fgKHyf" src="/www/old/public/img/c5f4a6f1c358777eb8634c79ce9bdc88_origin.png">
+                        <h1 class="c-heading heading_MjoBaN">更多</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/www/old/public/js/youziku.justtime.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/index_data.js"></script>
+    <script>
+        var portal_url = '/sites/impkvs_draft/';
+
+        var page_slug = 'index';
+    </script>
+
+
+    <script type="text/javascript" src="/www/old/public/js/jquery.fancybox.min.js"></script>
+
+    <script type="text/javascript" src="/www/old/public/js/headroom.min.js"></script>
+
+    <script type="text/javascript" src="/www/old/public/js/jQuery.headroom.min.js"></script>
+
+    <script type="text/javascript" src="/www/old/public/js/jarallax.min.js"></script>
+
+    <script type="text/javascript" src="/www/old/public/js/TweenMax.min.js"></script>
+
+    <script type="text/javascript" src="/www/old/public/js/DrawSVGPlugin.min.js"></script>
+
+    <script type="text/javascript" src="/www/old/public/js/MorphSVGPlugin.min.js"></script>
+
+    <script type="text/javascript" src="/www/old/public/js/vue-bundle.min.js"></script>
+
+
+
+
+
+
+
+
+
+    <!--<script type="text/javascript" src="http://o3bnyc.creatby.com/diazo/c-built/requireJS/require.js"></script>-->
+    <!--<script>-->
+    <!--define('jquery',function(){});-->
+    <!--</script>-->
+    <!--<script>-->
+    <!--define('bootstrap',function(){});-->
+    <!--</script>-->
+    <!-- <script type="text/javascript" src="/www/old/public/img/vendor_c.bundle.built.9cae0925.cache.js"></script>
+    <script type="text/javascript" src="/www/old/public/img/pack.built.5222feab.cache.js"></script>
+    <script type="text/javascript" src="/www/old/public/img/cst.built.426f7fd1.cache.js"></script> -->
+    <script type="text/javascript" src="/www/old/public/js/vendor_c.bundle.built.b2e42525.cache.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/pack.built.fde557fa.cache.js"></script>
+    <script type="text/javascript" src="/www/old/public/js/cst.built.0d1e9835.cache.js"></script>
+
+
+
+    <!-- ie8 以下版本提示信息 -->
+    <!--[if lt ie 8]>
+  <script type="text/javascript">
+    window.onload=function(){
+      document.getElementById('browser-tip').style.display = "block";
+      document.getElementsByTagName('body')[0].style.paddingTop = "50px";
+    }
+    function hide(){
+      document.getElementById('browser-tip').style.display = "none";
+      document.getElementsByTagName('body')[0].style.paddingTop = "0px";
+    }
+  </script>
+<![endif]-->
+    <div id="browser-tip" style="position:fixed; top:0; left:0; right:0; z-index:9999; height:30px; line-height:33px; padding:10px 0 9px; text-indent:30px; font-size:15px; background:#fcf8e3; border-bottom:1px solid #fbeed5; width:100%;display:none;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="display:block; float:right; z-index:9999; line-height:36px; margin-right: 0px;padding:0; font-size:32px; color:#666; box-shadow: 0; text-shadow:none; text-align:center; filter:alpha(opacity=100); -khtml-opacity:1; opacity:1;"
+            onclick="hide()">×</button>
+        <p style="text-align: center;">
+            您当前使用的浏览器版本较低，为使您获得更好的操作体验，我们推荐您使用：
+            <span style="margin-left:10px;">
+                <a href="http://windows.microsoft.com/zh-cn/internet-explorer/download-ie" target="_blank">
+                    <img src="/www/old/public/img/compatible_ie.gif" width="31" height="30" alt="Internet Explorer" title="Internet Explorer">
+                </a>
+                <a href="http://www.google.com/intl/zh-CN/chrome/" target="_blank">
+                    <img src="/www/old/public/img/compatible_chrome.gif" width="31" height="30" alt="Google Chrome" title="Google Chrome">
+                </a>
+                <a href="http://www.mozilla.org/zh-CN/firefox/new/" target="_blank">
+                    <img src="/www/old/public/img/compatible_firefox.gif" width="31" height="30" alt="Firefox" title="Firefox">
+                </a>
+                <a href="http://support.apple.com/zh_CN/downloads/#safari" target="_blank">
+                    <img src="/www/old/public/img/compatible_safari.gif" width="28" height="30" alt="Safari" title="Safari">
+                </a>
+            </span>
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        console.log(document.body.scrollHeight);
+    </script>
+
+</body>
+
+</html>
