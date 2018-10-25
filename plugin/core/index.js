@@ -97,7 +97,14 @@ module.exports = async () => {
             }
 
             const install = await execCommand(process.env.CMD_INSTALL);
-            const restart = await execCommand(process.env.CMD_RESTART);
+            let restart;
+            if (process.env.PM2_USAGE) {
+                restart = await execCommand(`pm2 restart pm2.json`);
+            } else {
+                console.error(
+                    `系统更新成功，当前系统不是pm2启动的，请手动重启生效`
+                );
+            }
             ctx.success({ install, restart });
             return;
         }

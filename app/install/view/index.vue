@@ -28,7 +28,7 @@ export default {
                 this.$message.warning("开始下载");
                 this.loading = true;
                 const res = await this.$axios.$get(
-                    `/api/system/index/installModule?module=${
+                    `/api/install/index/installModule?module=${
                         data.name
                     }&Token=${data.token}`
                 );

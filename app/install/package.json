@@ -1,5 +1,5 @@
 {
-    "name": "install",
+    "name": "system",
     "version": "1.0",
-    "description": "安装模块"
+    "description": "系统模块"
 }

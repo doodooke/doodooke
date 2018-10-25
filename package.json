@@ -101,7 +101,6 @@
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^4.0.0",
-    "nodemon": "^1.18.4",
     "pre-commit": "^1.2.2",
     "prettier": "^1.12.1"
   }

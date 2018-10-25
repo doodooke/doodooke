@@ -6,3 +6,4 @@ www/apidoc
 logs
 .nuxt
 dist
+shell/openSource

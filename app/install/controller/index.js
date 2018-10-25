@@ -150,13 +150,26 @@ module.exports = class extends doodoo.Controller {
                 await execSql(path.resolve(moduleDir, "sql", sqls[key]));
             }
 
-            const tip = `${module}模块安装/更新成功，3s后重启`;
-            setTimeout(async () => {
-                await execCommand(process.env.CMD_RESTART);
-            }, 3000);
-            this.success(tip);
-            return;
+            let tip;
+            if (!process.env.PM2_USAGE) {
+                tip = `${module}模块安装/更新成功，您当前系统不是pm2启动的，请手动重启`;
+
+                setTimeout(async () => {
+                    await execCommand(process.env.CMD_BUILD);
+                }, 3000);
+                this.success(tip);
+                return;
+            } else {
+                tip = `${module}模块安装/更新成功，3s后自动构建，自动重启。如果重启失败，请手动重启。`;
+
+                setTimeout(async () => {
+                    await execCommand(process.env.CMD_BUILD);
+                    await execCommand("pm2 restart pm2.json");
+                }, 3000);
+                this.success(tip);
+                return;
+            }
         }
-        this.fail(`${module}模块更新失败`);
+        this.fail(`${module}模块安装/更新失败`);
     }
 };

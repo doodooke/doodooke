@@ -13,17 +13,6 @@ app.use(
 );
 
 app.plugin("core");
-app.plugin("webhook", {
-    secret: "qingful",
-    isMaster: true,
-    cmd: {
-        "@start": "pm2 start pm2.json",
-        "@restart": "pm2 restart pm2.json",
-        "@stop": "pm2 stop pm2.json",
-        "@pull": "git pull",
-        "@install": "yarn install"
-    }
-});
 app.plugin("static");
 app.plugin("migrate");
 app.plugin("nuxt");
@@ -34,7 +23,6 @@ app.plugin("baas");
 
 (async () => {
     const server = await app.start();
-    doodoo.hook.run("dingding", "系统提示", "应用启动成功");
 
     // 全局
     global.io = socket(server);

@@ -1,9 +1,5 @@
 export default function({ app, route, redirect, req }) {
-    if (
-        req &&
-        req.headers &&
-        req.headers.host === "www.doodooke.qingful.com:3000"
-    ) {
+    if (req && req.headers && req.headers.host === "www.doodooke.qingful.com") {
         redirect(`https://www.doodooke.com${req.url}`);
         return;
     }
