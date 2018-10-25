@@ -164,7 +164,7 @@ module.exports = {
     axios: {
         proxy: true, // Can be also an object with default options
         debug: false,
-        baseURL: "http://127.0.0.1:3000"
+        baseURL: `http://127.0.0.1:${process.env.APP_PORT}`
     },
 
     router: {
@@ -194,7 +194,7 @@ module.exports = {
 
     proxy: {
         "/api": {
-            target: "http://127.0.0.1:3000"
+            target: `http://127.0.0.1:${process.env.APP_PORT}`
         }
     },
 

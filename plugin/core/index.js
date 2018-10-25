@@ -7,6 +7,8 @@ const address = require("address");
 
 // 安全码
 const uuidVal = uuid();
+// 连通性
+let connected = false;
 
 /**
  * Exec command
@@ -59,8 +61,18 @@ module.exports = async () => {
             }
         );
     } catch (error) {
-        console.log("Core Network Error");
+        console.error("Core Network Error");
     }
+
+    // 提示是否连通
+    const timer = setInterval(() => {
+        if (!connected) {
+            console.error("Core Can`t Connected");
+        } else {
+            console.log("Core Connected");
+            clearInterval(timer);
+        }
+    }, 10000);
 
     // 安全校验
     doodoo.router.use("/core", async (ctx, next) => {
@@ -72,6 +84,8 @@ module.exports = async () => {
 
     // 系统连通校验
     doodoo.router.get("/core/ping", async (ctx, next) => {
+        connected = true;
+
         ctx.success();
     });
 

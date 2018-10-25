@@ -1,3 +1,14 @@
+function includeRoute(routes = [], path) {
+    let include = false;
+    for (const key in routes) {
+        if (routes[key].path === path) {
+            include = true;
+            break;
+        }
+    }
+    return include;
+}
+
 export default function({ app, route, redirect, req }) {
     if (req && req.headers && req.headers.host === "www.doodooke.qingful.com") {
         redirect(`https://www.doodooke.com${req.url}`);
@@ -11,8 +22,22 @@ export default function({ app, route, redirect, req }) {
         redirect("/admin/public/login");
         return;
     }
-    if (route.path === "/" || route.matched.length === 0) {
-        redirect("/portal");
+
+    const routes = app.router.options.routes;
+    if (route.path === "/") {
+        if (includeRoute(routes, "/portal")) {
+            redirect("/portal");
+        } else if (includeRoute(routes, "/app/apps")) {
+            redirect("/app/apps");
+        } else if (includeRoute(routes, "/public/login")) {
+            redirect("/public/login");
+        } else {
+            redirect("/install");
+        }
+        return;
+    }
+    if (route.matched.length === 0) {
+        redirect(routes[0].path);
         return;
     }
 }

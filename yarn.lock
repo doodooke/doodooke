@@ -3211,7 +3211,7 @@ domutils@^1.7.0:
 
 doodoo.js@doodooke/doodoo.js:
   version "1.1.0"
-  resolved "https://codeload.github.com/doodooke/doodoo.js/tar.gz/32f3e1555bf914eb8f325b075654786e8005a6a6"
+  resolved "https://codeload.github.com/doodooke/doodoo.js/tar.gz/5c4fc4311f14c116f939fa0bb567f2088a76e692"
   dependencies:
     axios "^0.18.0"
     bluebird "^3.5.1"
