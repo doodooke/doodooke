@@ -1,3 +1,7 @@
+if (process.env.DOODOO_CORE) {
+    require("doodoo-core");
+}
+
 const Doodoo = require("doodoo.js");
 const socket = require("socket.io");
 const cors = require("koa-cors");
