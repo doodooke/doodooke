@@ -6,7 +6,7 @@ const download = require("download");
 const address = require("address");
 
 // 安全码
-const uuidVal = uuid();
+doodoo.securityCode = uuidVal = uuid();
 // 连通性
 let connected = false;
 

@@ -12,9 +12,9 @@ app.use(
     })
 );
 
+app.plugin("migrate");
 app.plugin("core");
 app.plugin("static");
-app.plugin("migrate");
 app.plugin("nuxt");
 app.plugin("sentry");
 app.plugin("wxaOpen");

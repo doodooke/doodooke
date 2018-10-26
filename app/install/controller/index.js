@@ -93,10 +93,14 @@ module.exports = class extends doodoo.Controller {
     }
 
     async installModule() {
-        const { module, Token } = this.query;
-        const moduleDir = path.resolve(process.env.APP_ROOT, module);
+        const { module, Token, securityCode } = this.query;
         const license = await fse.readFile("./LICENSE.key");
         const addrs = await getAddress();
+
+        if (securityCode !== doodoo.securityCode) {
+            this.fail("无权限，安全码(Security Code)不正确");
+            return;
+        }
 
         const downloadData = Object.assign(
             {
@@ -106,48 +110,64 @@ module.exports = class extends doodoo.Controller {
             },
             addrs
         );
-        const moduleExist = await fse.pathExists(
-            path.resolve(moduleDir, "package.json")
-        );
-        if (moduleExist) {
-            const moduleInfo = await fse.readJson(
-                path.resolve(moduleDir, "package.json")
-            );
-            Object.assign({
-                downloadData,
-                moduleInfo
-            });
-        }
 
+        const downloadedModules = [];
         const downloaded = await download(
             `http://core.doodooke.com/installModule?${qs.stringify(
                 downloadData
             )}`,
             "app",
-            { extract: true }
+            {
+                extract: true,
+                map: file => {
+                    if (file.type !== "directory") {
+                        return file;
+                    }
+
+                    const dir = path.parse(file.path).dir;
+                    if (
+                        !_.includes(downloadedModules, dir) &&
+                        dir.indexOf(path.sep) === -1
+                    ) {
+                        downloadedModules.push(dir);
+                    }
+
+                    return file;
+                }
+            }
         );
         if (downloaded.length > 0) {
-            // 执行install.js
-            const exist = await fse.pathExists(
-                path.resolve(moduleDir, "install.js")
-            );
-            if (exist) {
-                require(path.resolve(moduleDir, "install.js"));
-            }
+            for (const moduleDirName of downloadedModules) {
+                const moduleDir = path.resolve(
+                    process.env.APP_ROOT,
+                    moduleDirName
+                );
+                // 执行install.js
+                const exist = await fse.pathExists(
+                    path.resolve(moduleDir, "install.js")
+                );
+                if (exist) {
+                    require(path.resolve(moduleDir, "install.js"));
+                }
 
-            // 执行sql
-            const sqls = glob
-                .sync("**/*.sql", {
-                    cwd: path.resolve(moduleDir, "sql")
-                })
-                .sort((a, b) => {
-                    return (
-                        Number(_.trimEnd(a, ".sql")) -
-                        Number(_.trimEnd(b, ".sql"))
+                // 执行sql
+                const sqls = glob
+                    .sync("**/*.sql", {
+                        cwd: path.resolve(moduleDir, "sql")
+                    })
+                    .sort((a, b) => {
+                        return (
+                            Number(_.trimEnd(a, ".sql")) -
+                            Number(_.trimEnd(b, ".sql"))
+                        );
+                    });
+                for (const key in sqls) {
+                    await execSql(path.resolve(moduleDir, "sql", sqls[key]));
+                    await fse.move(
+                        path.resolve(moduleDir, "sql", sqls[key]),
+                        path.resolve(moduleDir, "sql", `${sqls[key]}.lock`)
                     );
-                });
-            for (const key in sqls) {
-                await execSql(path.resolve(moduleDir, "sql", sqls[key]));
+                }
             }
 
             let tip;
