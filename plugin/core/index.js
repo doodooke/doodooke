@@ -67,12 +67,12 @@ module.exports = async () => {
     // 提示是否连通
     const timer = setInterval(() => {
         if (!connected) {
-            console.error("Core Can`t Connected");
+            console.error("Core Can`t Connect");
         } else {
             console.log("Core Connected");
             clearInterval(timer);
         }
-    }, 1000 * 10 * 60 * 2);
+    }, 1000 * 60 * 2);
 
     // 安全校验
     doodoo.router.use("/core", async (ctx, next) => {
