@@ -63,7 +63,7 @@ EMAIL: 786699892@qq.com
 码云: https://gitee.com/doodooke/doodoo
 
 ## 官网
-[多多客Doodooke小程序](http://www.doodooke.qingful.com)
+[多多客Doodooke小程序](https://www.doodooke.com)
 
 ## 缩略图
 ![](https://gitee.com/doodooke/doodoo/raw/master/thumb/1.jpg)
