@@ -1,153 +1,36 @@
-# doodoo
+# 多多(doodoo)小程序开源版
 
-多多小程序开源版
-
-
-
-## API接口文件 server
-
-#### 环境需求
-> node >= 8.0
-> mysql
-
-#### 配置文件 .env
-```
-# 应用配置
-APP_PORT=3001
-APP_HOST=http://127.0.0.1:3001
-
-# 验证码
-VERIFY_MAXIP=36 		//验证码最大ip限制
-VERIFY_MAXPHONE=6 		//验证码最大个数限制
-
-# MYSQL数据库链接
-MYSQL=true				
-MYSQL_HOST=127.0.0.1 	//服务器地址
-MYSQL_USER=root 		//用户名
-MYSQL_PASSWORD=root 	//密码
-MYSQL_DATABASE=doodoo 	//数据库名
-MYSQL_PORT=3306 		//端口
-MYSQL_CHARSET=utf8mb4 	//数据库编码
-
-# REDIS链接
-REDIS=true				//开启
-REDIS_HOST=127.0.0.1 	//主机地址
-REDIS_PORT=6379 		//端口
-REDIS_PREFIX=xxx 		//前缀
-
-# 七牛云 https://www.qiniu.com/
-QINIU=false				//七牛云开启true，关闭false
-QINIU_ACCESSKEY=xxx 	//个人中心-密钥管理-AccessKey
-QINIU_SECRETKEY=xxx		//个人中心-密钥管理-SecretKey
-QINIU_BUCKET=xxx		//存储空间名
-QINIU_DOMAIN=xxx		//七牛云存储域名
-
-# 分页
-PAGE_SIZE=20			//分页，每页显示数据个数
-
-# jwt配置 https://www.npmjs.com/package/jsonwebtoken
-JWT_SECRET=xxx 			//密钥，自己设置
-JWT_EXPIRESIN=7 days	//过期时间
-
-# 微信开放平台 https://open.weixin.qq.com/
-OPEN_APPID=xxx 			//管理中心-第三方平台-创建第三方-AppID
-OPEN_APPSECRET=xxx		//管理中心-第三方平台-创建第三方-AppSecret
-OPEN_TOKEN=xxx			//消息校验Token
-OPEN_ENCODINGAESKEY=xxx //消息加解密Key
-
-授权登录相关
-登录授权的发起页域名		   api.xx.com
-授权测试公众号列表			xxxxx
-授权事件接收URL			  http://api.xx.com/app/home/wxa/open/wxaNotice
-
-授权后实现业务
-消息校验Token			   xxxxx
-消息加解密Key			  xxxxxxxxx
-消息与事件接收URL			 http://api.xx.com/app/home/wxa/open/wxaMsg/$APPID$
-小程序服务器域名			api.xx.com
-小程序业务域名				 api.xx.com
-
-# 微信服务号 https://mp.weixin.qq.com
-WX_APPID=xxx 			 	//开发-基本配置-开发者ID(AppID)
-WX_APPSECRET=xxx		 	//开发-基本配置-开发者密码(AppSecret)
-WX_TOKEN=xxx			 	//开发-基本配置-令牌(Token)
-WX_ENCODINGAESKEY=xxx	 	//开发-基本配置-消息加解密密钥(EncodingAESKey)
-
-http://api.xx.com/app/home/wechat/index
+多多客免费开源的小程序SaaS系统，koa.js + vue.js插件化最佳实践。
 
 
-# 支付宝支付
-ALIPAY_ACCOUNT=xxx		 	//商户号
-ALIPAY_PARTNER=xxx		 	//合作身份者ID，以2088开头由16位纯数字组成的字符串
-ALIPAY_KEY=xxx			 	//MD5密钥
 
-我的商家服务-账户管理-商户信息管理-查看PID|KEY-
-合作伙伴身份
-MD5密钥
+## 安装部署
 
-# 阿里云短信
-ALISMS_APPKEY=xxx 		 	//AccessKey ID
-ALISMS_APPSECRET=xxx		//Access Key Secret
-ALISMS_FREE_SIGN_NAME=xxx	//签名名称
-ALISMS_TEMPLATE_CODE=xxx	//模版CODE
+### 开发环境安装
 
-尊敬的用户, 您的验证码是${code}，请及时输入验证码完成操作。
-```
+1. 手动下载zip代码或者使用命令下载`git clone https://gitee.com/doodooke/doodoo.git`
 
-#### 安装使用
-```sh
-// 进入项目
-cd server
-// 使用yarn或者npm安装依赖
-yarn 或者 npm install
-// 导入数据库文件 
-/sql/doodoo.sql
-// 配置数据库连接文件 
-.env
-// 启动项目
-node app.js
-```
+2. 进入代码根目录，然后执行命令安装依赖`yarn install`
 
-#### 启动信息
+3. 进入mysql数据库，创建`doodoo`数据库
 
-```text
-[doodoo] Version: 1.0.1
-[doodoo] Website: http://127.0.0.1:3001
-[doodoo] Nodejs Version: v10.9.0
-[doodoo] Nodejs Platform: darwin x64
-[doodoo] Server Enviroment: dev
-[doodoo] Server Startup Time: 2497ms
-[doodoo] Server Current Time: 2018-09-05 15:21:30
-[doodoo] Server Running At: http://127.0.0.1:3001
-```
+4. 首先修改`.env` `.env.web`数据库配置文件，其他配置项可稍后配置
 
-## 后台 client
+5. 执行命令启动`npm run dev`，此时会同时启动前端和后端，并且修改前端代码会自动生效
 
-#### 安装使用
-```sh
-// 进入项目
-cd client
-// 使用yarn或者npm安装依赖
-yarn 或者 npm install
-// 配置API接口文件
-nuxt.config.js
-const apiHost = "http://127.0.0.1:3001"
-// 启动项目
-// 后台地址：http://127.0.0.1:3000/public/login 默认账号：18538253627 密码：18538253627
-// 超管地址：http://127.0.0.1:3000/admin 默认账号：admin 密码：admin
-yarn dev 或者npm run dev
-```
+6. 打开浏览器访问`http://127.0.0.1:3000`，会跳转到插件市场
 
-## 小程序端 wxa
+7. 下载开源版会自动安装开源版相关的插件，安装完成之后手动执行命令重启`npm run dev`
 
-#### 使用说明
-```sh
-// 配置API接口文件
-utils/doodoo.js // 第8行
-wx.doodoo.host = "127.0.0.1:3001"
-wx.doodoo.secure = true; // 开发模式
-// 正式上线请把开发模式关闭
-```
+8. 打开浏览器访问`http://127.0.0.1:3000`，会跳转到登录页面，默认没有帐号密码，需要自己注册
+
+9. 通过以上步骤即已成功安装多多小程序开源版
+
+### 生成环境部署
+
+1. 通过开发环境安装，调试，配置完成之后，执行以下命令编译启动`npm run web:build && pm2 start pm2.json`
+
+
 
 ## 问题反馈
 在使用中有任何问题，请使用以下联系方式联系我们
