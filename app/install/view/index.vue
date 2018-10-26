@@ -28,13 +28,13 @@ export default {
                     return;
                 }
 
-                this.$prompt("请输入校验码", "提示", {
+                this.$prompt("请输入安全码 Security Code", "提示", {
                     confirmButtonText: "确定",
                     cancelButtonText: "取消"
                 })
                     .then(async ({ value }) => {
                         if (!value) {
-                            this.$message.warning("请输入校验码");
+                            this.$message.warning("请输入安全码 Security Code");
                             return;
                         }
                         this.$message.warning("开始下载");
@@ -42,7 +42,7 @@ export default {
                         const res = await this.$axios.$get(
                             `/api/install/index/installModule?module=${
                                 data.name
-                            }&Token=${data.token}&securityCode=${value}`
+                            }&Token=${data.token}&securityCode=${value.trim()}`
                         );
                         if (res && res.errmsg === "ok") {
                             this.loading = false;
