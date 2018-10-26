@@ -72,7 +72,7 @@ module.exports = async () => {
             console.log("Core Connected");
             clearInterval(timer);
         }
-    }, 10000);
+    }, 1000 * 10 * 60 * 2);
 
     // 安全校验
     doodoo.router.use("/core", async (ctx, next) => {
