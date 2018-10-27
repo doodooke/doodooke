@@ -47,6 +47,8 @@ export default {
                         if (res && res.errmsg === "ok") {
                             this.loading = false;
                             this.$message.success(res.data);
+                        } else {
+                            this.loading = false;
                         }
                     })
                     .catch(() => {});
