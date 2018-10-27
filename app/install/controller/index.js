@@ -167,7 +167,7 @@ module.exports = class extends doodoo.Controller {
                         path.resolve(moduleDir, "sql", `${sqls[key]}.lock`)
                     );
                     if (locked) {
-                        await fs.remove(
+                        await fse.remove(
                             path.resolve(moduleDir, "sql", sqls[key])
                         );
                         continue;
