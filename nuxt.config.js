@@ -93,7 +93,7 @@ module.exports = {
             },
             {
                 src:
-                    "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"
+                    "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"
             },
             {
                 src:

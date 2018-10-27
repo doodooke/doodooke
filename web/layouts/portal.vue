@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <qingful-header>
-            <el-col slot="center" :span="12" :offset="3">
+            <el-col slot="center" :span="12" :offset="this.$store.state.env.WWW_DOMAIN == 'www.doodooke.com'?3:4">
                 <el-row style="line-height:70px;color: #222222;font-size: 14px;">
                     <el-col :span="4">
                         <a href="/" :style="{color:$route.path=='/portal'?'#fc5151':'#222'}">首页</a>
@@ -85,7 +85,7 @@
                         <a href="/portal/agent" :style="{color:$route.path=='/portal/agent'?'#fc5151':'#222'}">代理商</a>
                     </el-col> -->
                     <el-col :span="4" style="display:none">关于我们</el-col>
-                    <el-col :span="4">
+                    <el-col :span="4" v-if="this.$store.state.env.WWW_DOMAIN == 'www.doodooke.com'">
                         <a href="/addon" :style="{color:$route.path=='/cases'?'#fc5151':'#222'}">插件市场</a>
                     </el-col>
                     <el-col :span="4">
