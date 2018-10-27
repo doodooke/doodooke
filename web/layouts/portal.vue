@@ -8,7 +8,7 @@
                     </el-col>
                     <el-col :span="4">
                         <el-dropdown trigger="hover" style="cursor:pointer">
-                            <span class="el-dropdown-link" :style="{color:($route.path=='/portal/store' || $route.path=='/portal/weizhan' || $route.path=='/portal/canyin')?'#fc5151':'#222'}">
+                            <span class="el-dropdown-link" :style="{color:($route.path=='/portal/shop' || $route.path=='/portal/weizhan' || $route.path=='/portal/canyin')?'#fc5151':'#222'}">
                                 产品
                                 <i class="el-icon-arrow-down el-icon--right"></i>
                             </span>
@@ -186,7 +186,7 @@
                         <el-row style="font-size: 20px;margin-bottom:20px;font-weight:500 ">
                             产品
                         </el-row>
-                        <el-row style="margin-top:20px;cursor:pointer" @click.native="go('/portal/store')">
+                        <el-row style="margin-top:20px;cursor:pointer" @click.native="go('/portal/shop')">
                             新零售
                         </el-row>
                         <!-- <el-row style="margin-top:20px;cursor:pointer" @click.native="go('/portal/canyin')">

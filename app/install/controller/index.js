@@ -162,6 +162,18 @@ module.exports = class extends doodoo.Controller {
                         );
                     });
                 for (const key in sqls) {
+                    // sql已执行
+                    const locked = await fse.pathExists(
+                        path.resolve(moduleDir, "sql", `${sqls[key]}.lock`)
+                    );
+                    if (locked) {
+                        await fs.remove(
+                            path.resolve(moduleDir, "sql", sqls[key])
+                        );
+                        continue;
+                    }
+
+                    // sql未执行
                     await execSql(path.resolve(moduleDir, "sql", sqls[key]));
                     await fse.move(
                         path.resolve(moduleDir, "sql", sqls[key]),
