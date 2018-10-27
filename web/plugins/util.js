@@ -46,16 +46,7 @@ const util = {
     },
 
     getCoryright() {
-        if (
-            location.hostname === "127.0.0.1" ||
-            location.hostname === "localhost" ||
-            location.hostname === "0.0.0.0"
-        ) {
-            return location.hostname;
-        }
-
-        let hosts = location.hostname.split(".");
-        return hosts.join(".");
+        return location.origin;
     },
 
     strToArr(str) {
