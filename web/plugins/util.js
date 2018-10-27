@@ -41,7 +41,7 @@ const util = {
         if (this.isHttpUrl(url)) {
             return url;
         } else {
-            return 'https://' + this.$store.state.env.API_DOMAIN + url;
+            return this.$store.state.env.API_DOMAIN + url;
         }
     },
 
@@ -55,7 +55,6 @@ const util = {
         }
 
         let hosts = location.hostname.split(".");
-        hosts.shift();
         return hosts.join(".");
     },
 

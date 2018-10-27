@@ -6,11 +6,10 @@ function getCoryright(host) {
     }
 
     let hosts = host.split(".");
-    hosts.shift();
     return hosts.join(".");
 }
 
-function isAgent(host,domain) {
+function isAgent(host, domain) {
     const copyright = getCoryright(host);
     if (copyright.split(":")[0] === domain) {
         return false;
@@ -60,7 +59,7 @@ const createStore = () => {
             nuxtServerInit({ commit }, { app, req }) {
                 const xHost = req.headers["x-host"];
                 if (xHost) {
-                    commit("SET_AGENT", isAgent(xHost,app.context.env.DOMAIN));
+                    commit("SET_AGENT", isAgent(xHost, app.context.env.DOMAIN));
                     commit("SET_HOST", xHost);
                     commit("SET_CORYRIGHT", getCoryright(xHost));
                 }

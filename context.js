@@ -163,7 +163,7 @@ module.exports = {
         let sms_template_code = process.env.ALISMS_TEMPLATE_CODE;
         let sms_param = '{"code":"' + code + '","name":"小程序"}';
 
-        const _domain = this.host || _url.parse(process.env.WWW_HOST).host;
+        const _domain = this.host || _url.parse(process.env.APP_HOST).host;
         const _domains = _domain.split(".");
         _domains.shift();
         const domain = _domains.join(".");

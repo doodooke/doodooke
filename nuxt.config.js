@@ -2,11 +2,14 @@ const glob = require("glob");
 const path = require("path");
 const { Utils } = require("nuxt");
 const fs = require("fs");
+const _url = require("url");
 const dotenv = require("dotenv");
-const installed = fs.existsSync("install.lock");
 const apiConfig = dotenv.parse(fs.readFileSync(".env"));
 const webConfig = Object.assign(dotenv.parse(fs.readFileSync(".env.web")), {
-    INSTALLED: installed
+    APP_HOST: apiConfig.APP_HOST,
+    APP_PREFIX: apiConfig.APP_PREFIX,
+    DOMAIN: _url.parse(apiConfig.APP_HOST).host,
+    API_DOMAIN: apiConfig.APP_HOST + apiConfig.APP_PREFIX
 });
 const appDir = "app";
 
@@ -174,7 +177,7 @@ module.exports = {
 
     sitemap: {
         path: "/sitemap.xml",
-        hostname: `http://${webConfig.WWW_DOMAIN}`,
+        hostname: apiConfig.APP_HOST,
         cacheTime: 1000 * 60 * 15,
         gzip: true,
         generate: false, // Enable me when using nuxt generate

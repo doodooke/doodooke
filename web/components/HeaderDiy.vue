@@ -179,7 +179,7 @@ export default {
                     if (func_info_id < 4) {
                         this.$message.warning("请重新授权");
                         window.open(
-                            `http://www.${this.getCoryright()}/app/wxa_info`,
+                            `${this.getCoryright()}/app/wxa_info`,
                             "_self"
                         );
                         return;
@@ -211,7 +211,7 @@ export default {
             }).then(() => {
                 const redirect = this.getAppTokenUrl(
                     `/app/home/wxa/public/loginReferer?redirect=${encodeURIComponent(
-                        `http://www.${this.getCoryright()}/app/apps`
+                        `${this.getCoryright()}/app/apps`
                     )}`
                 );
                 window.open(redirect);
@@ -270,7 +270,7 @@ export default {
                     if (func_info_id < 4) {
                         this.$message.warning("请重新授权");
                         window.open(
-                            `http://www.${this.getCoryright()}/app/wxa_info`,
+                            `${this.getCoryright()}/app/wxa_info`,
                             "_self"
                         );
                         return;
