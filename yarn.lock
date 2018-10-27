@@ -3209,9 +3209,9 @@ domutils@^1.7.0:
     dom-serializer "0"
     domelementtype "1"
 
-doodoo.js@doodooke/doodoo.js:
-  version "1.1.0"
-  resolved "https://codeload.github.com/doodooke/doodoo.js/tar.gz/5c4fc4311f14c116f939fa0bb567f2088a76e692"
+doodoo.js@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/doodoo.js/-/doodoo.js-1.1.1.tgz#8af94d714f9d9b4c9f24d3e580db93f4f1eadfd4"
   dependencies:
     axios "^0.18.0"
     bluebird "^3.5.1"

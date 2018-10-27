@@ -44,7 +44,7 @@
     "cross-env": "^5.2.0",
     "crypto": "^1.0.1",
     "descartes-sku.js": "^1.4.0",
-    "doodoo.js": "doodooke/doodoo.js",
+    "doodoo.js": "^1.1.1",
     "dotenv": "^6.1.0",
     "download": "^7.1.0",
     "easy-alipay": "^0.1.5",
