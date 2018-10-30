@@ -57,12 +57,13 @@ async function execSql(sqlFile) {
         if (sql.indexOf(";") != -1) {
             let sqls = sql.split(";");
             for (let key in sqls) {
-                if (sqls[key] && sqls[key] != "\n") {
+                sqls[key] = _.trim(sqls[key]);
+                if (sqls[key]) {
                     await doodoo.bookshelf.knex.raw(sqls[key]);
                 }
             }
         } else {
-            if (sql != "\n") {
+            if (_.trim(sql)) {
                 await doodoo.bookshelf.knex.raw(sql);
             }
         }
