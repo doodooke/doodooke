@@ -15,6 +15,10 @@ module.exports = {
         return doodoo.models[model];
     },
 
+    getHostPrefix() {
+        return process.env.APP_HOST + process.env.APP_PREFIX;
+    },
+
     get hook() {
         return doodoo.hooks;
     },

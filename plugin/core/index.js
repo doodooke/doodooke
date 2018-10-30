@@ -2,6 +2,7 @@ const axios = require("axios");
 const fse = require("fs-extra");
 const qs = require("querystring");
 const uuid = require("uuid");
+const path = require("path");
 const download = require("download");
 const address = require("address");
 

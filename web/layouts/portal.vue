@@ -85,7 +85,7 @@
                         <a href="/portal/agent" :style="{color:$route.path=='/portal/agent'?'#fc5151':'#222'}">代理商</a>
                     </el-col> -->
                     <el-col :span="4" style="display:none">关于我们</el-col>
-                    <el-col :span="4" v-if="this.$store.state.env.WWW_DOMAIN == 'www.doodooke.com'">
+                    <el-col :span="4" v-if="this.$store.state.env.DOMAIN == 'www.doodooke.com'">
                         <a href="/addon" :style="{color:$route.path=='/cases'?'#fc5151':'#222'}">插件市场</a>
                     </el-col>
                     <el-col :span="4">

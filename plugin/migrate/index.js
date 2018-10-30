@@ -11,9 +11,9 @@ module.exports = () => {
         //分销红包兼容小程序
         if (ctx.path.indexOf(`/shop/api/shop/fxhb`) > -1) {
             Object.assign(ctx, {
-                path: `${process.env.APP_PREFIX}${ctx.path.replace('/shop/api/shop/fxhb', "/fxhb/api/fxhb")}`,
-                url: `${process.env.APP_PREFIX}${ctx.url.replace('/shop/api/shop/fxhb', "/fxhb/api/fxhb")}`,
-                originalUrl: `${process.env.APP_PREFIX}${ctx.originalUrl}`
+                path: `${ctx.path.replace('/shop/api/shop/fxhb', "/fxhb/api/fxhb")}`,
+                url: `${ctx.url.replace('/shop/api/shop/fxhb', "/fxhb/api/fxhb")}`,
+                originalUrl: `${ctx.originalUrl.replace('/shop/api/shop/fxhb', "/fxhb/api/fxhb")}`
             });
         }
 

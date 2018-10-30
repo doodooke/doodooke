@@ -415,14 +415,14 @@ export default {
                 //我的
                 this.$emit("on-select", {
                     targetUrl: "/pages/shop/user/index",
-                    targetType: "page"
+                    targetType: "switchTab"
                 });
             }
             if (this.umpSelect == 13) {
                 //购物车
                 this.$emit("on-select", {
                     targetUrl: "/pages/shop/cart/index",
-                    targetType: "page"
+                    targetType: "switchTab"
                 });
             }
         },

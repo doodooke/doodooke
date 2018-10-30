@@ -59,7 +59,7 @@
                                             <el-input placeholder="最多四个字" v-model="item.text" clearable></el-input>
                                         </el-form-item>
                                         <el-form-item label="点击事件">
-                                            <el-input placeholder="请选择绑定事件" v-model="item.targetUrl" clearable @clear="clearLink">
+                                            <el-input placeholder="请选择绑定事件" v-model="item.targetUrl" clearable @clear="clearLink(index)">
                                                 <el-button slot="append" @click="handleLink(index)">选择</el-button>
                                             </el-input>
                                         </el-form-item>
