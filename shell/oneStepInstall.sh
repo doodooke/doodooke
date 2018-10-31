@@ -170,7 +170,7 @@ if test "$DOODOO_NODE" == "yes" ; then
 	NODE_PWD=`which node`
 
 	wget -O $NODE_PWD "https://raw.githubusercontent.com/doodooke/node/master/8.12.0/$OS/node"
-	chmod a+w $NODE_PWD
+	chmod 755 $NODE_PWD
 fi
 
 echo "配置完成"

@@ -4,7 +4,7 @@
 
 ## 一键安装
 执行命令
-`curl -o- https://gitee.com/doodooke/doodoo/raw/master/shell/oneStepInstall.sh | bash`
+`wget https://gitee.com/doodooke/doodoo/raw/master/shell/oneStepInstall.sh && chmod 755 ./oneStepInstall.sh && ./oneStepInstall.sh`
 
 ## 安装部署
 
