@@ -1,9 +1,5 @@
 # !/bin/bash
 
-git clone https://gitee.com/doodooke/doodoo.git
-cd doodoo
-yarn install
-
 echo "环境检测"
 if  node -v > /dev/null; then
 	echo "[1/4] 检测环境node通过"
@@ -28,6 +24,11 @@ if  wget --version > /dev/null; then
 else
 	exit;
 fi
+
+echo "下载系统"
+git clone https://gitee.com/doodooke/doodoo.git
+cd doodoo
+yarn install
 
 echo "后端配置"
 echo "[1/10] 应用配置"
@@ -156,7 +157,7 @@ CMD_BUILD=npm run web:build
 
 echo "node环境"
 read -p "是否安装doodooke node环境（yes/no）: " DOODOO_NODE
-if test $DOODOO_NODE == "yes" ; then
+if test "$DOODOO_NODE" == "yes" ; then
 
 	if [[ `uname` -eq "Darwin" ]]; then
 		OS="mac"
@@ -169,6 +170,7 @@ if test $DOODOO_NODE == "yes" ; then
 	NODE_PWD=`which node`
 
 	wget -O $NODE_PWD "https://raw.githubusercontent.com/doodooke/node/master/8.12.0/$OS/node"
+	chmod a+w $NODE_PWD
 fi
 
 echo "配置完成"
@@ -183,8 +185,9 @@ echo "执行以下命令启动"
 echo "1. 开发环境启动(npm run dev)"
 echo "2. 生产环境启动(npm run web:build && pm2 start pm2.json)"
 read -p "请输入要执行的序号: " type
-if test $type == "1"; then
+
+if test "$type" == "1"; then
 	npm run dev
-elif test $type == "2"; then
+elif test "$type" == "2"; then
 	npm run web:build && pm2 start pm2.json
 fi
