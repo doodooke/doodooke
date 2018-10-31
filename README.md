@@ -2,7 +2,9 @@
 
 多多客免费开源的小程序SaaS系统，koa.js + vue.js插件化最佳实践。
 
-
+## 一键安装
+执行命令
+`curl -o- https://gitee.com/doodooke/doodoo/raw/master/shell/oneStepInstall.sh | bash`
 
 ## 安装部署
 
