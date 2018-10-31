@@ -1,6 +1,6 @@
-if (process.env.DOODOO_CORE) {
+try {
     require("doodoo-core");
-}
+} catch (error) {}
 
 const Doodoo = require("doodoo.js");
 const socket = require("socket.io");
