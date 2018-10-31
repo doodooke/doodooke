@@ -210,7 +210,7 @@ export default {
                 type: "warning"
             }).then(() => {
                 const redirect = this.getAppTokenUrl(
-                    `/app/home/wxa/public/loginReferer?redirect=${encodeURIComponent(
+                    `/app/home/wxa/public/login?redirect=${encodeURIComponent(
                         `${this.getCoryright()}/app/apps`
                     )}`
                 );

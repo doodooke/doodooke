@@ -72,10 +72,6 @@ module.exports = {
                 content: "width=device-width, initial-scale=1"
             },
             {
-                name: "referrer",
-                content: "never"
-            },
-            {
                 hid: "description",
                 name: "description",
                 content: webConfig.HEAD_META_DESCRIPTION
