@@ -1,19 +1,35 @@
+const _url = require("url");
+let _host;
+if (process.env.OPEN_DOMAIN) {
+    _host = _url.parse(process.env.OPEN_DOMAIN).host;
+}
+
 module.exports = () => {
     doodoo.use(async (ctx, next) => {
         // 新增prefix，兼容小程序api请求
-        if (ctx.get("host") === "api.doodooke.com") {
+        if (_host && ctx.get("host") === _host) {
             Object.assign(ctx, {
                 path: `${process.env.APP_PREFIX}${ctx.path}`,
                 url: `${process.env.APP_PREFIX}${ctx.url}`,
                 originalUrl: `${process.env.APP_PREFIX}${ctx.originalUrl}`
             });
         }
+
         //分销红包兼容小程序
         if (ctx.path.indexOf(`/shop/api/shop/fxhb`) > -1) {
             Object.assign(ctx, {
-                path: `${ctx.path.replace('/shop/api/shop/fxhb', "/fxhb/api/fxhb")}`,
-                url: `${ctx.url.replace('/shop/api/shop/fxhb', "/fxhb/api/fxhb")}`,
-                originalUrl: `${ctx.originalUrl.replace('/shop/api/shop/fxhb', "/fxhb/api/fxhb")}`
+                path: `${ctx.path.replace(
+                    "/shop/api/shop/fxhb",
+                    "/fxhb/api/fxhb"
+                )}`,
+                url: `${ctx.url.replace(
+                    "/shop/api/shop/fxhb",
+                    "/fxhb/api/fxhb"
+                )}`,
+                originalUrl: `${ctx.originalUrl.replace(
+                    "/shop/api/shop/fxhb",
+                    "/fxhb/api/fxhb"
+                )}`
             });
         }
 
