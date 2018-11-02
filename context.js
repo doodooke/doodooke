@@ -172,23 +172,14 @@ module.exports = {
         _domains.shift();
         const domain = _domains.join(".");
         console.log("发短信检查代理商 domain:", domain);
-        const agent = await this.model("agent")
-            .query(qb => {
-                qb.where("domain", domain);
-            })
-            .fetch();
-        if (agent && agent.status && agent.verify === 1) {
-            const agentSms = await this.model("agent_sms")
-                .query(qb => {
-                    qb.where("agent_id", agent.id);
-                })
-                .fetch();
-            if (agentSms && agentSms.status) {
-                appkey = agentSms.appkey;
-                appsecret = agentSms.appsecret;
-                sms_free_sign_name = agentSms.sign;
-                sms_template_code = agentSms.template_code;
-            }
+        await this.hook.run("agent", domain, this);
+        const agentSms = this.agentSms;
+        console.log('agentSms',agentSms);
+        if (agentSms && agentSms.status) {
+            appkey = agentSms.appkey;
+            appsecret = agentSms.appsecret;
+            sms_free_sign_name = agentSms.sign;
+            sms_template_code = agentSms.template_code;
         }
         try {
             //     const wxa_id = this.state.wxa ? this.state.wxa.id : 0;
