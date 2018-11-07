@@ -51,7 +51,7 @@ export default {
             menu: [
                 {
                     name: "首页",
-                    icon: "icon-gaishu1",
+                    icon: "icon-shouye1",
                     url: "/app/dashboard"
                 },
                 {

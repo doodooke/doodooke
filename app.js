@@ -16,6 +16,7 @@ app.use(
     })
 );
 
+app.plugin("webDomain");
 app.plugin("static");
 app.plugin("migrate");
 app.plugin("core");

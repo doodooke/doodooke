@@ -1,96 +1,98 @@
 <template>
-    <el-row @mouseenter.native='showBorder=true' @mouseleave.native='showBorder=false' class="components" style="width:70px;position:absolute;bottom:70px;right:0;z-index:99">
-        <el-row class='border-select' v-show='itemData.id==$store.state.componentId'></el-row>
-        <el-row class='border-select' v-show='showBorder'></el-row>
-        <div style='padding:15px 5px 10px'>
-            <div v-if="formProps.data && formProps.data.length">
-                <div class='hover_wrap' v-for='(item,index) in formProps.data' :key='index' :style='{background: formProps.bgColor,borderRadius:formProps.borderRadius+"px",boxShadow:formProps.boxShadow}'>
-                    <div class='hover-img'>
-                        <img v-if='item.imgUrl' :src="item.imgUrl" :style='{borderRadius:formProps.borderRadius+"px"}'>
-                        <div v-else style="background-color:#E6F2FF;text-align: center;height:50px;line-height:50px">
-                            <i class="iconfont" style="color:#fff;font-size: 28px;">&#xe77d;</i>
+    <div>
+        <el-row @mouseenter.native='showBorder=true' @mouseleave.native='showBorder=false' class="components" style="width:70px;position:absolute;bottom:70px;right:0;z-index:99">
+            <el-row class='border-select' v-show='itemData.id==$store.state.componentId'></el-row>
+            <el-row class='border-select' v-show='showBorder'></el-row>
+            <div style='padding:15px 5px 10px'>
+                <div v-if="formProps.data && formProps.data.length">
+                    <div class='hover_wrap' v-for='(item,index) in formProps.data' :key='index' :style='{background: formProps.bgColor,borderRadius:formProps.borderRadius+"px",boxShadow:formProps.boxShadow}'>
+                        <div class='hover-img'>
+                            <img v-if='item.imgUrl' :src="item.imgUrl" :style='{borderRadius:formProps.borderRadius+"px"}'>
+                            <div v-else style="background-color:#E6F2FF;text-align: center;height:50px;line-height:50px">
+                                <i class="iconfont" style="color:#fff;font-size: 28px;">&#xe77d;</i>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div style='background-color:#E6F2FF;text-align: center;width:50px;height:50px;margin:0 auto;border-radius:50%' v-else>
+                    <i class="el-icon-plus" style="font-size:24px;margin-top:13px;color:#9ea7b4"></i>
+                </div>
             </div>
-            <div style='background-color:#E6F2FF;text-align: center;width:50px;height:50px;margin:0 auto;border-radius:50%' v-else>
-                <i class="el-icon-plus" style="font-size:24px;margin-top:13px;color:#9ea7b4"></i>
-            </div>
-        </div>
-        <el-row v-if="itemData.id==$store.state.componentId" class="hover-config" :style="{left: configOffsetLeft + 'px'}">
-            <el-row class="config-title">悬浮框</el-row>
-            <el-form label-width="80px">
-                <el-tabs type="card">
-                    <el-tab-pane label="内容" name="0">
-                        <draggable v-model="formProps.data">
-                            <el-collapse v-for="(item,index) in formProps.data" :key="index" style="margin-bottom:10px">
-                                <el-collapse-item>
-                                    <template slot="title">
-                                        <span style="margin:0 10px">第{{index+1}}项</span>
-                                        <i class="el-icon-delete" @click.stop="delHover(index)"></i>
-                                    </template>
-                                    <el-row>
-                                        <el-form-item label="图片" required>
-                                            <div class="upload-list" v-if="item.imgUrl">
-                                                <img :src="item.imgUrl">
-                                                <div class="upload-list-cover">
-                                                    <i class="el-icon-edit" @click="handleEdit(index)"></i>
-                                                    <i class="el-icon-delete" @click="handleDel(index)"></i>
+            <el-row v-if="itemData.id==$store.state.componentId" class="hover-config" :style="{left: '95px'}">
+                <el-row class="config-title">悬浮框</el-row>
+                <el-form label-width="80px">
+                    <el-tabs type="card">
+                        <el-tab-pane label="内容" name="0">
+                            <draggable v-model="formProps.data">
+                                <el-collapse v-for="(item,index) in formProps.data" :key="index" style="margin-bottom:10px">
+                                    <el-collapse-item>
+                                        <template slot="title">
+                                            <span style="margin:0 10px">第{{index+1}}项</span>
+                                            <i class="el-icon-delete" @click.stop="delHover(index)"></i>
+                                        </template>
+                                        <el-row>
+                                            <el-form-item label="图片" required>
+                                                <div class="upload-list" v-if="item.imgUrl">
+                                                    <img :src="item.imgUrl">
+                                                    <div class="upload-list-cover">
+                                                        <i class="el-icon-edit" @click="handleEdit(index)"></i>
+                                                        <i class="el-icon-delete" @click="handleDel(index)"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div @click='handleEdit(index)' class='upload-img' v-else>
-                                                <i class='el-icon-upload'></i>
-                                            </div>
-                                        </el-form-item>
-                                        <el-form-item label="点击事件">
-                                            <el-input placeholder="请选择绑定事件" v-model="item.targetUrl" clearable @clear="clearLink">
-                                                <el-button slot="append" @click="handleLink(index)">选择</el-button>
-                                            </el-input>
-                                        </el-form-item>
-                                    </el-row>
-                                </el-collapse-item>
-                            </el-collapse>
-                        </draggable>
-                        <el-button @click="addHover" v-show='formProps.data.length<4'>添加</el-button>
-                    </el-tab-pane>
-                    <el-tab-pane label="样式" name="1">
-                        <el-form-item label="背景颜色">
-                            <el-color-picker v-model="formProps.bgColor"></el-color-picker>
-                        </el-form-item>
-                        <el-form-item label="圆角">
-                            <el-input-number v-model="formProps.borderRadius" :max='50' :min='0' controls-position="right"></el-input-number>
-                        </el-form-item>
-                        <el-form-item label="阴影">
-                            <el-form>
-                                <el-form-item label="阴影颜色">
-                                    <el-color-picker v-model="shadowColor" @change="shadowChange"></el-color-picker>
-                                </el-form-item>
-                                <el-form-item label="模糊半径">
-                                    <el-input-number v-model="shadowR" :max='20' :min='0' controls-position="right" style="margin-bottom:10px" @change="shadowChange"></el-input-number>
-                                </el-form-item>
-                                <el-form-item label="X 轴偏移">
-                                    <el-input-number v-model="shadowX" :max='20' :min='0' controls-position="right" style="margin-bottom:10px" @change="shadowChange"></el-input-number>
-                                </el-form-item>
-                                <el-form-item label="Y 轴偏移">
-                                    <el-input-number v-model="shadowY" :max='20' :min='0' controls-position="right" style="margin-bottom:10px" @change="shadowChange"></el-input-number>
-                                </el-form-item>
-                            </el-form>
-                        </el-form-item>
-                    </el-tab-pane>
-                </el-tabs>
-                <el-form-item style="text-align:right">
-                    <el-button size="mini" @click.stop="cancel">取消</el-button>
-                    <el-button type="primary" size="mini" plain @click.stop="save">保存</el-button>
-                </el-form-item>
-            </el-form>
+                                                <div @click='handleEdit(index)' class='upload-img' v-else>
+                                                    <i class='el-icon-upload'></i>
+                                                </div>
+                                            </el-form-item>
+                                            <el-form-item label="点击事件">
+                                                <el-input placeholder="请选择绑定事件" v-model="item.targetUrl" clearable @clear="clearLink">
+                                                    <el-button slot="append" @click="handleLink(index)">选择</el-button>
+                                                </el-input>
+                                            </el-form-item>
+                                        </el-row>
+                                    </el-collapse-item>
+                                </el-collapse>
+                            </draggable>
+                            <el-button @click="addHover" v-show='formProps.data.length<4'>添加</el-button>
+                        </el-tab-pane>
+                        <el-tab-pane label="样式" name="1">
+                            <el-form-item label="背景颜色">
+                                <el-color-picker v-model="formProps.bgColor"></el-color-picker>
+                            </el-form-item>
+                            <el-form-item label="圆角">
+                                <el-input-number v-model="formProps.borderRadius" :max='50' :min='0' controls-position="right"></el-input-number>
+                            </el-form-item>
+                            <el-form-item label="阴影">
+                                <el-form>
+                                    <el-form-item label="阴影颜色">
+                                        <el-color-picker v-model="shadowColor" @change="shadowChange"></el-color-picker>
+                                    </el-form-item>
+                                    <el-form-item label="模糊半径">
+                                        <el-input-number v-model="shadowR" :max='20' :min='0' controls-position="right" style="margin-bottom:10px" @change="shadowChange"></el-input-number>
+                                    </el-form-item>
+                                    <el-form-item label="X 轴偏移">
+                                        <el-input-number v-model="shadowX" :max='20' :min='0' controls-position="right" style="margin-bottom:10px" @change="shadowChange"></el-input-number>
+                                    </el-form-item>
+                                    <el-form-item label="Y 轴偏移">
+                                        <el-input-number v-model="shadowY" :max='20' :min='0' controls-position="right" style="margin-bottom:10px" @change="shadowChange"></el-input-number>
+                                    </el-form-item>
+                                </el-form>
+                            </el-form-item>
+                        </el-tab-pane>
+                    </el-tabs>
+                    <el-form-item style="text-align:right">
+                        <el-button size="mini" @click.stop="cancel">取消</el-button>
+                        <el-button type="primary" size="mini" plain @click.stop="save">保存</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-row>
+            <el-row class="config-arrow" v-if="itemData.id==$store.state.componentId" :style="{left: '89px'}"></el-row>
+            <el-row class="config-del">
+                <span @click.stop="delComponent">删除</span>
+            </el-row>
+            <Upload :show="showUpload" @on-selected="selectImg" @on-cancel="cancelUpload"></Upload>
+            <qingful-link :show-modal='showLink' @on-select='selectedLink'></qingful-link>
         </el-row>
-        <el-row class="config-arrow" v-if="itemData.id==$store.state.componentId" :style="{left: configOffsetLeft - 6 + 'px'}"></el-row>
-        <el-row class="config-del">
-            <span @click.stop="delComponent">删除</span>
-        </el-row>
-        <Upload :show="showUpload" @on-selected="selectImg" @on-cancel="cancelUpload"></Upload>
-        <qingful-link :show-modal='showLink' @on-select='selectedLink'></qingful-link>
-    </el-row>
+    </div>
 </template>
 
 <script>

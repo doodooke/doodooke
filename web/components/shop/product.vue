@@ -369,7 +369,7 @@
                 <el-tabs type="card">
                     <el-tab-pane label="内容" name="0">
                         <el-button size="small" @click="addProduct" style="margin-bottom:10px">添加商品</el-button>
-                        <draggable v-model="products">
+                        <draggable v-model="products" @change='rankProduct'>
                             <el-row class="product-list" style="margin-bottom:5px" v-for="(item,index) in products" :key="index">
                                 <el-col :span="4">
                                     <img :src="item.img_url" alt="">
@@ -493,12 +493,6 @@
                         <el-tag size="mini" type="info" v-else-if="scope.row.type == 3">预售商品</el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column prop="status" label="状态" header-align="center" align="center">
-                    <template slot-scope="scoped">
-                        <el-row style="font-weight:700;color:#19be6b" v-if="scoped.row.status">开启</el-row>
-                        <el-row style="font-weight:700;color:#f50" v-else>关闭</el-row>
-                    </template>
-                </el-table-column>
             </el-table>
             <el-row style="margin-top:10px">
                 <el-col :span="12">
@@ -540,6 +534,7 @@ export default {
             formRelations: [],
             formPropsDefault: {
                 products: [],
+                productOther: [],
                 product_type: 0,
                 label_icon: 0,
                 label_name: "新品",
@@ -580,16 +575,53 @@ export default {
                         //         )
                         //     );
                         // }
-                        this.products.push({
-                            name: this.formRelations[key].relation.name,
-                            info: this.formRelations[key].relation.info,
-                            price: this.formRelations[key].relation.price,
-                            price_org: this.formRelations[key].relation
-                                .price_org,
-                            sale: this.formRelations[key].relation.sale,
-                            img_url: this.formRelations[key].relation.img_url,
-                            type: this.formRelations[key].relation.type
-                        });
+                        if (this.formRelations[key].relation.status) {
+                            this.products.push({
+                                id: this.formRelations[key].relation.id,
+                                name: this.formRelations[key].relation.name,
+                                info: this.formRelations[key].relation.info,
+                                price: this.formRelations[key].relation.price,
+                                price_pintuan: this.formRelations[key].relation
+                                    .price,
+                                price_org: this.formRelations[key].relation
+                                    .price_org,
+                                sale: this.formRelations[key].relation.sale,
+                                img_url: this.formRelations[key].relation
+                                    .img_url,
+                                type: this.formRelations[key].relation.type
+                            });
+                        }
+
+                        if (this.formRelations[key].relation.type == 2) {
+                            if (this.formProps.productOther.length) {
+                                for (let key in this.formProps.productOther) {
+                                    for (let k in this.products) {
+                                        if (
+                                            this.products[k].id ==
+                                            this.formProps.productOther[key].id
+                                        ) {
+                                            this.products[k].price =
+                                                (
+                                                    this.products[k]
+                                                        .price_pintuan *
+                                                    this.formProps.productOther[
+                                                        key
+                                                    ].pinTuanSet.discount
+                                                ).toFixed(2) < 0.01
+                                                    ? 0.01
+                                                    : (
+                                                          this.products[k]
+                                                              .price_pintuan *
+                                                          this.formProps
+                                                              .productOther[key]
+                                                              .pinTuanSet
+                                                              .discount
+                                                      ).toFixed(2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -619,16 +651,49 @@ export default {
                     //         })
                     //     );
                     // }
+                    if (this.formRelations[key].relation.status) {
+                        this.products.push({
+                            id: this.formRelations[key].relation.id,
+                            name: this.formRelations[key].relation.name,
+                            info: this.formRelations[key].relation.info,
+                            price: this.formRelations[key].relation.price,
+                            price_pintuan: this.formRelations[key].relation
+                                .price,
+                            price_org: this.formRelations[key].relation
+                                .price_org,
+                            sale: this.formRelations[key].relation.sale,
+                            img_url: this.formRelations[key].relation.img_url,
+                            type: this.formRelations[key].relation.type
+                        });
+                    }
 
-                    this.products.push({
-                        name: this.formRelations[key].relation.name,
-                        info: this.formRelations[key].relation.info,
-                        price: this.formRelations[key].relation.price,
-                        price_org: this.formRelations[key].relation.price_org,
-                        sale: this.formRelations[key].relation.sale,
-                        img_url: this.formRelations[key].relation.img_url,
-                        type: this.formRelations[key].relation.type
-                    });
+                    if (this.formRelations[key].relation.type == 2) {
+                        if (this.formProps.productOther.length) {
+                            for (let key in this.formProps.productOther) {
+                                for (let k in this.products) {
+                                    if (
+                                        this.products[k].id ==
+                                        this.formProps.productOther[key].id
+                                    ) {
+                                        this.products[k].price =
+                                            (
+                                                this.products[k].price_pintuan *
+                                                this.formProps.productOther[key]
+                                                    .pinTuanSet.discount
+                                            ).toFixed(2) < 0.01
+                                                ? 0.01
+                                                : (
+                                                      this.products[k]
+                                                          .price_pintuan *
+                                                      this.formProps
+                                                          .productOther[key]
+                                                          .pinTuanSet.discount
+                                                  ).toFixed(2);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -646,7 +711,7 @@ export default {
         async getProduct() {
             let url = `/api/shop/home/shop/product/product/index?page=${
                 this.pagination.page
-            }`;
+            }&status=1`;
             if (this.keyword) {
                 url += `&keyword=${this.keyword}`;
             }
@@ -654,6 +719,18 @@ export default {
             if (product && product.errmsg === "ok") {
                 this.productData = product.data.data;
                 for (let key in this.productData) {
+                    if (this.productData[key].type == 2) {
+                        this.productData[key].price =
+                            (
+                                this.productData[key].price *
+                                this.productData[key].pintuan.discount
+                            ).toFixed(2) < 0.01
+                                ? 0.01
+                                : (
+                                      this.productData[key].price *
+                                      this.productData[key].pintuan.discount
+                                  ).toFixed(2);
+                    }
                     // if (
                     //     this.productData[key].sku_status &&
                     //     this.productData[key].sku.length
@@ -692,6 +769,17 @@ export default {
                 for (let key in this.selectProduct) {
                     this.formProps.products.push(this.selectProduct[key].id);
 
+                    if (this.selectProduct[key].type == 2) {
+                        //拼团商品
+                        this.formProps.productOther.push({
+                            id: this.selectProduct[key].id,
+                            pinTuanSet: {
+                                discount: this.selectProduct[key].pintuan
+                                    .discount
+                            }
+                        });
+                    }
+
                     // if (
                     //     this.selectProduct[key].sku_status &&
                     //     this.selectProduct[key].sku.length
@@ -710,7 +798,19 @@ export default {
                         img_url: this.selectProduct[key].img_url,
                         name: this.selectProduct[key].name,
                         info: this.selectProduct[key].info,
-                        price: this.selectProduct[key].price,
+                        price:
+                            this.selectProduct[key].type == 2
+                                ? (
+                                      this.selectProduct[key].price *
+                                      this.selectProduct[key].pintuan.discount
+                                  ).toFixed(2) < 0.01
+                                    ? 0.01
+                                    : (
+                                          this.selectProduct[key].price *
+                                          this.selectProduct[key].pintuan
+                                              .discount
+                                      ).toFixed(2)
+                                : this.selectProduct[key].price,
                         sale: this.selectProduct[key].sale,
                         type: this.selectProduct[key].type
                     });
@@ -721,6 +821,18 @@ export default {
         //删除商品
         delProduct(index) {
             this.formProps.products.splice(index, 1);
+
+            if (this.products[index].type == 2) {
+                for (let key in this.formProps.productOther) {
+                    if (
+                        this.formProps.productOther[key].id ==
+                        this.products[index].id
+                    ) {
+                        this.formProps.productOther.splice(key, 1);
+                    }
+                }
+            }
+
             this.products.splice(index, 1);
         },
         selectStyle(style) {
@@ -735,6 +847,12 @@ export default {
             }
             if (style == 3) {
                 this.formProps.show_type = 7;
+            }
+        },
+        rankProduct() {
+            this.formProps.products = [];
+            for (let key in this.products) {
+                this.formProps.products.push(this.products[key].id);
             }
         },
         cancel() {

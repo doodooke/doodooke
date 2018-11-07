@@ -2,7 +2,7 @@
     <el-row style="line-height:70px;">
         <el-col :span="4" @click.native="dashboard" class="col-list">
             <i class="iconfont icon-shouye"></i>
-            <span class="col-list-span">控制台</span>
+            <span class="col-list-span">首页</span>
         </el-col>
         <el-col :span="4" @click.native="decorate" class="col-list">
             <i class="iconfont icon-zhuangxiu"></i>
@@ -52,17 +52,19 @@
         </el-col>
         <el-dialog :visible.sync="issueDialog" width="500px">
             <p slot="title" style="text-align:center;">发布</p>
-            <el-form label-width="90px" :model="form" :rules="rules" ref="form" style="margin:-30px 0">
+            <el-form label-width="80px" :model="form" :rules="rules" ref="form" style="margin:-30px 0">
                 <el-form-item label="服务类目" prop="class">
                     <el-select v-model="form.class" style="width:100%">
                         <el-option v-for="(item,index) in category" :key="index" :value="selectedCategory(item)">{{selectedCategory(item)}}</el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="标题" prop="title">
-                    <el-input v-model="form.title" placeholder='请填写标题'></el-input>
+                    <el-input v-model="form.title" placeholder='请填写标题' :maxlength="32"></el-input>
+                    <el-row>小程序页面的标题，标题长度不超过32</el-row>
                 </el-form-item>
                 <el-form-item label="标签" prop="tag">
                     <el-input v-model="form.tag" placeholder='多个标签用空格分隔'></el-input>
+                    <el-row style="line-height:20px;margin-top:10px">小程序的标签，多个标签用空格分隔，标签不能多于10个，标签长度不超过20</el-row>
                 </el-form-item>
             </el-form>
             <span slot="footer">

@@ -1,4 +1,6 @@
 const { URL, parse } = require("url");
+const _ = require("lodash");
+const path = require("path");
 const httpProxy = require("http-proxy");
 const hProxy = httpProxy.createProxyServer({});
 hProxy.on("error", (err, req, res) => {

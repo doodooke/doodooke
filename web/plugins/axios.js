@@ -51,9 +51,11 @@ export default function ({ app, $axios, redirect, req }) {
                     redirect("/app/apps");
                     return;
                 }
-            }
-            if (status === 301) {
-                redirect("/install/config");
+                if (data.errcode === "Custom Agent Unauthorized" || data.errcode === "Agent Unauthorized") {
+                    redirect("/app/apps");
+                    return;
+                }
+
             }
         } else {
             console.log("Error", error.message);

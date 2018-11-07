@@ -9,7 +9,7 @@
 
         <div style="width: 1200px;margin: 0 auto;margin-top: 40px;min-height:500px;">
             <qingful-dashboard :menu="menu">
-                <nuxt/>
+                <nuxt />
             </qingful-dashboard>
         </div>
 
@@ -44,9 +44,14 @@ export default {
                     url: "/agent/dashboard"
                 },
                 {
-                    name: "配置",
+                    name: "代理商配置",
                     icon: "icon-shezhi",
                     url: "/agent/config"
+                },
+                {
+                    name: "网站配置",
+                    icon: "icon-shezhi",
+                    url: "/agent/envweb"
                 },
                 {
                     name: "短信",

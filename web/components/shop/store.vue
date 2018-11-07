@@ -116,16 +116,18 @@
                     <el-tab-pane label="内容" name="0">
                         <el-button size="small" @click="selectShop" style="margin-bottom:10px">选择店铺</el-button>
                         <el-button size="small" @click="addProduct" style="margin-bottom:10px" v-if="appToken">添加商品</el-button>
-                        <el-row class="product-list" style="margin-bottom:5px" v-for="(item,index) in products" :key="index">
-                            <el-col :span="4">
-                                <img :src="item.img_url" alt="">
-                            </el-col>
-                            <el-col :span="19">
-                                <el-row class="product-list text_ellipsis">名称：{{item.name}}</el-row>
-                                <el-row class="product-list" style="margin-top:5px">价格：¥{{item.price}}</el-row>
-                            </el-col>
-                            <i class="el-icon-circle-close" @click="delProduct(index)"></i>
-                        </el-row>
+                        <draggable v-model="products" @change='rankProduct'>
+                            <el-row class="product-list" style="margin-bottom:5px" v-for="(item,index) in products" :key="index">
+                                <el-col :span="4">
+                                    <img :src="item.img_url" alt="">
+                                </el-col>
+                                <el-col :span="19">
+                                    <el-row class="product-list text_ellipsis">名称：{{item.name}}</el-row>
+                                    <el-row class="product-list" style="margin-top:5px">价格：¥{{item.price}}</el-row>
+                                </el-col>
+                                <i class="el-icon-circle-close" @click="delProduct(index)"></i>
+                            </el-row>
+                        </draggable>
                     </el-tab-pane>
                     <el-tab-pane label="样式" name="1">
                         <el-form-item label="背景图片" required>
@@ -261,12 +263,7 @@
                         <el-tag size="mini" v-if="scope.row.type == 0">普通商品</el-tag>
                         <el-tag size="mini" type="warning" v-if="scope.row.type == 1">分销商品</el-tag>
                         <el-tag size="mini" type="danger" v-else-if="scope.row.type == 2">拼团商品</el-tag>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="status" label="状态" header-align="center" align="center">
-                    <template slot-scope="scoped">
-                        <el-row style="font-weight:700;color:#19be6b" v-if="scoped.row.status">开启</el-row>
-                        <el-row style="font-weight:700;color:#f50" v-else>关闭</el-row>
+                        <el-tag size="mini" type="info" v-else-if="scope.row.type == 3">预售商品</el-tag>
                     </template>
                 </el-table-column>
             </el-table>
@@ -286,7 +283,11 @@
 
 <script>
 import axios from "axios";
+import draggable from "vuedraggable";
 export default {
+    components: {
+        draggable
+    },
     props: {
         itemData: {
             default: {}
@@ -345,9 +346,11 @@ export default {
                     for (let key in this.formRelations) {
                         if (
                             this.formRelations[key].relation_type ==
-                            "shop_product"
+                                "shop_product" &&
+                            this.formRelations[key].relation.status
                         ) {
                             this.products.push({
+                                id: this.formRelations[key].relation.id,
                                 name: this.formRelations[key].relation.name,
                                 info: this.formRelations[key].relation.info,
                                 price: this.formRelations[key].relation.price,
@@ -391,9 +394,12 @@ export default {
             if (this.formRelations.length) {
                 for (let key in this.formRelations) {
                     if (
-                        this.formRelations[key].relation_type == "shop_product"
+                        this.formRelations[key].relation_type ==
+                            "shop_product" &&
+                        this.formRelations[key].relation.status
                     ) {
                         this.products.push({
+                            id: this.formRelations[key].relation.id,
                             name: this.formRelations[key].relation.name,
                             info: this.formRelations[key].relation.info,
                             price: this.formRelations[key].relation.price,
@@ -461,13 +467,15 @@ export default {
         },
         shopSelected(row) {
             this.showShopModal = false;
-            this.formProps.shop_id = row.subShop.id;
-            this.formProps.shop_logo = row.subShop.img_url;
-            this.formProps.shop_sub = row.subShop.info;
-            this.formProps.shop_name = row.subShop.name;
             this.appToken = row.subToken;
-            this.products = [];
-            this.formProps.product_id = [];
+            if (this.formProps.shop_id != row.subShop.id) {
+                this.formProps.shop_id = row.subShop.id;
+                this.formProps.shop_logo = row.subShop.img_url;
+                this.formProps.shop_sub = row.subShop.info;
+                this.formProps.shop_name = row.subShop.name;
+                this.products = [];
+                this.formProps.product_id = [];
+            }
         },
         //添加商品
         addProduct() {
@@ -481,7 +489,7 @@ export default {
         async getProduct() {
             let url = `/api/shop/home/shop/product/product/index?page=${
                 this.pagination.page
-            }`;
+            }&status=1`;
             if (this.keyword) {
                 url += `&keyword=${this.keyword}`;
             }
@@ -568,6 +576,12 @@ export default {
         delProduct(index) {
             this.formProps.product_id.splice(index, 1);
             this.products.splice(index, 1);
+        },
+        rankProduct() {
+            this.formProps.product_id = [];
+            for (let key in this.products) {
+                this.formProps.product_id.push(this.products[key].id);
+            }
         },
         cancel() {
             this.$store.commit("SET_COMPONENT_ID", 0);

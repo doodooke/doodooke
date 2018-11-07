@@ -265,7 +265,7 @@ export default {
             const res = await this.$axios.$get(
                 `/api/article/home/article/index?article_category_id=${id}&pageSize=${
                     this.formProps.show_num
-                }`
+                }&status=1`
             );
             if (res && res.errmsg === "ok") {
                 this.articleData = res.data.data;
