@@ -149,8 +149,8 @@ ALISMS_FREE_SIGN_NAME=$ALISMS_FREE_SIGN_NAME
 ALISMS_TEMPLATE_CODE=$ALISMS_TEMPLATE_CODE
 
 # 常用命令
-CMD_INSTALL=yarn install
-CMD_BUILD=npm run web:build
+CMD_INSTALL=yarn install && npm run bootstrap
+CMD_BUILD=npm run bootstrap && npm run web:build
 " > ./.env
 
 # ===============================
