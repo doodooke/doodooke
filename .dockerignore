@@ -1,2 +1,2 @@
 node_modules
-shell/openSource
+**/node_modules

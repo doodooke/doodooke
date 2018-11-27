@@ -1,0 +1,13 @@
+{
+  "packages": [
+    "app/*",
+    "plugin/*"
+  ],
+  "command": {
+    "publish": {
+        "registry": "http://registry.npm.doodooke.com"
+    }
+  },
+  "npmClient": "yarn",
+  "version": "independent"
+}

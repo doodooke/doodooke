@@ -5,27 +5,35 @@ try {
 const Doodoo = require("doodoo.js");
 const socket = require("socket.io");
 const cors = require("koa-cors");
-const context = require("./context");
+const glob = require("glob");
+const fs = require("fs");
 
-// 初始化
+// 兼容1.x配置文件
+require("doodoo-plugin-dotenv");
+
 const app = new Doodoo();
-Object.assign(app.context, context);
 app.use(
     cors({
         credentials: true
     })
 );
 
-app.plugin("webDomain");
-app.plugin("envWeb");
+if (fs.existsSync("./plugin/sentry")) {
+    app.plugin("sentry");
+}
+app.plugin("mysql");
+app.plugin("redis");
 app.plugin("static");
-app.plugin("migrate");
-app.plugin("core");
-app.plugin("nuxt");
-app.plugin("sentry");
-app.plugin("wxaOpen");
 app.plugin("proxy");
 app.plugin("baas");
+
+// 自动加载
+const plugins = glob.sync("*", {
+    cwd: "plugin"
+});
+for (const key in plugins) {
+    app.plugin(plugins[key]);
+}
 
 (async () => {
     const server = await app.start();

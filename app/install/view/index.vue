@@ -24,43 +24,73 @@ export default {
             "message",
             async e => {
                 let data = e.data;
-                if (data.type !== "doodooke") {
-                    return;
+
+                //获取更新模块
+                if (data.type == "module") {
+                    const modules = await this.$axios.$get(
+                        `/api/install/index/moduleVersion?Token=${data.token}`
+                    );
+                    if (modules && modules.errmsg === "ok") {
+                        var iframeWin = document.getElementById("myIframe")
+                            .contentWindow;
+                        iframeWin.postMessage(modules.data, "*");
+                    }
                 }
 
-                this.$prompt("请输入安全码 Security Code", "提示", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消"
-                })
-                    .then(async ({ value }) => {
-                        if (!value) {
-                            this.$message.warning("请输入安全码 Security Code");
-                            return;
-                        }
-                        this.$message.warning("开始下载");
-                        this.loading = true;
-                        const res = await this.$axios.$get(
-                            `/api/install/index/installModule?module=${
-                                data.name
-                            }&Token=${data.token}&securityCode=${value.trim()}`
-                        );
-                        if (res && res.errmsg === "ok") {
-                            this.loading = false;
-                            this.$message.success(res.data);
-                        } else {
-                            this.loading = false;
-                        }
+                //下载 更新
+                if (data.type == "doodooke" || data.type == "update") {
+                    this.$prompt("请输入安全码 Security Code", "提示", {
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消"
                     })
-                    .catch(() => {});
+                        .then(async ({ value }) => {
+                            if (!value) {
+                                this.$message.warning(
+                                    "请输入安全码 Security Code"
+                                );
+                                return;
+                            }
+                            this.$message.warning(
+                                data.type == "doodooke"
+                                    ? "开始下载"
+                                    : "开始更新"
+                            );
+                            this.loading = true;
+                            let url =
+                                data.type == "doodooke"
+                                    ? `/api/install/index/installModule?module=${
+                                          data.name
+                                      }&Token=${
+                                          data.token
+                                      }&securityCode=${value.trim()}`
+                                    : `/api/install/index/updateModule?cid=${
+                                          data.cid
+                                      }&pid=${data.pid}&Token=${
+                                          data.token
+                                      }&securityCode=${value.trim()}`;
+
+                            const res = await this.$axios.$get(url);
+                            if (res && res.errmsg === "ok") {
+                                this.loading = false;
+                                this.$message.success(res.data);
+                            } else {
+                                this.loading = false;
+                            }
+                        })
+                        .catch(() => {});
+                }
             },
             false
         );
+
+        this.sendPost();
     },
     methods: {
         changeFrameHeight() {
             var ifm = document.getElementById("myIframe");
             ifm.height = document.documentElement.clientHeight;
-        }
+        },
+        sendPost() {}
     }
 };
 </script>
