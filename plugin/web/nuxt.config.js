@@ -7,7 +7,7 @@ if (process.cwd() === __dirname) {
 }
 
 const fs = require("fs");
-const { Utils } = require("nuxt");
+const { relativeTo } = require("@nuxt/common");
 const glob = require("glob");
 const _url = require("url");
 const dotenv = require("dotenv");
@@ -54,7 +54,7 @@ function createLayouts() {
                 .basename(layouts[key])
                 .replace(/\\/g, "/")
                 .replace(/.vue$/, "")
-        ] = Utils.relativeTo(
+        ] = relativeTo(
             path.resolve(__dirname, ".nuxt"),
             path.resolve(appDir, layouts[key])
         );
