@@ -28,7 +28,7 @@ fi
 echo "下载系统"
 git clone https://gitee.com/doodooke/doodoo.git
 cd doodoo
-yarn install
+yarn install && npm run bootstrap
 
 echo "后端配置"
 echo "[1/10] 应用配置"
