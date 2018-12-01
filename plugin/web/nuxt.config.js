@@ -62,6 +62,26 @@ function createLayouts() {
 
     return _layouts;
 }
+/***SCRIPT***/
+let HEAD_SCRIPT = [];
+if (webConfig.HEAD_SCRIPT) {
+    for(const value of webConfig.HEAD_SCRIPT.split(',')){
+        HEAD_SCRIPT.push({
+            src: value
+        })
+    }
+}
+/***LINK***/
+let HEAD_LINK = [];
+if (webConfig.HEAD_LINK) {
+    for(const value of webConfig.HEAD_LINK.split(',')){
+        HEAD_LINK.push({
+            rel: "stylesheet",
+            type: "text/css",
+            href: value
+        })
+    }
+}
 
 module.exports = {
     rootDir: "plugin/web",
@@ -107,7 +127,7 @@ module.exports = {
                     "https://s19.cnzz.com/z_stat.php?id=1274740931&web_id=1274740931",
                 type: "hidden"
             }
-        ],
+        ].concat(HEAD_SCRIPT),
         link: [
             { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
             {
@@ -130,9 +150,9 @@ module.exports = {
             {
                 rel: "stylesheet",
                 type: "text/css",
-                href: "/font/iconfont.css"
+                href: "//at.alicdn.com/t/font_704506_578sukvba0w.css"
             }
-        ]
+        ].concat(HEAD_LINK)
     },
     /*
      ** Customize the progress bar color

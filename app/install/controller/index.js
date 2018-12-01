@@ -59,12 +59,20 @@ async function execSql(sqlFile) {
             for (let key in sqls) {
                 sqls[key] = _.trim(sqls[key]);
                 if (sqls[key]) {
-                    await doodoo.bookshelf.knex.raw(sqls[key]);
+                    try {
+                        await doodoo.bookshelf.knex.raw(sqls[key]);
+                    } catch (e) {
+                        console.error(e.sqlMessage);
+                    }
                 }
             }
         } else {
             if (_.trim(sql)) {
-                await doodoo.bookshelf.knex.raw(sql);
+                try {
+                    await doodoo.bookshelf.knex.raw(sql);
+                } catch (e) {
+                    console.error(e.sqlMessage);
+                }
             }
         }
     }
@@ -188,10 +196,10 @@ module.exports = class extends doodoo.Controller {
 
                     const dir = path.parse(file.path).dir;
                     if (
-                        !_.includes(downloadedModules, dir) &&
-                        dir.indexOf(path.sep) === -1
+                        dir && !_.includes(downloadedModules, dir.split(path.sep)[1]) &&
+                        dir.indexOf(path.sep) === 3
                     ) {
-                        downloadedModules.push(dir);
+                        downloadedModules.push(dir.split(path.sep)[1]);
                     }
 
                     return file;
@@ -358,10 +366,10 @@ module.exports = class extends doodoo.Controller {
 
                     const dir = path.parse(file.path).dir;
                     if (
-                        !_.includes(downloadedModules, dir) &&
-                        dir.indexOf(path.sep) === -1
+                        dir && !_.includes(downloadedModules, dir.split(path.sep)[1]) &&
+                        dir.indexOf(path.sep) === 3
                     ) {
-                        downloadedModules.push(dir);
+                        downloadedModules.push(dir.split(path.sep)[1]);
                     }
 
                     return file;
