@@ -150,7 +150,7 @@ module.exports = {
             {
                 rel: "stylesheet",
                 type: "text/css",
-                href: "//at.alicdn.com/t/font_704506_578sukvba0w.css"
+                href: "//at.alicdn.com/t/font_704506_b789o6snslp.css"
             }
         ].concat(HEAD_LINK)
     },

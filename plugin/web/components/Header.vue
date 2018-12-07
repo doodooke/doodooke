@@ -1,22 +1,41 @@
 <template>
-    <el-row style="min-width:1200px;height: 70px;border-bottom: 1px solid hsla(0, 0%, 63%, .1);transition: all .2s ease-in-out;background-color:#ffffff;border-color:#ffffff">
+  <el-row style="min-width:1200px;height: 70px;border-bottom: 1px solid hsla(0, 0%, 63%, .1);transition: all .2s ease-in-out;background-color:#ffffff;border-color:#ffffff">
 
-        <el-row style="width: 1200px;margin:0 auto;">
-            <!-- logo -->
-            <el-col :span="4">
-                <img src="/api/app/home/public/logo" style="height: 40px;margin-top: 15px;float: left" @click="clickLogo" />
-            </el-col>
+    <el-row style="width: 1200px;margin:0 auto;">
+      <!-- logo -->
+      <el-col :span="4">
+        <img
+          :src="logo"
+          style="height: 40px;margin-top: 15px;float: left"
+          @click="clickLogo"
+          v-if="logo"
+        />
+        <img
+          v-else
+          src="/api/app/home/public/logo"
+          style="height: 40px;margin-top: 15px;float: left"
+          @click="clickLogo"
+        />
 
-            <!-- 装修设置 -->
-            <slot name="center"></slot>
-            <!-- 登录注册 -->
-            <slot name="right"></slot>
-        </el-row>
+      </el-col>
 
+      <!-- 装修设置 -->
+      <slot name="center"></slot>
+      <!-- 登录注册 -->
+      <slot name="right"></slot>
     </el-row>
+
+  </el-row>
 </template>
 <script>
 export default {
+    props: {
+        logo: {
+            default: function() {
+                return "";
+            }
+        }
+    },
     methods: {
         clickLogo() {
             if (!this.$cookies.get("Token") || !this.$cookies.get("AppToken")) {

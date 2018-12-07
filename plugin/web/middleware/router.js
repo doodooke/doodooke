@@ -32,7 +32,7 @@ export default function({ app, route, redirect, req }) {
         } else if (includeRoute(routes, "/public/login")) {
             redirect("/public/login");
         } else {
-            redirect("/install");
+            redirect("/admin");
         }
         return;
     }

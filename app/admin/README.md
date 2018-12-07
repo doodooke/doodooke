@@ -1,11 +1,11 @@
-# `install`
+# `admin`
 
 > TODO: description
 
 ## Usage
 
 ```
-const install = require('install');
+const admin = require('admin');
 
 // TODO: DEMONSTRATE API
 ```

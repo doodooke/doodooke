@@ -1,11 +1,11 @@
 <template>
     <div v-loading="loading" element-loading-text="正在下载中">
-        <iframe id="myIframe" :src="src" scrolling="auto" frameborder="0" style="min-width:1200px;width:100%;background-color:#ffffff;min-height:100vh;"></iframe>
+        <iframe id="myIframe" :src="src" scrolling="auto" frameborder="0" style="min-width:1200px;width:100%;background-color:#ffffff;"></iframe>
     </div>
 </template>
 <script>
 export default {
-    layout: "empty",
+    layout: "plugin",
     data() {
         return {
             loading: false,
@@ -28,7 +28,7 @@ export default {
                 //获取更新模块
                 if (data.type == "module") {
                     const modules = await this.$axios.$get(
-                        `/api/install/index/moduleVersion?Token=${data.token}`
+                        `/api/admin/install/moduleVersion?Token=${data.token}`
                     );
                     if (modules && modules.errmsg === "ok") {
                         var iframeWin = document.getElementById("myIframe")
@@ -58,12 +58,12 @@ export default {
                             this.loading = true;
                             let url =
                                 data.type == "doodooke"
-                                    ? `/api/install/index/installModule?module=${
+                                    ? `/api/admin/install/installModule?module=${
                                           data.name
                                       }&Token=${
                                           data.token
                                       }&securityCode=${value.trim()}`
-                                    : `/api/install/index/updateModule?cid=${
+                                    : `/api/admin/install/updateModule?cid=${
                                           data.cid
                                       }&pid=${data.pid}&Token=${
                                           data.token
@@ -82,22 +82,16 @@ export default {
             },
             false
         );
-
-        this.sendPost();
     },
     methods: {
         changeFrameHeight() {
             var ifm = document.getElementById("myIframe");
             ifm.height = document.documentElement.clientHeight;
-        },
-        sendPost() {}
+        }
     }
 };
 </script>
 <style>
-body {
-    overflow-y: hidden;
-}
 .el-loading-spinner {
     top: 200px;
 }

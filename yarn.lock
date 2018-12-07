@@ -3242,9 +3242,9 @@ domutils@^1.7.0:
     dom-serializer "0"
     domelementtype "1"
 
-doodoo-plugin-baas@^1.0.1-alpha.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/doodoo-plugin-baas/-/doodoo-plugin-baas-1.0.1.tgz#a7857608261a8c231a26f41c836c0b098a7c45f6"
+doodoo-plugin-baas@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/doodoo-plugin-baas/-/doodoo-plugin-baas-1.0.2.tgz#cbcc660ecc0fc3788b406d481e5eb1816aed4a0a"
   dependencies:
     jsonwebtoken "^8.3.0"
     lodash "^4.17.11"
@@ -3255,9 +3255,9 @@ doodoo-plugin-dotenv@^1.0.2:
   dependencies:
     lodash "^4.17.11"
 
-doodoo-plugin-mysql@^1.0.1-alpha.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/doodoo-plugin-mysql/-/doodoo-plugin-mysql-1.0.1.tgz#81ca64a62f2f3c259ef29432b3325d5419ec46be"
+doodoo-plugin-mysql@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/doodoo-plugin-mysql/-/doodoo-plugin-mysql-1.0.2.tgz#9d79cb39355882dd17ccd0f3bf7444bae717f5fd"
   dependencies:
     bluebird "^3.5.2"
     bookshelf "^0.13.3"
@@ -3268,34 +3268,32 @@ doodoo-plugin-mysql@^1.0.1-alpha.0:
     knex "0.13"
     lodash "^4.17.11"
     mysql "^2.16.0"
-    yn "^2.0.0"
 
-doodoo-plugin-nuxt@^1.0.1-alpha.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/doodoo-plugin-nuxt/-/doodoo-plugin-nuxt-1.0.1.tgz#2ec055fd529fb2aebca5bb93ef995dd87efa5433"
+doodoo-plugin-nuxt@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/doodoo-plugin-nuxt/-/doodoo-plugin-nuxt-1.0.2.tgz#fc0c93d3c50bdea7393b3d678d865ee2c8990565"
   dependencies:
     glob "^7.1.3"
     lodash "^4.17.11"
     nuxt "^2.2.0"
     yn "^2.0.0"
 
-doodoo-plugin-proxy@^1.0.1-alpha.0:
+doodoo-plugin-proxy@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/doodoo-plugin-proxy/-/doodoo-plugin-proxy-1.0.1.tgz#a37e44298559486dcde110d7ad9445ac710e6944"
   dependencies:
     http-proxy "^1.17.0"
 
-doodoo-plugin-redis@^1.0.1-alpha.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/doodoo-plugin-redis/-/doodoo-plugin-redis-1.0.1.tgz#ab3b20649f7dc3e4b3b528b506562d1a21bcde54"
+doodoo-plugin-redis@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/doodoo-plugin-redis/-/doodoo-plugin-redis-1.0.2.tgz#d78a7d7797dd78f11c536bb5c98e3eb44b5dbff9"
   dependencies:
     bluebird "^3.5.2"
     redis "^2.8.0"
-    yn "^2.0.0"
 
-doodoo.js@^2.0.0-alpha.7:
-  version "2.0.0-alpha.7"
-  resolved "https://registry.yarnpkg.com/doodoo.js/-/doodoo.js-2.0.0-alpha.7.tgz#73e05ed23cb5d1ed910c2b4fcf13f910bdaedf05"
+doodoo.js@^2.0.0-alpha.8:
+  version "2.0.0-alpha.8"
+  resolved "https://registry.yarnpkg.com/doodoo.js/-/doodoo.js-2.0.0-alpha.8.tgz#3b6504a81be6bb7148bb21814904c9547e698b2f"
   dependencies:
     dayjs "^1.7.7"
     debug "^3.1.0"

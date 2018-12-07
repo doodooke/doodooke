@@ -26,7 +26,6 @@
         </div>
 
         <qingful-footer></qingful-footer>
-        <qingful-kefu></qingful-kefu>
 
     </div>
 </template>
@@ -35,7 +34,6 @@
 import Header from "./../components/Header.vue";
 import HeaderCustom from "./../components/HeaderCustom.vue";
 import Footer from "./../components/Footer.vue";
-import Kefu from "./../components/Kefu.vue";
 export default {
     head() {
         return {
@@ -57,8 +55,7 @@ export default {
     components: {
         "qingful-header": Header,
         "qingful-footer": Footer,
-        "qingful-header-custom": HeaderCustom,
-        "qingful-kefu": Kefu
+        "qingful-header-custom": HeaderCustom
     },
     methods: {
         toAgent() {

@@ -7,3 +7,4 @@ logs
 .nuxt
 dist
 shell/openSource
+SECURITY_CODE.key

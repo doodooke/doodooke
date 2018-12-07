@@ -1,6 +1,14 @@
 /*可以在这里添加你自己的css*/
-img {
-    max-width: 100%;
-    width: auto;
+img ,video{
+    width: 100%;
     height: auto;
+}
+table{
+    width:100%;
+}
+tr,td{
+    padding:3px!important;
+}
+hr{
+    border:1px solid #ddd!important;
 }

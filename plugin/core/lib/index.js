@@ -1,4 +1,5 @@
 const axios = require("axios");
+const fs = require("fs");
 const fse = require("fs-extra");
 const qs = require("querystring");
 const uuid = require("uuid");
@@ -7,7 +8,19 @@ const download = require("download");
 const address = require("address");
 
 // 安全码
-doodoo.securityCode = uuidVal = uuid();
+if (fs.existsSync("SECURITY_CODE.key")) {
+    const securityCode = fs.readFileSync("SECURITY_CODE.key", {
+        encoding: "utf8"
+    });
+    if (securityCode) {
+        doodoo.securityCode = securityCode;
+    }
+}
+if (!doodoo.securityCode) {
+    doodoo.securityCode = uuid();
+    fse.outputFileSync("SECURITY_CODE.key", doodoo.securityCode);
+}
+
 // 连通性
 let connected = false;
 
@@ -47,11 +60,15 @@ module.exports = async () => {
     const addrs = await getAddress();
     const pkg = await fse.readJson("./package.json");
 
-    console.log("Security Code:", uuidVal);
+    console.log();
+    console.log("Security Code:", doodoo.securityCode);
+    console.log();
 
     try {
         await axios.post(
-            `http://core.doodooke.com/installDevice?uuid=${uuidVal}`,
+            `http://core.doodooke.com/installDevice?uuid=${
+                doodoo.securityCode
+            }`,
             {
                 addrs,
                 env: {
@@ -77,7 +94,7 @@ module.exports = async () => {
 
     // 安全校验
     doodoo.router.use("/core", async (ctx, next) => {
-        if (ctx.query.uuid !== uuidVal) {
+        if (ctx.query.uuid !== doodoo.securityCode) {
             throw new Error("Illegal Request");
         }
         await next();
@@ -111,7 +128,9 @@ module.exports = async () => {
                 require(path.resolve("install.js"));
             }
 
-            const install = await execCommand(process.env.CMD_INSTALL);
+            const install = await execCommand(
+                "yarn install && npm run bootstrap"
+            );
             let restart;
             if (process.env.PM2_USAGE) {
                 restart = await execCommand("pm2 restart pm2.json");

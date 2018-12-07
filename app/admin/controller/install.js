@@ -79,7 +79,7 @@ async function execSql(sqlFile) {
 }
 
 async function installMigrate() {
-    const moduleDirName = "install";
+    const moduleDirName = "admin";
     const moduleDir = path.resolve(process.env.APP_ROOT, moduleDirName);
     // 执行install.js
     const exist = await fse.pathExists(path.resolve(moduleDir, "install.js"));
@@ -196,7 +196,11 @@ module.exports = class extends doodoo.Controller {
 
                     const dir = path.parse(file.path).dir;
                     if (
-                        dir && !_.includes(downloadedModules, dir.split(path.sep)[1]) &&
+                        dir &&
+                        !_.includes(
+                            downloadedModules,
+                            dir.split(path.sep)[1]
+                        ) &&
                         dir.indexOf(path.sep) === 3
                     ) {
                         downloadedModules.push(dir.split(path.sep)[1]);
@@ -274,25 +278,25 @@ module.exports = class extends doodoo.Controller {
 
             let tip;
             if (!process.env.PM2_USAGE) {
-                tip = `${module}模块安装/更新成功，您当前系统不是pm2启动的，请手动重启`;
+                tip = `模块安装/更新成功，您当前系统不是pm2启动的，请手动重启`;
 
                 setTimeout(async () => {
-                    await execCommand(process.env.CMD_BUILD);
+                    await execCommand("npm run bootstrap && npm run web:build");
                 }, 3000);
                 this.success(tip);
                 return;
             } else {
-                tip = `${module}模块安装/更新成功，3s后自动构建，自动重启。如果重启失败，请手动重启。`;
+                tip = `模块安装/更新成功，3s后自动构建，自动重启。如果重启失败，请手动重启。`;
 
                 setTimeout(async () => {
-                    await execCommand(process.env.CMD_BUILD);
+                    await execCommand("npm run bootstrap && npm run web:build");
                     await execCommand("pm2 restart pm2.json");
                 }, 3000);
                 this.success(tip);
                 return;
             }
         }
-        this.fail(`${module}模块安装/更新失败`);
+        this.fail(`模块安装/更新失败`);
     }
     //  返回当前所有模块的版本号
     async moduleVersion() {
@@ -366,7 +370,11 @@ module.exports = class extends doodoo.Controller {
 
                     const dir = path.parse(file.path).dir;
                     if (
-                        dir && !_.includes(downloadedModules, dir.split(path.sep)[1]) &&
+                        dir &&
+                        !_.includes(
+                            downloadedModules,
+                            dir.split(path.sep)[1]
+                        ) &&
                         dir.indexOf(path.sep) === 3
                     ) {
                         downloadedModules.push(dir.split(path.sep)[1]);
@@ -441,24 +449,24 @@ module.exports = class extends doodoo.Controller {
 
             let tip;
             if (!process.env.PM2_USAGE) {
-                tip = `${module}模块安装/更新成功，您当前系统不是pm2启动的，请手动重启`;
+                tip = `模块安装/更新成功，您当前系统不是pm2启动的，请手动重启`;
 
                 setTimeout(async () => {
-                    await execCommand(process.env.CMD_BUILD);
+                    await execCommand("npm run bootstrap && npm run web:build");
                 }, 3000);
                 this.success(tip);
                 return;
             } else {
-                tip = `${module}模块安装/更新成功，3s后自动构建，自动重启。如果重启失败，请手动重启。`;
+                tip = `模块安装/更新成功，3s后自动构建，自动重启。如果重启失败，请手动重启。`;
 
                 setTimeout(async () => {
-                    await execCommand(process.env.CMD_BUILD);
+                    await execCommand("npm run bootstrap && npm run web:build");
                     await execCommand("pm2 restart pm2.json");
                 }, 3000);
                 this.success(tip);
                 return;
             }
         }
-        this.fail(`${module}模块安装/更新失败`);
+        this.fail(`模块安装/更新失败`);
     }
 };
