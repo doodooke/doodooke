@@ -160,7 +160,6 @@ module.exports = class extends doodoo.Controller {
     async installModule() {
         const url = path.resolve(__dirname, "../../../").replace(/\\/g, "/");
         const dir = url.split("/")[url.split("/").length - 1];
-        console.log("dir-->", dir);
         const { module, Token, securityCode, ids = "" } = this.query;
         const license = await fse.readFile("./LICENSE.key");
         const addrs = await getAddress();
@@ -291,7 +290,6 @@ module.exports = class extends doodoo.Controller {
 
                 setTimeout(async () => {
                     shell.exec("npm run bootstrap && npm run web:build");
-                    shell.exec("pwd");
                     shell.exec("pm2 restart pm2.json");
                 }, 3000);
                 this.success(tip);
@@ -463,7 +461,6 @@ module.exports = class extends doodoo.Controller {
 
                 setTimeout(async () => {
                     shell.exec("npm run bootstrap && npm run web:build");
-                    shell.exec("pwd");
                     shell.exec("pm2 restart pm2.json");
                 }, 3000);
                 this.success(tip);
