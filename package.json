@@ -3,7 +3,8 @@
   "version": "2.0.1",
   "private": true,
   "scripts": {
-    "bootstrap": "yarn install --production --verbose && lerna bootstrap",
+    "bootstrap": "yarn install && lerna bootstrap",
+    "bootstrap:production": "yarn install --production && lerna bootstrap",
     "web:dev": "lerna exec --scope doodoo-plugin-web -- npm run dev",
     "web:build": "lerna exec --scope doodoo-plugin-web -- npm run build",
     "web:generate": "lerna exec --scope doodoo-plugin-web -- npm run generate",
