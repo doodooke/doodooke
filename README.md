@@ -12,7 +12,7 @@
 
 1. 手动下载zip代码或者使用命令下载`git clone https://gitee.com/doodooke/doodoo.git`
 
-2. 进入代码根目录，然后执行命令安装依赖`yarn install && yarn run bootstrap`
+2. 进入代码根目录，然后执行命令安装依赖`npm run bootstrap`
 
 3. 进入mysql数据库，创建`doodoo`数据库
 
