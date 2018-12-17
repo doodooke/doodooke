@@ -76,7 +76,7 @@ module.exports = class extends base {
             .save();
 
         // 上传七牛
-        if (!yn(process.env.LOCAL_STATUS)) {
+        if (yn(process.env.QINIU)) {
             await this.uploadFile(file.path, savename);
 
             url = `${process.env.QINIU_DOMAIN}/${savename}`;

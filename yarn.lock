@@ -3238,9 +3238,9 @@ doodoo-plugin-baas@^1.0.3:
     jsonwebtoken "^8.3.0"
     lodash "^4.17.11"
 
-doodoo-plugin-dotenv@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/doodoo-plugin-dotenv/-/doodoo-plugin-dotenv-1.0.2.tgz#a85ec0b8f19f77e25b96a3a60b6f63a159f36ab4"
+doodoo-plugin-dotenv@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/doodoo-plugin-dotenv/-/doodoo-plugin-dotenv-1.0.3.tgz#92811596cbe2daf536b099178cf3d6a1707b7039"
   dependencies:
     lodash "^4.17.11"
 
@@ -3280,9 +3280,9 @@ doodoo-plugin-redis@^1.0.2:
     bluebird "^3.5.2"
     redis "^2.8.0"
 
-doodoo.js@^2.0.0-alpha.8:
-  version "2.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/doodoo.js/-/doodoo.js-2.0.0-alpha.8.tgz#3b6504a81be6bb7148bb21814904c9547e698b2f"
+doodoo.js@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/doodoo.js/-/doodoo.js-2.0.0.tgz#b0c525d08a63414eac1e09c270c3a94674bf06b8"
   dependencies:
     dayjs "^1.7.7"
     debug "^3.1.0"
