@@ -2980,9 +2980,9 @@ ieee754@^1.1.4:
   version "1.1.12"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.12.tgz#50bf24e5b9c8bb98af4964c941cdb0918da7b60b"
 
-ifanrx-react-ueditor@^1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/ifanrx-react-ueditor/-/ifanrx-react-ueditor-1.5.3.tgz#87c674180a59653c080bba4ae171f2f00b808ee5"
+ifanrx-react-ueditor@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/ifanrx-react-ueditor/-/ifanrx-react-ueditor-1.7.1.tgz#21c37b9dcb628c23d4bf26ce7b5d6a3f63749634"
   dependencies:
     rc-dialog "6.5.11"
 
