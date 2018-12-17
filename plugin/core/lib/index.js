@@ -6,6 +6,7 @@ const uuid = require("uuid");
 const path = require("path");
 const download = require("download");
 const address = require("address");
+const shell = require("shelljs");
 
 // 安全码
 if (fs.existsSync("SECURITY_CODE.key")) {
@@ -23,26 +24,6 @@ if (!doodoo.securityCode) {
 
 // 连通性
 let connected = false;
-
-/**
- * Exec command
- * @param {String} command command
- * @param {String} options options
- */
-function execCommand(command, options) {
-    return new Promise((resolve, reject) => {
-        exec(command, options, (error, stdout, stderr) => {
-            if (error) {
-                reject(error);
-            } else {
-                resolve({
-                    stdout: stdout.toString(),
-                    stderr: stderr.toString()
-                });
-            }
-        });
-    });
-}
 
 function getAddress() {
     return new Promise((resolve, reject) => {
@@ -128,12 +109,10 @@ module.exports = async () => {
                 require(path.resolve("install.js"));
             }
 
-            const install = await execCommand(
-                "yarn install && npm run bootstrap"
-            );
+            const install = shell.exec("yarn install && npm run bootstrap");
             let restart;
             if (process.env.PM2_USAGE) {
-                restart = await execCommand("pm2 restart pm2.json");
+                restart = shell.exec("pm2 restart pm2.json");
             } else {
                 console.error(
                     "系统更新成功，当前系统不是pm2启动的，请手动重启生效"

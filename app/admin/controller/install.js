@@ -8,6 +8,7 @@ const qs = require("querystring");
 const download = require("download");
 const address = require("address");
 const { exec } = require("child_process");
+const shell = require("shelljs");
 
 /**
  * Exec command
@@ -281,7 +282,7 @@ module.exports = class extends doodoo.Controller {
                 tip = `模块安装/更新成功，您当前系统不是pm2启动的，请手动重启`;
 
                 setTimeout(async () => {
-                    await execCommand("npm run bootstrap && npm run web:build");
+                    shell.exec("npm run bootstrap && npm run web:build");
                 }, 3000);
                 this.success(tip);
                 return;
@@ -289,8 +290,9 @@ module.exports = class extends doodoo.Controller {
                 tip = `模块安装/更新成功，3s后自动构建，自动重启。如果重启失败，请手动重启。`;
 
                 setTimeout(async () => {
-                    await execCommand("npm run bootstrap && npm run web:build");
-                    await execCommand("pm2 restart pm2.json");
+                    shell.exec("npm run bootstrap && npm run web:build");
+                    shell.exec("pwd");
+                    shell.exec("pm2 restart pm2.json");
                 }, 3000);
                 this.success(tip);
                 return;
@@ -452,7 +454,7 @@ module.exports = class extends doodoo.Controller {
                 tip = `模块安装/更新成功，您当前系统不是pm2启动的，请手动重启`;
 
                 setTimeout(async () => {
-                    await execCommand("npm run bootstrap && npm run web:build");
+                    shell.exec("npm run bootstrap && npm run web:build");
                 }, 3000);
                 this.success(tip);
                 return;
@@ -460,8 +462,9 @@ module.exports = class extends doodoo.Controller {
                 tip = `模块安装/更新成功，3s后自动构建，自动重启。如果重启失败，请手动重启。`;
 
                 setTimeout(async () => {
-                    await execCommand("npm run bootstrap && npm run web:build");
-                    await execCommand("pm2 restart pm2.json");
+                    shell.exec("npm run bootstrap && npm run web:build");
+                    shell.exec("pwd");
+                    shell.exec("pm2 restart pm2.json");
                 }, 3000);
                 this.success(tip);
                 return;

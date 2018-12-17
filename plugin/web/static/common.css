@@ -113,3 +113,216 @@ textarea {
     color: #fff;
     cursor: pointer;
 }
+
+/* 编辑器 */
+#editor-preview div,
+#editor-preview p {
+    word-break: break-all;
+    max-width: 100%;
+}
+
+#editor-preview div {
+    margin: 0;
+    padding: 0;
+}
+
+#editor-preview p {
+    margin: 5px 0;
+}
+
+#editor-preview p br {
+    line-height: 21px;
+}
+
+#editor-preview h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+#editor-preview h2 {
+    font-size: 1.5em;
+    margin: 0.75em 0;
+}
+
+#editor-preview h3 {
+    font-size: 1.17em;
+    margin: 0.83em 0;
+}
+
+#editor-preview h4 {
+    margin: 1.12em 0;
+}
+
+#editor-preview h5 {
+    font-size: 0.83em;
+    margin: 1.5em 0;
+}
+
+#editor-preview h6 {
+    font-size: 0.75em;
+    margin: 1.67em 0;
+}
+
+#editor-preview h1,
+#editor-preview h2,
+#editor-preview h3,
+#editor-preview h4,
+#editor-preview h5,
+#editor-preview h6,
+#editor-preview b,
+#editor-preview strong {
+    font-weight: bolder;
+}
+
+#editor-preview i,
+#editor-preview cite,
+#editor-preview em,
+#editor-preview var,
+#editor-preview address {
+    font-style: italic;
+}
+
+#ditor-preview pre,
+#ditor-preview tt,
+#ditor-preview code,
+#ditor-preview kbd,
+#ditor-preview samp {
+    font-family: monospace;
+}
+
+#ditor-preview pre {
+    white-space: pre;
+}
+
+#ditor-preview big {
+    font-size: 1.17em;
+}
+
+#ditor-preview small,
+#ditor-preview sub,
+#ditor-preview sup {
+    font-size: 0.83em;
+}
+
+#ditor-preview sub {
+    vertical-align: sub;
+}
+
+#ditor-preview sup {
+    vertical-align: super;
+}
+
+#ditor-preview s,
+#ditor-preview strike,
+#ditor-preview del {
+    text-decoration: line-through;
+}
+
+#ditor-preview strong,
+#ditor-preview s {
+    display: inline;
+}
+
+#ditor-preview u {
+    text-decoration: underline;
+}
+
+#ditor-preview a {
+    color: deepskyblue;
+    word-break: break-all;
+    overflow: auto;
+}
+
+#editor-preview video {
+    text-align: center;
+}
+
+#editor-preview p video {
+    width: 100%;
+    height: auto;
+}
+
+#editor-preview audio {
+    text-align: center;
+    margin: 5px 0;
+}
+
+#editor-preview p audio {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+#editor-preview p img {
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+}
+
+#editor-preview blockquote {
+    margin: 0;
+    padding: 4px 10px 4px 10px;
+    font-family: Courier, Calibri, "宋体";
+    background: #f5f5f5;
+    border-left: 2px solid #dbdbdb;
+}
+
+#editor-preview ul,
+#editor-preview ol {
+    width: 95%;
+}
+
+#editor-preview li p {
+    margin: 5px 0;
+}
+
+#editor-preview ol li {
+    margin: 5px 0;
+}
+
+#editor-preview .hidden {
+    display: none;
+}
+
+#editor-preview table {
+    width: 100%;
+}
+
+#editor-preview tr {
+    display: flex;
+    border-right: 1px solid #e0e0e0;
+}
+
+#editor-preview th,
+#editor-preview td {
+    flex: 1;
+    padding: 3px;
+    font-size: 16px;
+    border-left: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    word-break: break-all;
+}
+
+#editor-preview tr:last-child {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#editor-preview th {
+    background: #f0f0f0;
+}
+
+#editor-preview hr {
+    border: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+#editor-preview pre,
+#editor-preview code {
+    margin: 3px 0;
+    padding: 5px 5px;
+    border-radius: 4px;
+    background: #f8f8f8;
+    font-size: 15px;
+    line-height: 20px;
+    overflow-x: auto;
+}

@@ -1,6 +1,11 @@
 const Joi = require("joi");
 const md5 = require("md5");
 const jwt = require("jsonwebtoken");
+const fse = require("fs-extra");
+const fs = require("fs");
+const path = require("path");
+const _ = require("lodash");
+const glob = require("glob");
 
 async function validate(keys = {}, schema = {}) {
     try {
@@ -21,8 +26,103 @@ function jwtSign(obj, expires_in, secret) {
     });
 }
 
+
+/**
+ * 执行sql
+ * @param {*} sqlFile
+ */
+async function execSql(sqlFile) {
+    const sql = await new Promise(function(resolve, reject) {
+        fs.readFile(sqlFile, "utf-8", function(err, data) {
+            if (err) throw err;
+            resolve(data);
+        });
+    });
+
+    if (sql) {
+        if (sql.indexOf(";") != -1) {
+            let sqls = sql.split(";");
+            for (let key in sqls) {
+                sqls[key] = _.trim(sqls[key]);
+                if (sqls[key]) {
+                    try {
+                        await doodoo.bookshelf.knex.raw(sqls[key]);
+                    } catch (e) {
+                        console.error(e.sqlMessage);
+                    }
+                }
+            }
+        } else {
+            if (_.trim(sql)) {
+                try {
+                    await doodoo.bookshelf.knex.raw(sql);
+                } catch (e) {
+                    console.error(e.sqlMessage);
+                }
+            }
+        }
+    }
+}
+
+async function installMigrate() {
+    const moduleDirName = "admin";
+    const moduleDir = path.resolve(process.env.APP_ROOT, moduleDirName);
+    // 执行install.js
+    const exist = await fse.pathExists(path.resolve(moduleDir, "install.js"));
+    if (exist) {
+        require(path.resolve(moduleDir, "install.js"));
+    }
+
+    // 执行sql
+    const sqls = glob
+        .sync("**/*.sql", {
+            cwd: path.resolve(moduleDir, "sql")
+        })
+        .sort((a, b) => {
+            return Number(_.trimEnd(a, ".sql")) - Number(_.trimEnd(b, ".sql"));
+        });
+    for (const key in sqls) {
+        if (Number(key) === 0) {
+            const tableExists = await doodoo.bookshelf.knex.schema.hasTable(
+                "migrate"
+            );
+            if (!tableExists) {
+                // sql未执行
+                await execSql(path.resolve(moduleDir, "sql", sqls[key]));
+                await doodoo
+                    .model("migrate")
+                    .forge({
+                        module: moduleDirName,
+                        sql: sqls[key]
+                    })
+                    .save();
+            }
+        } else {
+            const exists = await doodoo
+                .model("migrate")
+                .query(qb => {
+                    qb.where("module", moduleDirName);
+                    qb.where("sql", sqls[key]);
+                })
+                .fetch();
+            if (!exists) {
+                await execSql(path.resolve(moduleDir, "sql", sqls[key]));
+                await doodoo
+                    .model("migrate")
+                    .forge({
+                        module: moduleDirName,
+                        sql: sqls[key]
+                    })
+                    .save();
+            }
+        }
+    }
+}
+
 module.exports = class extends doodoo.Controller {
-    async _initialize() {}
+    async _initialize() {
+        await installMigrate();
+    }
 
     /**
      *

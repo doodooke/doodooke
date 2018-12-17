@@ -35,7 +35,7 @@
     "apidoc": "^0.17.6",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
-    "doodoo-plugin-baas": "^1.0.2",
+    "doodoo-plugin-baas": "^1.0.3",
     "doodoo-plugin-dotenv": "^1.0.2",
     "doodoo-plugin-mysql": "^1.0.2",
     "doodoo-plugin-nuxt": "^1.0.2",

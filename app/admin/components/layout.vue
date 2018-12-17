@@ -64,7 +64,20 @@
         :offset="3"
       >
         <el-row style="color: #657180;font-size:14px;text-align: right;">
-          <el-dropdown placement="bottom">
+          <el-row
+            style="line-height:70px;"
+            v-if='!$cookies.get("admin")'
+          >
+            <el-button
+              type="primary"
+              style="height:32px;width:84px;border-radius:0;padding: 0;"
+              @click="goLogin"
+            >立即登录</el-button>
+          </el-row>
+          <el-dropdown
+            placement="bottom"
+            v-else
+          >
             <img
               :src="getAvaterUrl($store.state.custom.avater_url)"
               style="width:30px;height:30px;border-radius:50%;margin-top: 20px;"
@@ -110,9 +123,15 @@
       custom-class="logsModal"
       @close="closeSocket"
     >
-      <pre style="white-space: pre-wrap;word-wrap: break-word;line-height:20px">
+      <div
+        id="logs"
+        ref="logs"
+      >
+        <pre style="white-space: pre-wrap;word-wrap: break-word;line-height:20px">
             {{logsData}}
         </pre>
+      </div>
+
     </el-dialog>
   </div>
 </template>
@@ -135,7 +154,8 @@ export default {
             showLogs: false,
             logsData: "",
             uid: uuid(),
-            logo: this.$store.state.env.LOGO
+            logo: this.$store.state.env.LOGO,
+            autoScroll: true
         };
     },
     methods: {
@@ -192,6 +212,18 @@ export default {
         async getLogs() {
             this.socketConnect();
             this.showLogs = true;
+            this.$nextTick(() => {
+                this.$refs.logs.addEventListener("scroll", this.handleScroll);
+            });
+        },
+        handleScroll() {
+            let scrolltop = this.$refs.logs.scrollTop;
+            let scrollheight = this.$refs.logs.scrollHeight - 600;
+            if (scrolltop < scrollheight) {
+                this.autoScroll = false;
+            } else {
+                this.autoScroll = true;
+            }
         },
         async socketConnect() {
             this.socket = io.connect(
@@ -208,14 +240,25 @@ export default {
             // })
             this.socket.on("pm2Logs", data => {
                 this.logsData += data;
+
+                if (this.autoScroll) {
+                    this.$nextTick(() => {
+                        let logs = this.$refs.logs;
+                        logs.scrollTop = logs.scrollHeight;
+                    });
+                }
             });
         },
         closeSocket() {
             this.socket.disconnect();
             this.logsData = "";
+            window.removeEventListener("scroll", this.handleScroll);
         },
         async getPlugin() {
             this.$router.push("/admin/install");
+        },
+        goLogin() {
+            this.$router.push("/admin/public/login");
         }
     }
 };
@@ -244,14 +287,22 @@ export default {
 }
 </style><style>
 .logsModal {
+    min-width: 600px;
     width: 80%;
     height: 600px;
+}
+#logs {
+    width: 100%;
+    height: 600px;
+    padding-top: 20px;
     overflow-x: hidden;
     overflow-y: auto;
 }
-
 .logsModal .el-dialog__body {
-    padding-top: 0;
+    padding: 0 0 0 30px;
+}
+.logsModal .el-dialog__header {
+    padding: 0;
 }
 
 .el-loading-spinner {
