@@ -169,7 +169,7 @@ if test "$DOODOO_NODE" == "yes" ; then
 
 	NODE_PWD=`which node`
 
-	wget -O $NODE_PWD "https://raw.githubusercontent.com/doodooke/node/master/8.12.0/$OS/node"
+	wget -O $NODE_PWD "https://raw.githubusercontent.com/doodooke/node/master/10.14.0/$OS/node"
 	chmod 755 $NODE_PWD
 fi
 
