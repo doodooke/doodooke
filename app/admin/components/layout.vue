@@ -13,7 +13,6 @@
         <el-row>
           <el-col
             :span="4"
-            :offset="2"
             class="col-list"
             @click.native="homePage"
           >
@@ -55,6 +54,33 @@
           >
             <i class="iconfont icon-chajian1"></i>
             <span class="col-list-span">插件</span>
+          </el-col>
+          <el-col
+            :span="4"
+            class="col-list"
+          >
+            <el-dropdown>
+              <span style="display:flex;">
+                <i class="iconfont icon-gengduo"></i>
+                <span
+                  class="col-list-span"
+                  style="font-size:16px"
+                >更多</span>
+              </span>
+              <el-dropdown-menu
+                slot="dropdown"
+                style="width:100px;text-align:center"
+              >
+                <el-dropdown-item @click.native="showCode = true">安全码</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+
+            <el-dialog
+              title="安全码"
+              :visible.sync="showCode"
+            >
+              <div style="margin-top:-40px">{{securityCode}}</div>
+            </el-dialog>
           </el-col>
         </el-row>
       </el-col>
@@ -155,8 +181,16 @@ export default {
             logsData: "",
             uid: uuid(),
             logo: this.$store.state.env.LOGO,
-            autoScroll: true
+            autoScroll: true,
+            securityCode: "",
+            showCode: false
         };
+    },
+    async mounted() {
+        const res = await this.$axios.$get("/api/admin/system/getSecurityCode");
+        if (res && res.errmsg == "ok") {
+            this.securityCode = res.data;
+        }
     },
     methods: {
         homePage() {

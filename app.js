@@ -9,7 +9,9 @@ const glob = require("glob");
 const fs = require("fs");
 
 // 兼容1.x配置文件
+const env = Object.assign({}, process.env);
 require("doodoo-plugin-dotenv");
+Object.assign(process.env, env);
 
 const app = new Doodoo();
 app.use(
@@ -20,6 +22,9 @@ app.use(
 
 if (fs.existsSync("./plugin/sentry")) {
     app.plugin("sentry");
+}
+if (app.env === "development") {
+    app.plugin("chokidar");
 }
 app.plugin("mysql");
 app.plugin("redis");

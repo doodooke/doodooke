@@ -2195,7 +2195,7 @@ caller-path@^2.0.0:
   dependencies:
     caller-callsite "^2.0.0"
 
-callsite@1.0.0:
+callsite@1.0.0, callsite@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
 
@@ -3033,6 +3033,12 @@ debuglog@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/debuglog/-/debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492"
 
+decache@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/decache/-/decache-4.5.0.tgz#8709b1ccbe5a4ddcadfba42abff7e6abbbebc76b"
+  dependencies:
+    callsite "^1.0.0"
+
 decamelize-keys@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/decamelize-keys/-/decamelize-keys-1.1.0.tgz#d171a87933252807eb3cb61dc1c1445d078df2d9"
@@ -3231,11 +3237,21 @@ domutils@^1.7.0:
     dom-serializer "0"
     domelementtype "1"
 
-doodoo-plugin-baas@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/doodoo-plugin-baas/-/doodoo-plugin-baas-1.0.3.tgz#9fa122223ae3871cd2fd6507db93ecaa65c56565"
+doodoo-plugin-baas@^1.0.4-alpha.0:
+  version "1.0.4-alpha.0"
+  resolved "https://registry.yarnpkg.com/doodoo-plugin-baas/-/doodoo-plugin-baas-1.0.4-alpha.0.tgz#ffcc046f0f48ea4f4ff9c8ee54632e37e43be9aa"
   dependencies:
+    decache "^4.5.0"
     jsonwebtoken "^8.3.0"
+    lodash "^4.17.11"
+
+doodoo-plugin-chokidar@^1.0.1-alpha.3:
+  version "1.0.1-alpha.3"
+  resolved "https://registry.yarnpkg.com/doodoo-plugin-chokidar/-/doodoo-plugin-chokidar-1.0.1-alpha.3.tgz#53e3d86fae5dec3a34d1e693b3e143aec82b4b56"
+  dependencies:
+    chokidar "^2.0.4"
+    decache "^4.5.0"
+    koa-router "^7.4.0"
     lodash "^4.17.11"
 
 doodoo-plugin-dotenv@^1.0.3:
@@ -3280,9 +3296,9 @@ doodoo-plugin-redis@^1.0.2:
     bluebird "^3.5.2"
     redis "^2.8.0"
 
-doodoo.js@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/doodoo.js/-/doodoo.js-2.0.0.tgz#b0c525d08a63414eac1e09c270c3a94674bf06b8"
+doodoo.js@^2.0.1-alpha.0:
+  version "2.0.1-alpha.0"
+  resolved "https://registry.yarnpkg.com/doodoo.js/-/doodoo.js-2.0.1-alpha.0.tgz#f84198daef4f99c243b040ac56694025b1322ae9"
   dependencies:
     dayjs "^1.7.7"
     debug "^3.1.0"

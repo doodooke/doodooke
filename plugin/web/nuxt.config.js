@@ -11,13 +11,18 @@ const { relativeTo } = require("@nuxt/common");
 const glob = require("glob");
 const _url = require("url");
 const dotenv = require("dotenv");
+const env = Object.assign({}, process.env);
 const apiConfig = dotenv.parse(fs.readFileSync(".env"));
-const webConfig = Object.assign(dotenv.parse(fs.readFileSync(".env.web")), {
-    APP_HOST: apiConfig.APP_HOST,
-    APP_PREFIX: apiConfig.APP_PREFIX,
-    DOMAIN: _url.parse(apiConfig.APP_HOST).host,
-    API_DOMAIN: apiConfig.APP_HOST + apiConfig.APP_PREFIX
-});
+const webConfig = Object.assign(
+    dotenv.parse(fs.readFileSync(".env.web")),
+    {
+        APP_HOST: apiConfig.APP_HOST,
+        APP_PREFIX: apiConfig.APP_PREFIX,
+        DOMAIN: _url.parse(apiConfig.APP_HOST).host,
+        API_DOMAIN: apiConfig.APP_HOST + apiConfig.APP_PREFIX
+    },
+    env
+);
 const appDir = "app";
 
 function createRoutes(srcDir) {
@@ -65,21 +70,21 @@ function createLayouts() {
 /***SCRIPT***/
 let HEAD_SCRIPT = [];
 if (webConfig.HEAD_SCRIPT) {
-    for(const value of webConfig.HEAD_SCRIPT.split(',')){
+    for (const value of webConfig.HEAD_SCRIPT.split(",")) {
         HEAD_SCRIPT.push({
             src: value
-        })
+        });
     }
 }
 /***LINK***/
 let HEAD_LINK = [];
 if (webConfig.HEAD_LINK) {
-    for(const value of webConfig.HEAD_LINK.split(',')){
+    for (const value of webConfig.HEAD_LINK.split(",")) {
         HEAD_LINK.push({
             rel: "stylesheet",
             type: "text/css",
             href: value
-        })
+        });
     }
 }
 
@@ -150,7 +155,7 @@ module.exports = {
             {
                 rel: "stylesheet",
                 type: "text/css",
-                href: "//at.alicdn.com/t/font_704506_bcl8ibsxl4.css"
+                href: "//at.alicdn.com/t/font_704506_1gug7yhfqul.css"
             }
         ].concat(HEAD_LINK)
     },
@@ -195,7 +200,7 @@ module.exports = {
     },
 
     router: {
-        middleware: ["auth", "router"]
+        middleware: ["auth", "router", "browser"]
     },
 
     sitemap: {

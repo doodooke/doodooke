@@ -429,6 +429,32 @@
         >
         </el-table-column>
         <el-table-column
+          label="商品类型"
+          align="center"
+        >
+          <template slot-scope="scope">
+            <el-tag
+              size="mini"
+              v-if="scope.row.type == 0"
+            >普通商品</el-tag>
+            <el-tag
+              size="mini"
+              type="warning"
+              v-if="scope.row.type == 1"
+            >分销商品</el-tag>
+            <el-tag
+              size="mini"
+              type="danger"
+              v-else-if="scope.row.type == 2"
+            >拼团商品</el-tag>
+            <el-tag
+              size="mini"
+              type="info"
+              v-else-if="scope.row.type == 3"
+            >预售商品</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
           label="操作"
           align="center"
         >
@@ -705,6 +731,20 @@ export default {
                     icon: "/assets/distribute-img.png",
                     img: "/assets/ump_16.jpg",
                     status: this.$cookies.get("layout") == "shop" ? true : false
+                },
+                {
+                    id: 17,
+                    name: "客服聊天",
+                    icon: "/assets/kefu-img.png",
+                    img: "/assets/ump_17.png",
+                    status: true
+                },
+                {
+                    id: 18,
+                    name: "意见反馈",
+                    icon: "/assets/feedback-img.png",
+                    img: "/assets/ump_18.jpg",
+                    status: true
                 }
             ],
             umpSelect: 1,
@@ -888,6 +928,20 @@ export default {
                     targetType: "page"
                 });
             }
+            if (this.umpSelect == 17) {
+                //客服聊天
+                this.$emit("on-select", {
+                    targetUrl: "contact",
+                    targetType: "open"
+                });
+            }
+            if (this.umpSelect == 18) {
+                //意见反馈
+                this.$emit("on-select", {
+                    targetUrl: "feedback",
+                    targetType: "open"
+                });
+            }
         },
         //集赞
         async getJizan() {
@@ -1005,9 +1059,11 @@ export default {
         },
         selectProduct(row) {
             this.$emit("on-select", {
-                targetUrl: `/pages/shop/product/product-detail/index?id=${
-                    row.id
-                }`,
+                targetUrl: `${
+                    row.type == 2
+                        ? "/pages/pintuan/product/index"
+                        : "/pages/shop/product/product-detail/index"
+                }?id=${row.id}`,
                 targetType: "page"
             });
             this.showProduct = false;

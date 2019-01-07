@@ -27,7 +27,8 @@ const createStore = () => {
             componentId: 0,
             color: "#000000",
             pageId: 0,
-            env: {}
+            env: {},
+            browser: ""
         },
         mutations: {
             SET_AGENT(state, agent) {
@@ -53,6 +54,9 @@ const createStore = () => {
             },
             SET_ENV(state, env) {
                 state.env = env;
+            },
+            SET_BROWSER(state, browser) {
+                state.browser = browser;
             }
         },
         actions: {
@@ -68,6 +72,23 @@ const createStore = () => {
                 }
                 if (app.context.env) {
                     commit("SET_ENV", app.context.env);
+                }
+
+                const u_agent = req.headers["user-agent"];
+                let browser_name = '';
+                if (u_agent) {
+                    if (u_agent.indexOf('Firefox') > -1) {
+                        browser_name = 'Firefox';
+                    } else if (u_agent.indexOf('Chrome') > -1) {
+                        browser_name = 'Chrome';
+                    } else if (u_agent.indexOf('Trident') > -1 && u_agent.indexOf('rv:11') > -1) {
+                        browser_name = 'IE';
+                    } else if (u_agent.indexOf('MSIE') > -1 && u_agent.indexOf('Trident') > -1) {
+                        browser_name = 'IE';
+                    } else if (u_agent.indexOf('Opera') > -1) {
+                        browser_name = 'Opera';
+                    }
+                    commit("SET_BROWSER", browser_name);
                 }
             }
         }

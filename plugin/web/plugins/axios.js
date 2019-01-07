@@ -9,6 +9,7 @@ export default function ({ app, $axios, redirect, req }) {
         config.headers.AppToken = app.$cookies.get("AppToken") || "";
         config.headers.ProjectToken = app.$cookies.get("ProjectToken") || "";
         config.headers.PageToken = app.$cookies.get("PageToken") || "";
+        config.headers.WxaToken = app.$cookies.get("WxaToken") || "";
 
         // config.headers["X-IP"] = req.headers["X-Real-IP"] || req.ip;
 
