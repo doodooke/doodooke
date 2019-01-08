@@ -147,31 +147,27 @@ ALISMS_APPKEY=$ALISMS_APPKEY
 ALISMS_APPSECRET=$ALISMS_APPSECRET
 ALISMS_FREE_SIGN_NAME=$ALISMS_FREE_SIGN_NAME
 ALISMS_TEMPLATE_CODE=$ALISMS_TEMPLATE_CODE
-
-# 常用命令
-CMD_INSTALL=yarn install && npm run bootstrap
-CMD_BUILD=npm run bootstrap && npm run web:build
 " > ./.env
 
 # ===============================
 
-echo "node环境"
-read -p "是否安装doodooke node环境（yes/no）: " DOODOO_NODE
-if test "$DOODOO_NODE" == "yes" ; then
+# echo "node环境"
+# read -p "是否安装doodooke node环境（yes/no）: " DOODOO_NODE
+# if test "$DOODOO_NODE" == "yes" ; then
 
-	if [[ `uname` -eq "Darwin" ]]; then
-		OS="mac"
-	elif [[ `uname` -eq "Linux" ]]; then
-		OS="linux"
-	else
-		OS="windows"
-	fi
+# 	if [[ `uname` -eq "Darwin" ]]; then
+# 		OS="mac"
+# 	elif [[ `uname` -eq "Linux" ]]; then
+# 		OS="linux"
+# 	else
+# 		OS="windows"
+# 	fi
 
-	NODE_PWD=`which node`
+# 	NODE_PWD=`which node`
 
-	wget -O $NODE_PWD "https://raw.githubusercontent.com/doodooke/node/master/10.14.0/$OS/node"
-	chmod 755 $NODE_PWD
-fi
+# 	wget -O $NODE_PWD "https://raw.githubusercontent.com/doodooke/node/master/10.14.0/$OS/node"
+# 	chmod 755 $NODE_PWD
+# fi
 
 echo "配置完成"
 
