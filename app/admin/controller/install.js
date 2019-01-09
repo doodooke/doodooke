@@ -199,11 +199,11 @@ module.exports = class extends doodoo.Controller {
                         dir &&
                         !_.includes(
                             downloadedModules,
-                            dir.split(path.sep)[1]
+                            dir.split('/')[1]
                         ) &&
-                        dir.indexOf(path.sep) === 3
+                        dir.indexOf('/') === 3
                     ) {
-                        downloadedModules.push(dir.split(path.sep)[1]);
+                        downloadedModules.push(dir.split('/')[1]);
                     }
 
                     return file;
@@ -373,11 +373,11 @@ module.exports = class extends doodoo.Controller {
                         dir &&
                         !_.includes(
                             downloadedModules,
-                            dir.split(path.sep)[1]
+                            dir.split('/')[1]
                         ) &&
-                        dir.indexOf(path.sep) === 3
+                        dir.indexOf('/') === 3
                     ) {
-                        downloadedModules.push(dir.split(path.sep)[1]);
+                        downloadedModules.push(dir.split('/')[1]);
                     }
 
                     return file;

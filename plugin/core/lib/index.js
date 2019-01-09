@@ -22,9 +22,6 @@ if (!doodoo.securityCode) {
     fse.outputFileSync("SECURITY_CODE.key", doodoo.securityCode);
 }
 
-// 连通性
-let connected = false;
-
 function getAddress() {
     return new Promise((resolve, reject) => {
         address((err, addrs) => {
@@ -63,16 +60,6 @@ module.exports = async () => {
         console.error("Core Network Error");
     }
 
-    // 提示是否连通
-    const timer = setInterval(() => {
-        if (!connected) {
-            console.error("Core Can`t Connect");
-        } else {
-            console.log("Core Connected");
-            clearInterval(timer);
-        }
-    }, 1000 * 60 * 2);
-
     // 安全校验
     doodoo.router.use("/core", async (ctx, next) => {
         if (ctx.query.uuid !== doodoo.securityCode) {
@@ -83,8 +70,6 @@ module.exports = async () => {
 
     // 系统连通校验
     doodoo.router.get("/core/ping", async (ctx, next) => {
-        connected = true;
-
         ctx.success();
     });
 
@@ -109,7 +94,7 @@ module.exports = async () => {
                 require(path.resolve("install.js"));
             }
 
-            const install = shell.exec("yarn install && npm run bootstrap");
+            const install = shell.exec("npm run bootstrap");
             let restart;
             if (process.env.PM2_USAGE) {
                 restart = shell.exec("pm2 restart pm2.json");

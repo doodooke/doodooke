@@ -595,6 +595,60 @@
       </el-row>
       <p slot="footer"></p>
     </el-dialog>
+    <!-- 投票 -->
+    <el-dialog
+      title="投票活动"
+      :visible.sync="voteModal"
+      width='800px'
+      top="20px"
+      :modal-append-to-body="false"
+    >
+      <el-alert
+        title="提示"
+        :closable="false"
+        show-icon
+        v-if='!voteData.length'
+        style="margin-bottom:24px"
+      >
+        <p>暂无活动，请先去
+          <nuxt-link to='/vote/config'>设置活动</nuxt-link>
+        </p>
+      </el-alert>
+      <el-table
+        :data="voteData"
+        stripe
+      >
+        <el-table-column
+          prop="name"
+          label="活动名称"
+          align="center"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="time"
+          label="时间"
+          align="center"
+        >
+          <template slot-scope="scoped">
+            <el-row>{{format(scoped.row.started_at)}}</el-row>
+            <el-row>{{format(scoped.row.ended_at)}}</el-row>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="操作"
+          align="center"
+        >
+          <template slot-scope="scope">
+            <el-button
+              type="text"
+              size="mini"
+              @click="selectedVote(scope.row)"
+            >选择</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <p slot="footer"></p>
+    </el-dialog>
   </el-row>
 </template>
 <script>
@@ -745,6 +799,13 @@ export default {
                     icon: "/assets/feedback-img.png",
                     img: "/assets/ump_18.jpg",
                     status: true
+                },
+                {
+                    id: 19,
+                    name: "投票",
+                    icon: "/assets/vote.png",
+                    img: "/assets/ump_19.png",
+                    status: true
                 }
             ],
             umpSelect: 1,
@@ -766,7 +827,9 @@ export default {
             keyword: "",
             productData: [],
             showArticle: false,
-            articleData: []
+            articleData: [],
+            voteModal: false,
+            voteData: []
         };
     },
     methods: {
@@ -942,6 +1005,11 @@ export default {
                     targetType: "open"
                 });
             }
+            if (this.umpSelect == 19) {
+                //集赞
+                this.voteModal = true;
+                this.getVote();
+            }
         },
         //集赞
         async getJizan() {
@@ -959,6 +1027,22 @@ export default {
                 targetType: "page"
             });
             this.jizanModal = false;
+        },
+        //投票
+        async getVote() {
+            let res = await this.$axios.$get(
+                `/api/plugin/baas/vote/home/vote_config/fetchAll?where=status,1`
+            );
+            if (res && res.errmsg === "ok") {
+                this.voteData = res.data;
+            }
+        },
+        selectedVote(item) {
+            this.$emit("on-select", {
+                targetUrl: `/pages/vote/index/index?id=${item.id}`,
+                targetType: "page"
+            });
+            this.voteModal = false;
         },
         //小程序列表
         async getWxa() {

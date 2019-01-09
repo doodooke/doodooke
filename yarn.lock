@@ -3237,9 +3237,9 @@ domutils@^1.7.0:
     dom-serializer "0"
     domelementtype "1"
 
-doodoo-plugin-baas@^1.0.4-alpha.0:
-  version "1.0.4-alpha.0"
-  resolved "https://registry.yarnpkg.com/doodoo-plugin-baas/-/doodoo-plugin-baas-1.0.4-alpha.0.tgz#ffcc046f0f48ea4f4ff9c8ee54632e37e43be9aa"
+doodoo-plugin-baas@^1.0.5-alpha.0:
+  version "1.0.5-alpha.0"
+  resolved "http://registry.npm.taobao.org/doodoo-plugin-baas/download/doodoo-plugin-baas-1.0.5-alpha.0.tgz#47d07aa3265e54ca997da5717316fda3be988015"
   dependencies:
     decache "^4.5.0"
     jsonwebtoken "^8.3.0"

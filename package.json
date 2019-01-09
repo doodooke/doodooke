@@ -13,7 +13,7 @@
     "dev": "cross-env NODE_ENV=development NUXT_BUILD=true node app.js",
     "api:dev": "cross-env NODE_ENV=development node app.js",
     "api:docker": "cross-env NODE_ENV=docker node app.js",
-    "api:doc": "apidoc -i app -o www/apidoc",
+    "api:doc": "apidoc -i app -o www/apidoc -t www/template",
     "eslint": "eslint ./",
     "eslint:fix": "eslint --fix ./"
   },
@@ -38,7 +38,7 @@
     "apidoc": "^0.17.6",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
-    "doodoo-plugin-baas": "^1.0.4-alpha.0",
+    "doodoo-plugin-baas": "^1.0.5-alpha.0",
     "doodoo-plugin-chokidar": "^1.0.1-alpha.3",
     "doodoo-plugin-dotenv": "^1.0.3",
     "doodoo-plugin-mysql": "^1.0.2",
