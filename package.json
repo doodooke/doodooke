@@ -22,8 +22,8 @@
     "version": "0.0.1",
     "description": "多多客",
     "title": "多多客",
-    "url": "http://127.0.0.1:3000",
-    "sampleUrl": "http://127.0.0.1:3000"
+    "url": "http://127.0.0.1:3000/api",
+    "sampleUrl": "http://127.0.0.1:3000/api"
   },
   "devDependencies": {
     "eslint": "^5.8.0",

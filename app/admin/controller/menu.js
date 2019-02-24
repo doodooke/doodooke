@@ -11,7 +11,7 @@ module.exports = class extends base {
      *
      * @api {get} /admin/menu/index 菜单列表
      * @apiDescription 菜单列表
-     * @apiGroup Admin超管快速功能页
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
      * @apiHeader {String} Token 用户登录授权token

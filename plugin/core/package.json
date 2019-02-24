@@ -1,6 +1,6 @@
 {
   "name": "doodoo-plugin-core",
-  "version": "1.1.3",
+  "version": "1.1.5",
   "description": "> TODO: description",
   "author": "heqing <786699892@qq.com>",
   "homepage": "",
@@ -19,6 +19,7 @@
   "dependencies": {
     "address": "^1.0.3",
     "axios": "^0.18.0",
+    "doodoo-plugin-web": "^2.1.9",
     "download": "^7.1.0",
     "fs-extra": "^7.0.1",
     "shelljs": "^0.8.3",

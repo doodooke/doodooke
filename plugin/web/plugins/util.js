@@ -84,6 +84,27 @@ const util = {
         );
     },
 
+    getAppWxaTokenUrl(url) {
+        let str = "?";
+        if (url.indexOf("?") !== -1) {
+            str = "&";
+        }
+
+        return (
+            this.getUrl(url) + str + `AppToken=${this.$cookies.get("AppToken")}&WxaToken=${this.$cookies.get("WxaToken")}`
+        );
+    },
+    getWxaTokenUrl(url) {
+        let str = "?";
+        if (url.indexOf("?") !== -1) {
+            str = "&";
+        }
+
+        return (
+            this.getUrl(url) + str + `Token=${this.$cookies.get("Token")}&WxaToken=${this.$cookies.get("WxaToken")}`
+        );
+    },
+
     isHttpUrl(url) {
         if (url.substr(0, 7) == "http://" || url.substr(0, 8) == "https://") {
             return true;
@@ -116,7 +137,8 @@ const util = {
     uploadHeaders() {
         return {
             Token: this.$cookies.get("Token") || "",
-            AppToken: this.$cookies.get("AppToken") || ""
+            AppToken: this.$cookies.get("AppToken") || "",
+            WxaToken: this.$cookies.get("WxaToken") || ""
         };
     },
 

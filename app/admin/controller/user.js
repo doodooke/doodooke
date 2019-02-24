@@ -8,10 +8,10 @@ module.exports = class extends base {
      *
      * @api {post} /admin/user/adminInfo 超管列表
      * @apiDescription 超管列表
-     * @apiGroup Admin
+     * @apiGroup admin Admin  
      * @apiVersion 0.0.1
      *
-     * @apiHeader {String} Token 用户登录授权token
+     * @apiHeader {String} Token 超管登录授权token
      *
      * @apiSampleRequest /admin/user/adminInfo
      *
@@ -26,16 +26,17 @@ module.exports = class extends base {
      *
      * @api {post} /admin/user/updataAdmin 超管信息修改与添加
      * @apiDescription 超管信息修改与添加
-     * @apiGroup Admin超管快速功能页
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
-     * @apiHeader {String} Token 用户登录授权token
+     * @apiHeader {String} Token 超管登录授权token
      *
      * @apiParam {String} nickname 名称
      * @apiParam {String} password 密码
      * @apiParam {Number} phone    手机
      * @apiParam {String} email    邮箱
-     * @apiParam {int}   status    状态
+     * @apiParam {int}    status   状态
+     * @apiParam {int}    id       0表示新增，大于0表示新增
      *
      * @apiSampleRequest /admin/user/updataAdmin
      *
@@ -76,10 +77,10 @@ module.exports = class extends base {
      *
      * @api {get} /admin/user/editAdmin 超管信息详情
      * @apiDescription 超管信息详情
-     * @apiGroup Admin超管快速功能页
+     * @apiGroup admin Admin  
      * @apiVersion 0.0.1
      *
-     * @apiHeader {String} Token 用户登录授权token
+     * @apiHeader {String} Token 超管登录授权token
      *
      * @apiParam {Number} id    手机
      *

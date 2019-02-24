@@ -128,7 +128,7 @@ module.exports = class extends doodoo.Controller {
      *
      * @api {post} /admin/public/connectedMysql 监测数据库是否链接
      * @apiDescription 监测数据库是否链接
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
      * @apiSampleRequest /admin/public/connectedMysql
@@ -147,7 +147,7 @@ module.exports = class extends doodoo.Controller {
      *
      * @api {post} /admin/public/login 客户登录
      * @apiDescription 客户登录授权
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
      * @apiParam {nickname} nickname 用户名
@@ -201,7 +201,7 @@ module.exports = class extends doodoo.Controller {
      *
      * @api {post} /admin/public/codeLogin 客户登录
      * @apiDescription 客户登录授权
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
      * @apiParam {String} code Security Code

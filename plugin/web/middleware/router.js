@@ -24,7 +24,7 @@ export default function({ app, route, redirect, req }) {
     }
 
     const routes = app.router.options.routes;
-    if (route.path === "/" || route.matched.length === 0) {
+    if (route.matched.length === 0) {
         if (includeRoute(routes, "/portal")) {
             redirect("/portal");
         } else if (includeRoute(routes, "/app/apps")) {

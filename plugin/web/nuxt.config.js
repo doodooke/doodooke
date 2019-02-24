@@ -33,19 +33,28 @@ function createRoutes(srcDir) {
     const routes = [];
     for (const key in views) {
         const file = path.resolve(appDir, views[key]);
-        routes.push({
-            name: views[key],
-            path:
-                "/" +
+        const _path = "/" +
                 views[key]
                     .replace(/\\/g, "/")
                     .replace(/\/view/, "")
                     .replace(/_/g, ":")
                     .replace(/.vue$/, "")
-                    .replace(/.index$/, ""),
+                    .replace(/.index$/, "");
+        routes.push({
+            name: views[key],
+            path: _path,
             component: file,
             chunkName: "pages/app/" + views[key]
         });
+        
+        if (_path === '/portal') {
+            routes.push({
+                name: "index",
+                path: "/",
+                component: file,
+                chunkName: "pages/index"
+            });
+        }
     }
     return routes;
 }
@@ -155,7 +164,7 @@ module.exports = {
             {
                 rel: "stylesheet",
                 type: "text/css",
-                href: "//at.alicdn.com/t/font_704506_1gug7yhfqul.css"
+                href: "//at.alicdn.com/t/font_704506_mkcxtv5i72e.css"
             }
         ].concat(HEAD_LINK)
     },

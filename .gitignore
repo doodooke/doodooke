@@ -2,7 +2,7 @@
 .nyc_output
 coverage
 node_modules
-www/apidoc
+# www/apidoc
 logs
 .nuxt
 dist

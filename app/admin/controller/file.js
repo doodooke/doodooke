@@ -15,10 +15,11 @@ module.exports = class extends base {
      *
      * @api {get} /admin/file/add 上传图片
      * @apiDescription 上传图片
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
      * @apiHeader {String} Token 用户登录授权token.
+     * @@apiParam {file}   file  图片文件   
      *
      * @apiSuccess {Object} success 上传的图片信息
      *

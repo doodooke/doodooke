@@ -11,10 +11,10 @@ module.exports = class extends base {
      *
      * @api {get} /admin/table/index 获取数据库所有表
      * @apiDescription 获取数据库所有表
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
-     * @apiHeader {String} Token 用户登录授权token
+     * @apiHeader {String} Token 超管登录授权token
      *
      * @apiSampleRequest /admin/table/index
      *
@@ -37,10 +37,10 @@ module.exports = class extends base {
      *
      * @api {get} /admin/table/searchInfo 获取搜索条件
      * @apiDescription 获取搜索条件
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
-     * @apiHeader {String} Token 用户登录授权token.
+     * @apiHeader {String} Token 超管登录授权token.
      * @apiParam {String} table 数据表名
      *
      * @apiSampleRequest /admin/table/searchInfo
@@ -90,10 +90,10 @@ module.exports = class extends base {
      *
      * @api {post} /admin/table/data 获取数据表数据
      * @apiDescription 获取数据表数据
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
-     * @apiHeader {String} Token 用户登录授权token.
+     * @apiHeader {String} Token 超管登录授权token.
      *
      * @apiSampleRequest /admin/table/data
      * @apiParamExample {json} Request-Example:
@@ -285,10 +285,10 @@ module.exports = class extends base {
      *
      * @api {get} /admin/table/edit 获取单个数据
      * @apiDescription 获取单个数据
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
-     * @apiHeader {String} Token 用户登录授权token
+     * @apiHeader {String} Token 超管登录授权token
      *
      * @apiParam {String} table 数据表名
      * @apiParam {Number} id
@@ -398,10 +398,10 @@ module.exports = class extends base {
      *
      * @api {post} /admin/table/add 新增修改数据
      * @apiDescription 新增修改数据
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
-     * @apiHeader {String} Token 用户登录授权token.
+     * @apiHeader {String} Token 超管登录授权token.
      * @apiParamExample {json} Request-Example:
      *  {
      *       table: 'admin', //数据表名
@@ -461,10 +461,10 @@ module.exports = class extends base {
      *
      * @api {get} /admin/table/del 删除数据
      * @apiDescription 删除数据
-     * @apiGroup Admin
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
-     * @apiHeader {String} Token 用户登录授权token.
+     * @apiHeader {String} Token 超管登录授权token.
      * @apiParam {String} table 数据表名
      * @apiParam {String} ids
      *

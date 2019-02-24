@@ -13,7 +13,7 @@ module.exports = class extends base {
      *
      * @api {get} /admin/system/webBuild web编译
      * @apiDescription web编译
-     * @apiGroup web编译
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
      * @apiHeader {String} Token 用户登录授权token
@@ -30,7 +30,7 @@ module.exports = class extends base {
      *
      * @api {get} /admin/system/pm2Restart pm2重启
      * @apiDescription pm2重启
-     * @apiGroup pm2重启
+     * @apiGroup  admin Admin
      * @apiVersion 0.0.1
      *
      * @apiHeader {String} Token 用户登录授权token
@@ -47,7 +47,7 @@ module.exports = class extends base {
      *
      * @api {get} /admin/system/webBuildAndPm2Restart 编译&重启
      * @apiDescription 编译&重启
-     * @apiGroup 编译&重启
+     * @apiGroup  admin Admin
      * @apiVersion 0.0.1
      *
      * @apiHeader {String} Token 用户登录授权token
@@ -64,7 +64,7 @@ module.exports = class extends base {
      *
      * @api {get} /admin/system/connectPm2Logs 连接pm2日志
      * @apiDescription 连接pm2日志
-     * @apiGroup 连接pm2日志
+     * @apiGroup  admin Admin
      * @apiVersion 0.0.1
      *
      * @apiHeader {String} Token 用户登录授权token
@@ -97,7 +97,7 @@ module.exports = class extends base {
      *
      * @api {get} /admin/system/getSecurityCode 获取安全码（Security Code）
      * @apiDescription 获取安全码（Security Code）
-     * @apiGroup 获取安全码（Security Code）
+     * @apiGroup admin Admin
      * @apiVersion 0.0.1
      *
      * @apiHeader {String} Token 用户登录授权token
