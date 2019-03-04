@@ -121,10 +121,6 @@ module.exports = class extends doodoo.Controller {
                 extract: true,
                 strip: 1,
                 map: file => {
-                    if (file.type !== "directory") {
-                        return file;
-                    }
-
                     const dir = path.parse(file.path).dir;
                     if (
                         dir &&
