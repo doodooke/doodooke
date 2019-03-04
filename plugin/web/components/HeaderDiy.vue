@@ -35,7 +35,7 @@
             :key="index"
             style="width:74px;margin-bottom:16px;cursor:pointer;text-align:center"
             :style="{marginRight:index%5==4?'0':'24px'}"
-            @click="selectXcx(item,index)"
+            @click="selectXcx(item,index,0)"
           >
             <img
               :src="getAvaterUrl(item.head_img)"
@@ -140,7 +140,7 @@
           :key="index"
           style="width:72.5px;margin-bottom:16px;cursor:pointer;text-align:center"
           :style="{marginRight:index%5==4?'0':'24px'}"
-          @click="selectXcx(item,index)"
+          @click="selectXcx(item,index,1)"
         >
           <img
             :src="getAvaterUrl(item.head_img)"
@@ -363,6 +363,7 @@ export default {
         },
         //预览
         async preview() {
+            this.xcxActive = -1;
             //判断是否授权小程序
             const checkWxa = await this.$axios.$get(
                 "/api/app/home/app/checkWxa"
@@ -438,7 +439,7 @@ export default {
             });
         },
         //选择小程序
-        selectXcx(item, index) {
+        selectXcx(item, index, type) {
             this.xcxActive = index;
             this.selectType = item.type;
 
@@ -448,7 +449,11 @@ export default {
             });
 
             if (this.selectType == "wx") {
-                this.getWxQrcode();
+                if (type == 0) {
+                    this.getWxQrcode();
+                } else {
+                    this.getWxIssue();
+                }
             }
             if (this.selectType == "alipay") {
                 this.getAlipayQrcode();
@@ -528,6 +533,7 @@ export default {
         },
         //发布
         async issue() {
+            this.xcxActive = -1;
             const checkWxa = await this.$axios.$get(
                 "/api/app/home/app/checkWxa"
             );

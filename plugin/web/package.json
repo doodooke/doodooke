@@ -1,17 +1,11 @@
 {
   "name": "doodoo-plugin-web",
-  "version": "2.1.9",
+  "version": "2.1.11-alpha.0",
   "description": "> TODO: description",
   "author": "heqing <786699892@qq.com>",
   "homepage": "",
   "license": "ISC",
   "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "files": [
-    "lib"
-  ],
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",

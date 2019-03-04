@@ -3,6 +3,7 @@ const path = require("path");
 const _ = require("lodash");
 const fse = require("fs-extra");
 const base = require("./base");
+const pm2Json = require("./../../../pm2.config");
 
 module.exports = class extends base {
     async _initialize() {
@@ -39,7 +40,7 @@ module.exports = class extends base {
      *
      */
     async pm2Restart() {
-        shell.exec("pm2 restart pm2.json");
+        shell.exec("pm2 restart pm2.config.js");
         this.success();
     }
 
@@ -56,7 +57,7 @@ module.exports = class extends base {
      *
      */
     async webBuildAndPm2Restart() {
-        shell.exec("npm run web:build && pm2 restart pm2.json");
+        shell.exec("npm run web:build && pm2 restart pm2.config.js");
         this.success();
     }
 
@@ -74,19 +75,21 @@ module.exports = class extends base {
      */
     async connectPm2Logs() {
         const { uid } = this.query;
-        const pm2Json = await fse.readJson(path.resolve("pm2.json"));
+        const apps = pm2Json.apps;
 
-        const child = shell.exec(`pm2 logs ${_.first(pm2Json.apps).name}`, {
-            async: true,
-            silent: true
-        });
         const sid = await this.redis.getAsync(`wxLogin:uid:${uid}:sid`);
         if (sid && io.sockets.sockets[sid]) {
             const socket = io.sockets.sockets[sid];
 
-            child.stdout.on("data", function(data) {
-                socket.emit("pm2Logs", data);
-            });
+            for (const app of apps) {
+                const child = shell.exec(`pm2 logs ${app.name}`, {
+                    async: true,
+                    silent: true
+                });
+                child.stdout.on("data", function(data) {
+                    socket.emit("pm2Logs", data);
+                });
+            }
             this.success();
             return;
         }

@@ -28,7 +28,9 @@ const createStore = () => {
             color: "#000000",
             pageId: 0,
             env: {},
-            browser: ""
+            browser: "",
+            recentArticle: [],
+            navData: []
         },
         mutations: {
             SET_AGENT(state, agent) {
@@ -57,10 +59,21 @@ const createStore = () => {
             },
             SET_BROWSER(state, browser) {
                 state.browser = browser;
+            },
+            SET_RECENT_ARTICLE(state, article) {
+                state.recentArticle = article;
+            },
+            SET_NAV_DATA(state, nav) {
+                state.navData = nav;
             }
         },
         actions: {
-            nuxtServerInit({ commit }, { app, req }) {
+            nuxtServerInit({
+                commit
+            }, {
+                app,
+                req
+            }) {
                 const xHost = req.headers["x-host"];
                 if (xHost) {
                     commit("SET_AGENT", isAgent(xHost, app.context.env.DOMAIN));

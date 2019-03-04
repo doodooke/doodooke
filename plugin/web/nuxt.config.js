@@ -164,7 +164,7 @@ module.exports = {
             {
                 rel: "stylesheet",
                 type: "text/css",
-                href: "//at.alicdn.com/t/font_704506_mkcxtv5i72e.css"
+                href: "//at.alicdn.com/t/font_704506_knv6d59aw5.css"
             }
         ].concat(HEAD_LINK)
     },
@@ -236,6 +236,10 @@ module.exports = {
     proxy: {
         "/api": {
             target: `http://127.0.0.1:${apiConfig.APP_PORT}`
+        },
+        "/registry": {
+            target: `http://registry.doodooke.com`,
+            pathRewrite: { "^/registry": "/" }
         }
     },
 

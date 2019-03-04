@@ -17,5 +17,5 @@ if (!doodoo.securityCode) {
 }
 
 console.log();
-console.log("Security Code:", doodoo.securityCode);
+console.log("安全码 Security Code:", doodoo.securityCode);
 console.log();
