@@ -3,7 +3,6 @@ const download = require("download");
 const ProgressBar = require("progress");
 const glob = require("glob");
 const semver = require("semver");
-const pkg = require("./package.json");
 
 async function downloadZip(url, dest, tag) {
     const response = await axios({
@@ -37,22 +36,7 @@ async function downloadZip(url, dest, tag) {
 
 (async () => {
     // 检测升级系统
-    const requestSystemInfo = await axios.get(
-        "http://upgrade.doodooke.com/system/system.json"
-    );
-    const systemInfo = requestSystemInfo.data;
-    const systemLatestVersion = systemInfo.latest;
-
-    if (semver.gt(systemLatestVersion, pkg.version)) {
-        console.log(
-            "[doodoo-upgrade] 温馨提示：开始升级system，升级完成请重启"
-        );
-        await downloadZip(
-            `http://upgrade.doodooke.com/system/${systemLatestVersion}.zip`,
-            "./",
-            "System"
-        );
-    }
+    // TODO
 
     // 检测商业版
     const js7Files = glob.sync("**/*.js7", { ignore: ["**/node_modules/**"] });
@@ -91,5 +75,6 @@ async function downloadZip(url, dest, tag) {
             "./",
             "Node"
         );
+        process.exit();
     }
 })();
