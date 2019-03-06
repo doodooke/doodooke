@@ -1,4 +1,4 @@
-# 多多(doodoo)小程序开源版
+# 多多客(doodooke)小程序开源版
 
 多多客免费开源的小程序SaaS系统，koa.js + vue.js插件化最佳实践。
 
