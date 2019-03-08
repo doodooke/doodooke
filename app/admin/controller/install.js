@@ -11,8 +11,8 @@ const shell = require("shelljs");
  * @param {*} sqlFile
  */
 async function execSql(sqlFile) {
-    const sql = await new Promise(function(resolve) {
-        fs.readFile(sqlFile, "utf-8", function(err, data) {
+    const sql = await new Promise(function (resolve) {
+        fs.readFile(sqlFile, "utf-8", function (err, data) {
             if (err) throw err;
             resolve(data);
         });
@@ -99,6 +99,7 @@ async function installMigrate() {
 }
 
 module.exports = class extends doodoo.Controller {
+
     async installModule() {
         const { id, Token, securityCode } = this.query;
         if (securityCode !== doodoo.securityCode) {
@@ -136,67 +137,38 @@ module.exports = class extends doodoo.Controller {
         );
 
         if (downloaded.length > 0) {
-            for (const moduleDirName of downloadedModules) {
-                const moduleDir = path.resolve(
-                    process.env.APP_ROOT,
-                    moduleDirName
-                );
-                // 执行install.js
-                const exist = await fse.pathExists(
-                    path.resolve(moduleDir, "install.js")
-                );
-                if (exist) {
-                    require(path.resolve(moduleDir, "install.js"));
-                }
-
-                // 执行sql
-                const sqls = glob
-                    .sync("**/*.sql", {
-                        cwd: path.resolve(moduleDir, "sql")
-                    })
-                    .sort((a, b) => {
-                        return (
-                            Number(_.trimEnd(a, ".sql")) -
-                            Number(_.trimEnd(b, ".sql"))
-                        );
-                    });
-                for (const key in sqls) {
-                    // sql已执行
-                    const locked = await fse.pathExists(
-                        path.resolve(moduleDir, "sql", `${sqls[key]}.lock`)
+            const sqls = glob
+                .sync("*/sql/*.sql", {
+                    cwd: process.env.APP_ROOT
+                })
+                .sort((a, b) => {
+                    return (
+                        Number(_.trimEnd(a.split("/")[2], ".sql")) -
+                        Number(_.trimEnd(b.split("/")[2], ".sql"))
                     );
-                    if (locked) {
-                        await doodoo
-                            .model("migrate")
-                            .forge({
-                                module: moduleDirName,
-                                sql: sqls[key]
-                            })
-                            .save();
-                        await fse.remove(
-                            path.resolve(moduleDir, "sql", `${sqls[key]}.lock`)
-                        );
-                        continue;
-                    }
-                    const exists = await this.model("migrate")
-                        .query(qb => {
-                            qb.where("module", moduleDirName);
-                            qb.where("sql", sqls[key]);
+                });
+
+            for (const key in sqls) {
+                const sqlName = sqls[key].split("/")[3];
+                const moduleDirName = sqls[key].split("/")[0];
+                const exists = await this.model("migrate")
+                    .query(qb => {
+                        qb.where("module", moduleDirName);
+                        qb.where("sql", sqlName);
+                    })
+                    .fetch();
+                if (!exists) {
+                    // sql未执行
+                    await execSql(
+                        path.resolve(process.env.APP_ROOT, sqls[key])
+                    );
+                    await doodoo
+                        .model("migrate")
+                        .forge({
+                            module: moduleDirName,
+                            sql: sqlName
                         })
-                        .fetch();
-                    if (!exists) {
-                        // sql未执行
-                        await execSql(
-                            path.resolve(moduleDir, "sql", sqls[key])
-                        );
-                        await doodoo
-                            .model("migrate")
-                            .forge({
-                                module: moduleDirName,
-                                sql: sqls[key]
-                            })
-                            .save();
-                    }
+                        .save();
                 }
             }
 

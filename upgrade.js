@@ -3,6 +3,7 @@ const download = require("download");
 const ProgressBar = require("progress");
 const glob = require("glob");
 const semver = require("semver");
+const fs = require("fs");
 
 async function downloadZip(url, dest, tag) {
     const response = await axios({
@@ -45,8 +46,13 @@ module.exports = async () => {
         return;
     }
 
-    if (!process.env.DOODOO_SH) {
-        throw new Error("Please start with ./bin/doodoo.sh, for example ./bin/doodoo.sh app.js");
+    // 必须使用doodoo.sh或者./node启动
+    if (fs.existsSync("./node") && !process.env.DOODOO_CORE_VERSION) {
+        throw new Error("Use ./bin/doodoo.sh or start with ./node");
+    }
+    // 必须使用doodoo.sh或者./node.exe启动
+    if (fs.existsSync("./node.exe") && !process.env.DOODOO_CORE_VERSION) {
+        throw new Error("Use ./bin/doodoo.sh or start with ./node.exe");
     }
 
     // 检测升级node

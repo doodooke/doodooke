@@ -2,14 +2,14 @@
 
 if [ -e "./node" ]
 then
-   DOODOO_SH=true ./node $*
+   ./node $*
    exit
 fi
 
 if [ -e "./node.exe" ]
 then
-   DOODOO_SH=true ./node.exe $*
+   ./node.exe $*
    exit
 fi
 
-DOODOO_SH=true node $*
+node $*
