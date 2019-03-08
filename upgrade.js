@@ -34,14 +34,19 @@ async function downloadZip(url, dest, tag) {
     });
 }
 
-(async () => {
+module.exports = async () => {
     // 检测升级系统
     // TODO
 
     // 检测商业版
     const js7Files = glob.sync("**/*.js7", { ignore: ["**/node_modules/**"] });
     if (!js7Files.length) {
+        process.emit("startServer");
         return;
+    }
+
+    if (!process.env.DOODOO_SH) {
+        throw new Error("Please start with ./bin/doodoo.sh, for example ./bin/doodoo.sh app.js");
     }
 
     // 检测升级node
@@ -77,4 +82,6 @@ async function downloadZip(url, dest, tag) {
         );
         process.exit();
     }
-})();
+
+    process.emit("startServer");
+}

@@ -2,14 +2,14 @@
 
 if [ -e "./node" ]
 then
-   ./node --require ./upgrade.js $*
+   DOODOO_SH=true ./node $*
    exit
 fi
 
 if [ -e "./node.exe" ]
 then
-   ./node.exe --require ./upgrade.js $*
+   DOODOO_SH=true ./node.exe $*
    exit
 fi
 
-node --require ./upgrade.js $*
+DOODOO_SH=true node $*
