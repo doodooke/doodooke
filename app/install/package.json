@@ -1,0 +1,24 @@
+{
+  "name": "install",
+  "version": "1.0.0",
+  "description": "安装配置",
+  "author": "qingful",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/install.js",
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.oneqing.com/doodooke/doodooke.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "doodoo-plugin-web": "^2.3.1",
+    "js-yaml": "^3.12.2",
+    "lodash": "^4.17.11",
+    "md5": "^2.2.1",
+    "shelljs": "^0.8.3",
+    "uuid": "^3.3.2"
+  }
+}

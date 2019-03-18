@@ -1,4 +1,3 @@
-
 app:
     port: '3000'
     host: 'https://www.xxx.com'
@@ -10,8 +9,8 @@ verify:
 mysql:
     host: 127.0.0.1
     user: root
-    password: root
-    database: doodooke
+    password: 786699892qing
+    database: doodoo2
     port: '3306'
     charset: utf8mb4
 redis:
@@ -26,9 +25,9 @@ qiniu:
 page:
     size: '20'
 jwt:
-    secret: xxx
+    secret: 978c45d1-0359-4a08-899e-86304ffa9491
     expiresin: 7 days
-    admin_secret: xxx
+    admin_secret: 2b121174-7893-49c8-91f4-9f92ff576e9a
     admin_expiresin: 7 days
 open:
     appid: xxx
@@ -49,4 +48,3 @@ alisms:
     template_code: xxx
 lbs:
     amap_key: xxx
-

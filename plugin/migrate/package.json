@@ -1,0 +1,17 @@
+{
+  "name": "doodoo-plugin-migrate",
+  "version": "2.2.1",
+  "description": "> TODO: description",
+  "author": "heqing <786699892@qq.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/doodoo-plugin-migrate.js",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "doodoo-plugin-web": "^2.3.1",
+    "raw-body": "^2.3.3",
+    "xml2js": "^0.4.19"
+  }
+}
