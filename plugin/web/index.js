@@ -37,7 +37,7 @@ module.exports = async () => {
     }
 
     // 页面配置项
-    doodoo.router.get("/app/home/public/envweb", async (ctx, next) => {
+    doodoo.router.get("/public/home/public/envweb", async (ctx, next) => {
         const _domain = ctx.query.host || _url.parse(process.env.APP_HOST).host;
         const _domains = _domain.split(".");
         _domains.shift();
@@ -49,8 +49,8 @@ module.exports = async () => {
 
     doodoo.use(async (ctx, next) => {
         if (
-            process.env.APP_PREFIX &&
-            ctx.path.indexOf(process.env.APP_PREFIX) === 0
+            doodoo.getConf("app.prefix") &&
+            ctx.path.indexOf(doodoo.getConf("app.prefix")) === 0
         ) {
             return await next();
         }

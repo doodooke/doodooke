@@ -1,0 +1,52 @@
+
+app:
+    port: '3000'
+    host: 'https://www.xxx.com'
+    prefix: /api
+    free_days: '7'
+verify:
+    maxip: '36'
+    maxphone: '6'
+mysql:
+    host: 127.0.0.1
+    user: root
+    password: root
+    database: doodooke
+    port: '3306'
+    charset: utf8mb4
+redis:
+    host: 127.0.0.1
+    port: '6379'
+    prefix: 'doodooke:'
+qiniu:
+    accesskey: xxx
+    secretkey: xxx
+    bucket: doodooke
+    domain: 'http://img.xxx.com'
+page:
+    size: '20'
+jwt:
+    secret: xxx
+    expiresin: 7 days
+    admin_secret: xxx
+    admin_expiresin: 7 days
+open:
+    appid: xxx
+    appsecret: xxx
+    token: xxx
+    encodingaeskey: xxx
+    domain: 'https://api.xxx.com'
+wx:
+    appid: xxx
+    appsecret: xxx
+    token: xxx
+    encodingaeskey: xxx
+alisms:
+    type: '1'
+    appkey: xxx
+    appsecret: xxx
+    free_sign_name: xxx
+    template_code: xxx
+lbs:
+    amap_key: xxx
+

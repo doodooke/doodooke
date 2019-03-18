@@ -8,97 +8,55 @@
       top="20px"
       :modal-append-to-body="false"
     >
-      <el-tabs
-        v-model="tabname"
-        type="card"
-        @tab-click="changeTabs"
-      >
-        <el-tab-pane
-          label="页面"
-          name="1"
-        >
-          <el-table
-            :data="pageData"
-            stripe
-            style="margin-bottom:60px"
-          >
-            <el-table-column
-              prop="name"
-              label="页面"
-              align="center"
-            >
-            </el-table-column>
-            <el-table-column
-              label="创建时间"
-              align="center"
-            >
+      <el-tabs v-model="tabname" type="card" @tab-click="changeTabs">
+        <el-tab-pane label="页面" name="1">
+          <el-table :data="pageData" stripe style="margin-bottom:60px">
+            <el-table-column prop="name" label="页面" align="center"></el-table-column>
+            <el-table-column label="创建时间" align="center">
               <template slot-scope="scope">
                 <el-row>{{format(scope.row.created_at)}}</el-row>
               </template>
             </el-table-column>
-            <el-table-column
-              label="操作"
-              align="center"
-            >
+            <el-table-column label="操作" align="center">
               <template slot-scope="scope">
-                <el-button
-                  type="text"
-                  size="mini"
-                  @click="selectPage(scope.row)"
-                >选择</el-button>
+                <el-button type="text" size="mini" @click="selectPage(scope.row)">选择</el-button>
               </template>
             </el-table-column>
           </el-table>
         </el-tab-pane>
-        <el-tab-pane
-          label="营销"
-          name="2"
-        >
-          <el-row style='border:1px solid #eee'>
-            <el-col
-              :span='17'
-              class='ump'
-            >
+        <el-tab-pane label="营销" name="2">
+          <el-row style="border:1px solid #eee">
+            <el-col :span="17" class="ump">
               <div
-                class='ump-comp'
-                v-for='(item,index) in umpData'
-                :key='index'
-                :style='{borderColor:item.id==umpSelect?"#06a0fd":"#eee"}'
-                @click='selectUmp(item.id)'
+                class="ump-comp"
+                v-for="(item,index) in umpData"
+                :key="index"
+                :style="{borderColor:item.id==umpSelect?'#06a0fd':'#eee'}"
+                @click="selectUmp(item.id)"
                 v-if="item.status"
               >
                 <img :src="item.icon">
-                <div style='text-align: center'>{{item.name}}</div>
+                <div style="text-align: center">{{item.name}}</div>
               </div>
             </el-col>
-            <el-col
-              :span='7'
-              style='padding:0 10px'
-            >
-              <div style='font-size: 14px;margin:8px 0'>示例</div>
-              <div style='width:100%;'>
-                <img
-                  :src="umpData[umpSelect-1].img"
-                  style='width:100%;height:100%'
-                >
+            <el-col :span="7" style="padding:0 10px">
+              <div style="font-size: 14px;margin:8px 0">示例</div>
+              <div style="width:100%;">
+                <img :src="umpData[umpSelect-1].img" style="width:100%;height:100%">
               </div>
             </el-col>
           </el-row>
         </el-tab-pane>
       </el-tabs>
       <p slot="footer">
-        <el-button
-          type='primary'
-          v-show='tabname==2'
-          @click='okUmp'
-        >确定</el-button>
+        <el-button type="primary" v-show="tabname==2" @click="okUmp">确定</el-button>
       </p>
     </el-dialog>
     <!-- 集赞 -->
     <el-dialog
       title="集赞活动"
       :visible.sync="jizanModal"
-      width='800px'
+      width="800px"
       top="20px"
       :modal-append-to-body="false"
     >
@@ -106,59 +64,30 @@
         title="提示"
         :closable="false"
         show-icon
-        v-show='!jizanData.length'
+        v-show="!jizanData.length"
         style="margin-bottom:24px"
       >
         <p>暂无活动，请先去
-          <nuxt-link to='/jizan/config'>设置活动</nuxt-link>
+          <nuxt-link to="/jizan/config">设置活动</nuxt-link>
         </p>
       </el-alert>
-      <el-table
-        :data="jizanData"
-        stripe
-      >
-        <el-table-column
-          prop="name"
-          label="活动名称"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="time"
-          label="时间"
-          align="center"
-        >
+      <el-table :data="jizanData" stripe>
+        <el-table-column prop="name" label="活动名称" align="center"></el-table-column>
+        <el-table-column prop="time" label="时间" align="center">
           <template slot-scope="scoped">
             <el-row>{{format(scoped.row.started_at)}}</el-row>
             <el-row>{{format(scoped.row.ended_at)}}</el-row>
           </template>
         </el-table-column>
-        <el-table-column
-          prop="status"
-          label="状态"
-          align="center"
-        >
+        <el-table-column prop="status" label="状态" align="center">
           <template slot-scope="scoped">
-            <el-row
-              style="font-weight:700;color:#19be6b"
-              v-if="scoped.row.status"
-            >开启</el-row>
-            <el-row
-              style="font-weight:700;color:#f50"
-              v-else
-            >关闭</el-row>
+            <el-row style="font-weight:700;color:#19be6b" v-if="scoped.row.status">开启</el-row>
+            <el-row style="font-weight:700;color:#f50" v-else>关闭</el-row>
           </template>
         </el-table-column>
-        <el-table-column
-          label="操作"
-          align="center"
-        >
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-button
-              type="text"
-              size="mini"
-              @click="selectedJizan(scope.row)"
-            >选择</el-button>
+            <el-button type="text" size="mini" @click="selectedJizan(scope.row)">选择</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -179,7 +108,7 @@
     <el-dialog
       title="小程序"
       :visible.sync="wxaModal"
-      width='800px'
+      width="800px"
       top="20px"
       :modal-append-to-body="false"
     >
@@ -187,39 +116,19 @@
         title="提示"
         :closable="false"
         show-icon
-        v-show='!wxaData.length'
+        v-show="!wxaData.length"
         style="margin-bottom:24px"
       >
         <p>暂无小程序，请先去
-          <nuxt-link to='/miniapps'>设置小程序</nuxt-link>
+          <nuxt-link to="/miniapps">设置小程序</nuxt-link>
         </p>
       </el-alert>
-      <el-table
-        :data="wxaData"
-        stripe
-      >
-        <el-table-column
-          prop="name"
-          label="名称"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="appid"
-          label="appid"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          label="操作"
-          align="center"
-        >
+      <el-table :data="wxaData" stripe>
+        <el-table-column prop="name" label="名称" align="center"></el-table-column>
+        <el-table-column prop="appid" label="appid" align="center"></el-table-column>
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-button
-              type="text"
-              size="mini"
-              @click="selectWxa(scope.row)"
-            >选择</el-button>
+            <el-button type="text" size="mini" @click="selectWxa(scope.row)">选择</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -240,7 +149,7 @@
     <el-dialog
       title="拨号"
       :visible.sync="phoneModal"
-      width='800px'
+      width="800px"
       top="20px"
       :modal-append-to-body="false"
     >
@@ -248,39 +157,19 @@
         title="提示"
         :closable="false"
         show-icon
-        v-show='!phoneData.length'
+        v-show="!phoneData.length"
         style="margin-bottom:24px"
       >
         <p>暂无联系人，请先去
-          <nuxt-link to='/contacts'>设置联系人</nuxt-link>
+          <nuxt-link to="/contacts">设置联系人</nuxt-link>
         </p>
       </el-alert>
-      <el-table
-        :data="phoneData"
-        stripe
-      >
-        <el-table-column
-          prop="name"
-          label="姓名"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="phone"
-          label="电话"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          label="操作"
-          align="center"
-        >
+      <el-table :data="phoneData" stripe>
+        <el-table-column prop="name" label="姓名" align="center"></el-table-column>
+        <el-table-column prop="phone" label="电话" align="center"></el-table-column>
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-button
-              type="text"
-              size="mini"
-              @click="selectPhone(scope.row)"
-            >选择</el-button>
+            <el-button type="text" size="mini" @click="selectPhone(scope.row)">选择</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -301,7 +190,7 @@
     <el-dialog
       title="小程序插件"
       :visible.sync="pluginModal"
-      width='800px'
+      width="800px"
       top="20px"
       :modal-append-to-body="false"
     >
@@ -309,39 +198,19 @@
         title="提示"
         :closable="false"
         show-icon
-        v-show='!pluginData.length'
+        v-show="!pluginData.length"
         style="margin-bottom:24px"
       >
         <p>暂无小程序插件，请先去
-          <nuxt-link to='/plugin'>设置小程序插件</nuxt-link>
+          <nuxt-link to="/plugin">设置小程序插件</nuxt-link>
         </p>
       </el-alert>
-      <el-table
-        :data="pluginData"
-        stripe
-      >
-        <el-table-column
-          prop="name"
-          label="名称"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="appid"
-          label="appid"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          label="操作"
-          align="center"
-        >
+      <el-table :data="pluginData" stripe>
+        <el-table-column prop="name" label="名称" align="center"></el-table-column>
+        <el-table-column prop="appid" label="appid" align="center"></el-table-column>
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-button
-              type="text"
-              size="mini"
-              @click="selectPlugin(scope.row)"
-            >选择</el-button>
+            <el-button type="text" size="mini" @click="selectPlugin(scope.row)">选择</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -362,7 +231,7 @@
     <el-dialog
       title="选择商品"
       :visible.sync="showProduct"
-      width='800px'
+      width="800px"
       top="20px"
       :modal-append-to-body="false"
     >
@@ -370,100 +239,43 @@
         title="提示"
         :closable="false"
         show-icon
-        v-show='!productData.length'
+        v-show="!productData.length"
         style="margin-top:-24px"
       >
         <p>暂无商品，请先去
-          <nuxt-link to='/plugin'>设置商品</nuxt-link>
+          <nuxt-link to="/plugin">设置商品</nuxt-link>
         </p>
       </el-alert>
       <el-row style="padding:24px;background:#f8f8f8;margin:10px 0">
         <el-col :span="13">
           <span style="font-size:14px">商品名称：</span>
-          <el-input
-            style="width:280px"
-            v-model="keyword"
-            size="small"
-            placeholder="请输入关键字搜索"
-          ></el-input>
+          <el-input style="width:280px" v-model="keyword" size="small" placeholder="请输入关键字搜索"></el-input>
         </el-col>
         <el-col :span="10">
-          <el-button
-            type="primary"
-            size="small"
-            @click="searchProduct"
-          >搜索</el-button>
-          <el-button
-            type="text"
-            size="small"
-            @click="clearSearch"
-          >清空</el-button>
+          <el-button type="primary" size="small" @click="searchProduct">搜索</el-button>
+          <el-button type="text" size="small" @click="clearSearch">清空</el-button>
         </el-col>
       </el-row>
-      <el-table
-        :data="productData"
-        stripe
-      >
-        <el-table-column
-          label="商品"
-          align="center"
-        >
+      <el-table :data="productData" stripe>
+        <el-table-column label="商品" align="center">
           <template slot-scope="scope">
-            <img
-              :src="scope.row.img_url"
-              alt=""
-              style="width:50px;height:50px"
-            >
+            <img :src="scope.row.img_url" alt style="width:50px;height:50px">
           </template>
         </el-table-column>
-        <el-table-column
-          prop="name"
-          label="名称"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="price"
-          label="价格"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          label="商品类型"
-          align="center"
-        >
+        <el-table-column prop="name" label="名称" align="center"></el-table-column>
+        <el-table-column prop="price" label="价格" align="center"></el-table-column>
+        <el-table-column label="商品类型" align="center">
           <template slot-scope="scope">
-            <el-tag
-              size="mini"
-              v-if="scope.row.type == 0"
-            >普通商品</el-tag>
-            <el-tag
-              size="mini"
-              type="warning"
-              v-if="scope.row.type == 1"
-            >分销商品</el-tag>
-            <el-tag
-              size="mini"
-              type="danger"
-              v-else-if="scope.row.type == 2"
-            >拼团商品</el-tag>
-            <el-tag
-              size="mini"
-              type="info"
-              v-else-if="scope.row.type == 3"
-            >预售商品</el-tag>
+            <el-tag size="mini" v-if="scope.row.type == 0">普通商品</el-tag>
+            <el-tag size="mini" type="warning" v-if="scope.row.type == 1">分销商品</el-tag>
+            <el-tag size="mini" type="danger" v-else-if="scope.row.type == 2">拼团商品</el-tag>
+            <el-tag size="mini" type="info" v-else-if="scope.row.type == 3">预售商品</el-tag>
+            <el-tag size="mini" type="success" v-else-if="scope.row.type == 4">集赞商品</el-tag>
           </template>
         </el-table-column>
-        <el-table-column
-          label="操作"
-          align="center"
-        >
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-button
-              type="text"
-              size="mini"
-              @click="selectProduct(scope.row)"
-            >选择</el-button>
+            <el-button type="text" size="mini" @click="selectProduct(scope.row)">选择</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -484,7 +296,7 @@
     <el-dialog
       title="选择文章"
       :visible.sync="showArticle"
-      width='800px'
+      width="800px"
       top="20px"
       :modal-append-to-body="false"
     >
@@ -492,38 +304,24 @@
         title="提示"
         :closable="false"
         show-icon
-        v-show='!articleData.length'
+        v-show="!articleData.length"
         style="margin-top:-24px"
       >
         <p>暂无文章，请先去
-          <nuxt-link to='/article'>添加文章</nuxt-link>
+          <nuxt-link to="/article">添加文章</nuxt-link>
         </p>
       </el-alert>
-      <el-table
-        :data="articleData"
-        stripe
-        style="margin-top:24px"
-      >
-        <el-table-column
-          prop="content"
-          label="内容"
-          header-align="center"
-          width="400"
-        >
+      <el-table :data="articleData" stripe style="margin-top:24px">
+        <el-table-column prop="content" label="内容" header-align="center" width="400">
           <template slot-scope="scope">
             <div style="display:flex">
               <img
                 :src="scope.row.img[0].img_url"
-                alt=""
+                alt
                 style="width:120px;height:100px"
                 v-if="scope.row.img.length"
               >
-              <img
-                src="/assets/default.png"
-                alt=""
-                style="width:120px;height:100px"
-                v-else
-              >
+              <img src="/assets/default.png" alt style="width:120px;height:100px" v-else>
               <div style="flex:1;padding:0 7px">
                 <el-row class="text_overflow text_overflow_line_1 title">{{scope.row.title}}</el-row>
                 <el-row class="text_overflow text_overflow_line_2 info">{{scope.row.info}}</el-row>
@@ -536,38 +334,15 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column
-          prop="pay_num"
-          label="购买数"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="rank"
-          label="排序"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="status"
-          label="状态"
-          align="center"
-        >
+        <el-table-column prop="pay_num" label="购买数" align="center"></el-table-column>
+        <el-table-column prop="rank" label="排序" align="center"></el-table-column>
+        <el-table-column prop="status" label="状态" align="center">
           <template slot-scope="scoped">
-            <el-row
-              style="font-weight:700;color:#19be6b"
-              v-if="scoped.row.status"
-            >开启</el-row>
-            <el-row
-              style="font-weight:700;color:#f50"
-              v-else
-            >关闭</el-row>
+            <el-row style="font-weight:700;color:#19be6b" v-if="scoped.row.status">开启</el-row>
+            <el-row style="font-weight:700;color:#f50" v-else>关闭</el-row>
           </template>
         </el-table-column>
-        <el-table-column
-          label="操作"
-          align="center"
-        >
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <el-button
               type="text"
@@ -575,10 +350,7 @@
               @click="selectArticle(scope.row)"
               v-if="scope.row.status"
             >选择</el-button>
-            <el-button
-              type="text"
-              v-else
-            >-</el-button>
+            <el-button type="text" v-else>-</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -599,7 +371,7 @@
     <el-dialog
       title="投票活动"
       :visible.sync="voteModal"
-      width='800px'
+      width="800px"
       top="20px"
       :modal-append-to-body="false"
     >
@@ -607,43 +379,24 @@
         title="提示"
         :closable="false"
         show-icon
-        v-if='!voteData.length'
+        v-if="!voteData.length"
         style="margin-bottom:24px"
       >
         <p>暂无活动，请先去
-          <nuxt-link to='/vote/config'>设置活动</nuxt-link>
+          <nuxt-link to="/vote/config">设置活动</nuxt-link>
         </p>
       </el-alert>
-      <el-table
-        :data="voteData"
-        stripe
-      >
-        <el-table-column
-          prop="name"
-          label="活动名称"
-          align="center"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="time"
-          label="时间"
-          align="center"
-        >
+      <el-table :data="voteData" stripe>
+        <el-table-column prop="name" label="活动名称" align="center"></el-table-column>
+        <el-table-column prop="time" label="时间" align="center">
           <template slot-scope="scoped">
             <el-row>{{format(scoped.row.started_at)}}</el-row>
             <el-row>{{format(scoped.row.ended_at)}}</el-row>
           </template>
         </el-table-column>
-        <el-table-column
-          label="操作"
-          align="center"
-        >
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-button
-              type="text"
-              size="mini"
-              @click="selectedVote(scope.row)"
-            >选择</el-button>
+            <el-button type="text" size="mini" @click="selectedVote(scope.row)">选择</el-button>
           </template>
         </el-table-column>
       </el-table>

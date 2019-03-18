@@ -86,6 +86,9 @@ textarea {
     font-size: 18px;
     font-weight: 500;
     color: #222;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .pay-modal-price {
     width: 240px;

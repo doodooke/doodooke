@@ -121,7 +121,7 @@ async function installMigrate() {
 
 module.exports = class extends doodoo.Controller {
     async _initialize() {
-        await installMigrate();
+        // await installMigrate();
     }
 
     /**
@@ -226,4 +226,56 @@ module.exports = class extends doodoo.Controller {
             return;
         }
     }
+
+    /**
+     *
+     * @api {post} /admin/public/getVersion 客户登录
+     * @apiDescription 客户登录授权
+     * @apiGroup admin Admin
+     * @apiVersion 0.0.1
+     *
+     * @apiParam {String} code Security Code
+     *
+     * @apiSuccess {String} json 当前app，plugin目录下模块，版本
+     *
+     * @apiSampleRequest /admin/public/getVersion
+     *
+     */
+
+    async getVersion(){
+        // 先获取app 模块
+        const url = path.resolve(__dirname, "../../");
+        const pluginUrl = path.resolve(__dirname, "../../../plugin");
+        const dirArr = fs.readdirSync(url);
+        const pluginArr = fs.readdirSync(pluginUrl);
+        const leng=pluginArr.length;
+        const newArr=[];
+        const appUrl= path.resolve(__dirname, "../../../");
+        const appInfo=require(`${appUrl}/package.json`.replace(/\\/g,"/"));
+        newArr.push({name:appInfo.name,version:appInfo.version,description:appInfo.description})
+        Array.prototype.push.apply(dirArr,pluginArr);
+       
+        
+        for(let x=0;x<dirArr.length;x++){
+            const pakUrl = dirArr.length-x<=leng?`${pluginUrl}/${dirArr[x]}/package.json`.replace(/\\/g,"/"):`${url}/${dirArr[x]}/package.json`.replace(/\\/g,"/");
+            const moduleUrl = dirArr.length-x<=leng?`${pluginUrl}/${dirArr[x]}`.replace(/\\/g, "/"):`${url}/${dirArr[x]}`.replace(/\\/g, "/");
+            const stat = fs.lstatSync(moduleUrl);
+            if (!stat.isDirectory()) {
+                continue;
+            }
+            const list = require(pakUrl);
+            const row={
+                name:list.name,
+                version:list.version,
+                description:list.description
+            } 
+            
+            newArr.push(row);
+        }
+        
+        this.success(newArr)
+       
+    } 
+
+
 };

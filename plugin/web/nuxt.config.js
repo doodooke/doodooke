@@ -10,18 +10,32 @@ const fs = require("fs");
 const { relativeTo } = require("@nuxt/common");
 const glob = require("glob");
 const _url = require("url");
-const dotenv = require("dotenv");
-const env = Object.assign({}, process.env);
-const apiConfig = dotenv.parse(fs.readFileSync(".env"));
-const webConfig = Object.assign(
-    dotenv.parse(fs.readFileSync(".env.web")),
+const pathToRegexp = require("path-to-regexp");
+const rewrite = require("./../../rewrite");
+const yaml = require('js-yaml');
+const _ = require('lodash');
+
+const configData = yaml.safeLoad(fs.readFileSync('config.yml', 'utf8'));
+const webConfigData = yaml.safeLoad(fs.readFileSync('web.config.yml', 'utf8'));
+const _webConfigData = {};
+for (let key in webConfigData) {
+    if (_.isString(webConfigData[key])) {
+        _webConfigData[_.toUpper(key)] = webConfigData[key];
+        continue;
+    }
+    for (let _key in webConfigData[key]) {
+        _webConfigData[_.toUpper(key) + "_" + _.toUpper(_key)] = webConfigData[key][_key]
+    }
+}
+const webConfig = _.merge(
+    webConfigData,
+    _webConfigData,
     {
-        APP_HOST: apiConfig.APP_HOST,
-        APP_PREFIX: apiConfig.APP_PREFIX,
-        DOMAIN: _url.parse(apiConfig.APP_HOST).host,
-        API_DOMAIN: apiConfig.APP_HOST + apiConfig.APP_PREFIX
-    },
-    env
+        APP_HOST: configData.app.host,
+        APP_PREFIX: configData.app.prefix,
+        DOMAIN: _url.parse(configData.app.host).host,
+        API_DOMAIN: configData.app.host + configData.app.prefix
+    }
 );
 const appDir = "app";
 
@@ -34,28 +48,44 @@ function createRoutes(srcDir) {
     for (const key in views) {
         const file = path.resolve(appDir, views[key]);
         const _path = "/" +
-                views[key]
-                    .replace(/\\/g, "/")
-                    .replace(/\/view/, "")
-                    .replace(/_/g, ":")
-                    .replace(/.vue$/, "")
-                    .replace(/.index$/, "");
+            views[key]
+                .replace(/\\/g, "/")
+                .replace(/\/view/, "")
+                .replace(/\/_/g, "/:")
+                .replace(/.vue$/, "")
+                .replace(/.index$/, "");
         routes.push({
             name: views[key],
             path: _path,
             component: file,
             chunkName: "pages/app/" + views[key]
         });
-        
+
         if (_path === '/portal') {
             routes.push({
-                name: "index",
+                name: "@" + views[key],
                 path: "/",
                 component: file,
-                chunkName: "pages/index"
+                chunkName: "pages/app/" + views[key]
             });
         }
+
+        for (const _key in rewrite) {
+            const keys = [];
+            const regexp = pathToRegexp(`${rewrite[_key]}(.*)`, keys);
+            const regres = regexp.exec(_path);
+
+            if (regres) {
+                routes.push({
+                    name: "@" + views[key],
+                    path: _path.replace(rewrite[_key], _key),
+                    component: file,
+                    chunkName: "pages/app/" + views[key]
+                });
+            }
+        }
     }
+
     return routes;
 }
 
@@ -154,7 +184,7 @@ module.exports = {
                 rel: "stylesheet",
                 type: "text/css",
                 href:
-                    "https://unpkg.com/element-ui@2.4.8/lib/theme-chalk/index.css"
+                    "https://unpkg.com/element-ui@2.6.1/lib/theme-chalk/index.css"
             },
             {
                 rel: "stylesheet",
@@ -164,7 +194,7 @@ module.exports = {
             {
                 rel: "stylesheet",
                 type: "text/css",
-                href: "//at.alicdn.com/t/font_704506_knv6d59aw5.css"
+                href: "//at.alicdn.com/t/font_704506_wn5qzgqpp9m.css"
             }
         ].concat(HEAD_LINK)
     },
@@ -200,12 +230,12 @@ module.exports = {
 
     loading: false,
 
-    modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "@nuxtjs/sitemap"],
+    modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "@nuxtjs/sitemap", "~/hook.js"],
 
     axios: {
         proxy: true, // Can be also an object with default options
         debug: false,
-        baseURL: `http://127.0.0.1:${apiConfig.APP_PORT}`
+        baseURL: `http://127.0.0.1:${configData.app.port}`
     },
 
     router: {
@@ -214,7 +244,7 @@ module.exports = {
 
     sitemap: {
         path: "/sitemap.xml",
-        hostname: apiConfig.APP_HOST,
+        hostname: configData.app.host,
         cacheTime: 1000 * 60 * 15,
         gzip: true,
         generate: false, // Enable me when using nuxt generate
@@ -235,7 +265,7 @@ module.exports = {
 
     proxy: {
         "/api": {
-            target: `http://127.0.0.1:${apiConfig.APP_PORT}`
+            target: `http://127.0.0.1:${configData.app.port}`
         },
         "/registry": {
             target: `http://registry.doodooke.com`,

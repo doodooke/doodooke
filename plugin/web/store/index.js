@@ -30,7 +30,11 @@ const createStore = () => {
             env: {},
             browser: "",
             recentArticle: [],
-            navData: []
+            navData: [],
+            marketCompare: {
+                showCompare: false,
+                appData: []
+            }
         },
         mutations: {
             SET_AGENT(state, agent) {
@@ -65,6 +69,9 @@ const createStore = () => {
             },
             SET_NAV_DATA(state, nav) {
                 state.navData = nav;
+            },
+            SET_MARKET_COMPARE(state, data) {
+                state.marketCompare = data;
             }
         },
         actions: {

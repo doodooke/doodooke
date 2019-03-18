@@ -12,7 +12,7 @@ export default function ({ app, $axios, redirect, req }) {
         config.headers.WxaToken = app.$cookies.get("WxaToken") || "";
 
         // config.headers["X-IP"] = req.headers["X-Real-IP"] || req.ip;
-
+        config.headers.uniqueToken = app.$cookies.get("uniqueToken") || "";
     });
 
     $axios.onResponse(response => {

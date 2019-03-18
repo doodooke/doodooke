@@ -10,8 +10,9 @@
   </div>
 </template>
 <script>
+import layout from "../../components/layout.vue";
 export default {
-    layout: "plugin",
+    layout: "empty",
     data() {
         return {
             loading: false,
@@ -30,6 +31,38 @@ export default {
             "message",
             async e => {
                 let data = e.data;
+
+                if (e.data.type == "homePage") {
+                    layout.methods.homePage.call(this);
+                    return;
+                }
+                if (e.data.type == "webBuild") {
+                    layout.methods.webBuild.call(this);
+                    return;
+                }
+                if (e.data.type == "reStart") {
+                    layout.methods.reStart.call(this);
+                    return;
+                }
+                if (e.data.type == "getLogs") {
+                    let iframeWin = document.getElementById("myIframe")
+                        .contentWindow;
+                    iframeWin.postMessage("getLogs", "*");
+                }
+                if (e.data.type == "getPlugin") {
+                    layout.methods.getPlugin.call(this);
+                    return;
+                }
+                if (e.data.type == "getSecurityCode") {
+                    let iframeWin = document.getElementById("myIframe")
+                        .contentWindow;
+                    iframeWin.postMessage("getSecurityCode", "*");
+                }
+                if (e.data.type == "debug") {
+                    let iframeWin = document.getElementById("myIframe")
+                        .contentWindow;
+                    iframeWin.postMessage("debug", "*");
+                }
 
                 //下载 更新
                 if (data.type == "doodooke") {
@@ -74,6 +107,9 @@ export default {
 <style>
 .el-loading-spinner {
     top: 200px;
+}
+body {
+    overflow: hidden;
 }
 </style>
 

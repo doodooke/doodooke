@@ -1,4 +1,4 @@
 module.exports = doodoo.bookshelf.Model.extend({
-    tableName: "migrate",
+    tableName: "file",
     hasTimestamps: true
 });

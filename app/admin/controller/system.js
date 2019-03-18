@@ -1,7 +1,5 @@
 const shell = require("shelljs");
-const path = require("path");
 const _ = require("lodash");
-const fse = require("fs-extra");
 const base = require("./base");
 const pm2Json = require("./../../../pm2.config");
 
@@ -40,7 +38,7 @@ module.exports = class extends base {
      *
      */
     async pm2Restart() {
-        shell.exec("pm2 restart pm2.config.js");
+        shell.exec("pm2 reload pm2.config.js");
         this.success();
     }
 
@@ -57,7 +55,7 @@ module.exports = class extends base {
      *
      */
     async webBuildAndPm2Restart() {
-        shell.exec("npm run web:build && pm2 restart pm2.config.js");
+        shell.exec("npm run web:build && pm2 reload pm2.config.js");
         this.success();
     }
 
@@ -86,7 +84,7 @@ module.exports = class extends base {
                     async: true,
                     silent: true
                 });
-                child.stdout.on("data", function(data) {
+                child.stdout.on("data", function (data) {
                     socket.emit("pm2Logs", data);
                 });
             }
@@ -110,5 +108,21 @@ module.exports = class extends base {
      */
     async getSecurityCode() {
         this.success(this.securityCode);
+    }
+
+    async getDebugPaths() {
+        this.success(doodoo.debugPaths)
+    }
+
+    async saveDebugPaths() {
+        const { paths } = this.post;
+
+        if (_.isArray(paths)) {
+            doodoo.debugPaths = paths;
+        } else {
+            doodoo.debugPaths = [paths];
+        }
+
+        this.success()
     }
 };

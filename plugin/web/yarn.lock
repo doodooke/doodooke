@@ -2617,10 +2617,10 @@ element-resize-detector@latest:
   dependencies:
     batch-processor "^1.0.0"
 
-element-ui@^2.4.9:
-  version "2.4.11"
-  resolved "https://registry.yarnpkg.com/element-ui/-/element-ui-2.4.11.tgz#db6a2d37001b8fe5fff9f176fb58bb3908cfa9c9"
-  integrity sha512-RtgK0t840NAFTajGMWvylzZRSX1EkZ7V4YgAoBxhv4TtkeMscLuk/IdYOzPdlQq6IN0byx1YVBxCX+u4yYkGvw==
+element-ui@^2.6.1:
+  version "2.6.1"
+  resolved "http://registry.npm.taobao.org/element-ui/download/element-ui-2.6.1.tgz#86db79ff5de9b1bcc3187b65b3772b0c54074718"
+  integrity sha1-htt5/13psbzDGHtls3crDFQHRxg=
   dependencies:
     async-validator "~1.8.1"
     babel-helper-vue-jsx-merge-props "^2.0.0"
@@ -3783,6 +3783,14 @@ js-yaml@^3.12.0, js-yaml@^3.9.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+js-yaml@^3.12.2:
+  version "3.12.2"
+  resolved "http://registry.npm.taobao.org/js-yaml/download/js-yaml-3.12.2.tgz#ef1d067c5a9d9cb65bd72f285b5d8105c77f14fc"
+  integrity sha1-7x0GfFqdnLZb1y8oW12BBcd/FPw=
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
 jsesc@^2.5.1:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
@@ -4675,6 +4683,11 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
   integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
+
+path-to-regexp@^3.0.0:
+  version "3.0.0"
+  resolved "http://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-3.0.0.tgz#c981a218f3df543fa28696be2f88e0c58d2e012a"
+  integrity sha1-yYGiGPPfVD+ihpa+L4jgxY0uASo=
 
 pbkdf2@^3.0.3:
   version "3.0.17"

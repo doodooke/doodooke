@@ -1,0 +1,32 @@
+brand: 多多客
+head:
+    title: 多多客小程序-微信百度支付宝小程序第三方平台
+    meta_description: '多多客是国内领先的小程序第三方平台。无需代码,可视化拖拽,提供海量小程序行业模板。联合服务商、开发者、运营专家,共建服务生态,服务百万商家。'
+    meta_keywords: >-
+        多多客,多多客小程序,小程序,微信小程序,支付宝小程序,百度小程序,小程序第三方平台,小程序模版,免费小程序,开源小程序,小程序软件,小程序商城。
+    script: ''
+    link: ''
+tel: 0371-63337761
+kaidian:
+    zixun: 开店咨询：0371-63337761
+work:
+    time: '周一到周日 09:00 ~ 18:00'
+fuwu:
+    zixun: '服务咨询：09:00 - 18:00'
+wx:
+    qrcode_url: 'https://open.weixin.qq.com/qr/code?username=gh_31d97ff84aa6'
+    kefu: /www/img/kefu/weixin.png
+logo: /assets/logo.png
+qq:
+    url: 'http://wpa.qq.com/msgrd?v=3&uin=3367414088&site=qq&menu=yes'
+weibo:
+    url: 'https://weibo.com/u/2335966217?is_hot=1'
+meiqia:
+    jiaocheng: 'http://www.doodooke.com/cms/article/kefuxiaoxiduijiemeiqia'
+copyright: Copyright © 2018 doodooke.com All Rights Reserved
+icp: 豫ICP备16009619号
+gongan:
+    icp: 豫公网安备 41010502002866号
+link:
+    name: koahub软件市场
+    url: 'http://www.koahub.com'
