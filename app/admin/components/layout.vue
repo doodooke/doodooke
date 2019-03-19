@@ -108,8 +108,11 @@
           <el-input
             v-model="item.path"
             placeholder="请输入调试路径"
-            style="width:447px;margin-right:12px;"
+            style="width:400px;margin-right:12px;"
           ></el-input>
+          <el-tooltip :content="item.copy?'复制':'转发'" placement="top">
+            <el-switch v-model="item.copy" style="margin-right:12px;"></el-switch>
+          </el-tooltip>
           <div>
             <i
               class="iconfont icon-Add debug-icon-add"
@@ -276,14 +279,9 @@ export default {
                 "/api/admin/system/getDebugPaths"
             );
             if (res && res.errmsg == "ok") {
-                this.debugPaths = [];
-                res.data.map(item => {
-                    this.debugPaths.push({
-                        path: item
-                    });
-                });
+                this.debugPaths = res.data;
                 if (!this.debugPaths.length) {
-                    this.debugPaths.push({ path: "" });
+                    this.debugPaths.push({ path: "", copy: true });
                 }
             }
         },
@@ -293,7 +291,8 @@ export default {
                 return;
             }
             this.debugPaths.push({
-                path: ""
+                path: "",
+                copy: true
             });
         },
         reducePaths(index) {
@@ -303,7 +302,7 @@ export default {
             let data = [];
             this.debugPaths.map(item => {
                 if (item.path) {
-                    data.push(item.path);
+                    data.push(item);
                 }
             });
             if (!data.length) {

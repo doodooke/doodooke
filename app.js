@@ -4,6 +4,7 @@ try {
 
 const Doodoo = require("doodoo.js");
 const socket = require("socket.io");
+const redisAdapter = require('socket.io-redis');
 const cors = require("koa-cors");
 const glob = require("glob");
 const fs = require("fs");
@@ -11,7 +12,6 @@ const _ = require("lodash");
 const fse = require("fs-extra");
 const uuid = require('uuid');
 const shortid = require('shortid');
-const getRawBody = require('raw-body')
 const pathToRegexp = require("path-to-regexp");
 const rewrite = require("./rewrite");
 
@@ -58,35 +58,48 @@ process.on("startServer", async () => {
     app.use(async (ctx, next) => {
         // 本地调试
         if (!_.isEmpty(debugClient)) {
-            for (const key in doodoo.debugPaths) {
+            for (const _path of doodoo.debugPaths) {
                 const keys = [];
-                const regexp = pathToRegexp(`${doodoo.debugPaths[key]}(.*)`, keys);
+                const regexp = pathToRegexp(`${_path.path}(.*)`, keys);
                 const regres = regexp.exec(ctx.path);
 
                 if (regres) {
-                    ctx.respond = false;
                     const uid = shortid.generate();
+                    const copy = _path.copy;
                     debugRequest[uid] = {
-                        ctx
+                        ctx,
+                        copy
                     };
 
                     const _token = ctx.query.uniqueToken || ctx.get("uniqueToken") || "default";
-                    const body = await getRawBody(ctx.req, {
-                        length: ctx.length,
-                        limit: "1mb",
-                        encoding: "utf8"
-                    });
-
+                    if (!copy) {
+                        ctx.respond = false;
+                    }
                     if (debugClient[_token]) {
-                        debugClient[_token].emit("req", {
-                            uid: uid,
-                            url: ctx.url,
-                            path: ctx.path,
-                            query: ctx.query,
-                            method: ctx.method,
-                            headers: ctx.headers,
-                            body: body
+                        let body = '';
+                        ctx.req.on('data', (chunk) => {
+                            body += chunk;
                         });
+                        ctx.req.on('end', () => {
+                            debugClient[_token].emit("req", {
+                                uid: uid,
+                                url: ctx.url,
+                                path: ctx.path,
+                                query: ctx.query,
+                                method: ctx.method,
+                                headers: ctx.headers,
+                                body: body
+                            });
+                        });
+
+                        const address = debugClient[_token].handshake.address
+                        const sid = debugClient[_token].id
+                        if (copy) {
+                            console.log(`Debug Copy ${ctx.path} ${address} ${sid}`)
+                            await next();
+                        } else {
+                            console.log(`Debug Forward ${ctx.path} ${address} ${sid}`)
+                        }
                     } else {
                         await next();
                     }
@@ -138,6 +151,7 @@ process.on("startServer", async () => {
 
     // 全局
     global.io = socket(server);
+    io.adapter(redisAdapter(doodoo.getConf("redis")));
     io.on("connection", async socket => {
         const sid = socket.id;
         const { uid, type, securityCode, uniqueToken } = socket.request._query;
@@ -147,7 +161,7 @@ process.on("startServer", async () => {
             }
 
             await doodoo.redis.setAsync(
-                `wxLogin: uid: ${uid}: sid`,
+                `wxLogin:uid:${uid}:sid`,
                 sid,
                 "EX",
                 60 * 60 * 2
@@ -161,20 +175,24 @@ process.on("startServer", async () => {
                 return
             }
 
-            console.log(`Connected Debug ${socket.handshake.address} ${sid} `)
+            console.log(`Connected Debug ${socket.handshake.address} ${sid}`)
             console.log("Connected debugPaths", doodoo.debugPaths)
 
             let _token = uniqueToken || "default";
             socket.on("res", async res => {
                 const client = debugRequest[res.uid];
-                client.ctx.res.writeHead(res.status || 200, res.headers || {});
-                client.ctx.res.write(res.data);
-                client.ctx.res.end();
+                const copy = client.copy;
+                const ctx = client.ctx;
+                if (!copy) {
+                    ctx.res.writeHead(res.status || 200, res.headers || {});
+                    ctx.res.write(res.data);
+                    ctx.res.end();
+                }
 
                 delete debugRequest[res.uid];
             });
             socket.on("disconnect", reason => {
-                console.log(`Disconnected Debug ${socket.handshake.address} ${sid} ${reason} `)
+                console.log(`Disconnected Debug ${socket.handshake.address} ${sid} ${reason}`)
                 delete debugClient[_token];
             });
 

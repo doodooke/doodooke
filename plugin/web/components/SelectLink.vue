@@ -32,7 +32,7 @@
                 v-for="(item,index) in umpData"
                 :key="index"
                 :style="{borderColor:item.id==umpSelect?'#06a0fd':'#eee'}"
-                @click="selectUmp(item.id)"
+                @click="selectUmp(item.id,index)"
                 v-if="item.status"
               >
                 <img :src="item.icon">
@@ -42,7 +42,7 @@
             <el-col :span="7" style="padding:0 10px">
               <div style="font-size: 14px;margin:8px 0">示例</div>
               <div style="width:100%;">
-                <img :src="umpData[umpSelect-1].img" style="width:100%;height:100%">
+                <img :src="umpData[umpSelectIndex].img" style="width:100%;height:100%">
               </div>
             </el-col>
           </el-row>
@@ -428,140 +428,15 @@ export default {
             //营销组件
             umpData: [
                 {
-                    id: 1,
-                    name: "社区",
-                    icon: "/assets/bbs-img.png",
-                    img: "/assets/ump_1.png",
-                    status: true
-                },
-                {
-                    id: 2,
-                    name: "集赞",
-                    icon: "/assets/jizan-img.png",
-                    img: "/assets/ump_2.png",
-                    status: true
-                },
-                {
-                    id: 3,
-                    name: "文章",
-                    icon: "/assets/article-img.png",
-                    img: "/assets/ump_3.png",
-                    status: true
-                },
-                {
-                    id: 4,
-                    name: "小程序",
-                    icon: "/assets/xcx.png",
-                    img: "/assets/ump_4.jpg",
-                    status: true
-                },
-                {
-                    id: 5,
-                    name: "拨号",
-                    icon: "/assets/phone-img.png",
-                    img: "/assets/ump_5.jpg",
-                    status: true
-                },
-                {
-                    id: 6,
-                    name: "买单",
-                    icon: "/assets/storepay-img.png",
-                    img: "/assets/ump_6.jpg",
-                    status: true
-                },
-                {
-                    id: 7,
-                    name: "WIFI",
-                    icon: "/assets/wifi-img.png",
-                    img: "/assets/ump_7.jpg",
-                    status: true
-                },
-                {
-                    id: 8,
-                    name: "小程序插件",
-                    icon: "/assets/plugin-img.png",
-                    img: "/assets/ump_8.jpg",
-                    status: true
-                },
-                {
-                    id: 9,
-                    name: "添加到我的小程序",
-                    icon: "/assets/mywxa-img.png",
-                    img: "/assets/ump_9.jpg",
-                    status: true
-                },
-                {
-                    id: 10,
-                    name: "商品详情",
-                    icon: "/assets/product_detail.png",
-                    img: "/assets/detail_1.jpg",
-                    status: this.$cookies.get("layout") == "shop" ? true : false
-                },
-                {
-                    id: 11,
-                    name: "红包",
-                    icon: "/assets/hongbao-img.png",
-                    img: "/assets/ump_11.jpg",
-                    status: this.$cookies.get("layout") == "shop" ? true : false
-                },
-                {
-                    id: 12,
-                    name: "我的",
-                    icon: "/assets/mine-img.png",
-                    img: "/assets/ump_12.jpg",
-                    status: this.$cookies.get("layout") == "shop" ? true : false
-                },
-                {
-                    id: 13,
-                    name: "购物车",
-                    icon: "/assets/cart-img.png",
-                    img: "/assets/ump_13.jpg",
-                    status: this.$cookies.get("layout") == "shop" ? true : false
-                },
-                {
-                    id: 14,
-                    name: "会员卡",
-                    icon: "/assets/card-img.png",
-                    img: "/assets/ump_14.jpg",
-                    status: this.$cookies.get("layout") == "shop" ? true : false
-                },
-                {
-                    id: 15,
-                    name: "优惠券",
-                    icon: "/assets/coupon-img.png",
-                    img: "/assets/ump_15.jpg",
-                    status: this.$cookies.get("layout") == "shop" ? true : false
-                },
-                {
-                    id: 16,
-                    name: "分销",
-                    icon: "/assets/distribute-img.png",
-                    img: "/assets/ump_16.jpg",
-                    status: this.$cookies.get("layout") == "shop" ? true : false
-                },
-                {
-                    id: 17,
-                    name: "客服聊天",
-                    icon: "/assets/kefu-img.png",
-                    img: "/assets/ump_17.png",
-                    status: true
-                },
-                {
                     id: 18,
                     name: "意见反馈",
                     icon: "/assets/feedback-img.png",
                     img: "/assets/ump_18.jpg",
                     status: true
-                },
-                {
-                    id: 19,
-                    name: "投票",
-                    icon: "/assets/vote.png",
-                    img: "/assets/ump_19.png",
-                    status: true
                 }
             ],
             umpSelect: 1,
+            umpSelectIndex: 0,
             jizanModal: false,
             jizanData: [],
             pagination: {
@@ -585,6 +460,9 @@ export default {
             voteData: []
         };
     },
+    created() {
+        this.$hook.run("yingxiao", this.umpData, this);
+    },
     methods: {
         changeTabs(tab) {
             this.pagination.page = 1;
@@ -592,7 +470,7 @@ export default {
                 this.getPage();
             }
             if (this.tabname == 2) {
-                this.umpSelect = 1;
+                this.umpSelect = 18;
             }
         },
         async getPage() {
@@ -609,8 +487,9 @@ export default {
             });
         },
         //选择营销组件
-        selectUmp(id) {
+        selectUmp(id,index) {
             this.umpSelect = id;
+            this.umpSelectIndex = index;
         },
         okUmp() {
             this.pagination.page = 1;
