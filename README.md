@@ -24,7 +24,7 @@
 
 ### 生成环境部署
 
-1. 通过开发环境安装，调试，配置完成之后，执行以下命令编译启动`npm run web:build && pm2 start pm2.json`
+1. 通过开发环境安装，调试，配置完成之后，执行以下命令编译启动`npm run web:build && pm2 start pm2.config.js`
 
 
 
