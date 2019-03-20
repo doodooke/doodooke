@@ -45,7 +45,7 @@
    > 环境因素，代码启动的方式不同，所有默认生产环境启动推荐使用pm2。当代码没有自动生效时，请手动重启生效
 
 4. 如何获得安全码？
-   
+  
    > 系统第一次启动会自动生成安装码到代码根目录`SECURITY_CODE.key`， 也可以通过超管后台更多获取安全码
 
 ## 问题反馈
@@ -59,6 +59,8 @@ QQ群: 874449168(交流群①)
 EMAIL: 786699892@qq.com
 
 码云: https://gitee.com/doodooke/doodoo
+
+文档: http://doodooke.gitee.io/doodoo/#/
 
 ## 官网
 [多多客Doodooke小程序](https://www.doodooke.com)
