@@ -54,7 +54,7 @@
 
 QQ群: 874449168(交流群①)
 
- <img src="https://gitee.com/doodooke/doodoo/raw/master/thumb/qqqun.jpg" width="300" alt="874449168"/>
+ <img src="/docs/thumb/qqqun.jpg" width="300" alt="874449168"/>
 
 EMAIL: 786699892@qq.com
 
@@ -65,9 +65,9 @@ EMAIL: 786699892@qq.com
 
 ## 缩略图
 ![](/docs/thumb/1.jpg)
-![](https://gitee.com/doodooke/doodoo/raw/master/thumb/2.jpg)
-![](https://gitee.com/doodooke/doodoo/raw/master/thumb/3.jpg)
-![](https://gitee.com/doodooke/doodoo/raw/master/thumb/4.jpg)
-![](https://gitee.com/doodooke/doodoo/raw/master/thumb/5.jpg)
-![](https://gitee.com/doodooke/doodoo/raw/master/thumb/6.jpg)
-![](https://gitee.com/doodooke/doodoo/raw/master/thumb/7.jpg)
+![](/docs/thumb/2.jpg)
+![](/docs/thumb/3.jpg)
+![](/docs/thumb/4.jpg)
+![](/docs/thumb/5.jpg)
+![](/docs/thumb/6.jpg)
+![](/docs/thumb/7.jpg)
