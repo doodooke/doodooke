@@ -56,7 +56,7 @@ QQ群: 874449168(交流群①)
 
  <img src="/docs/thumb/qqqun.jpg" width="300" alt="874449168"/>
 
-EMAIL: 786699892@qq.com
+邮箱: 786699892@qq.com
 
 码云: https://gitee.com/doodooke/doodoo
 
