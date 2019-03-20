@@ -64,7 +64,7 @@ EMAIL: 786699892@qq.com
 [多多客Doodooke小程序](https://www.doodooke.com)
 
 ## 缩略图
-![](../raw/master/thumb/1.jpg)
+![](../raw/master/docs/thumb/1.jpg)
 ![](https://gitee.com/doodooke/doodoo/raw/master/thumb/2.jpg)
 ![](https://gitee.com/doodooke/doodoo/raw/master/thumb/3.jpg)
 ![](https://gitee.com/doodooke/doodoo/raw/master/thumb/4.jpg)
