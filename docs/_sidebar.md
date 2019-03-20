@@ -1,3 +1,5 @@
 * [安装](/install)
+* [配置文件](/configure)
+* [代码提交](/code_submit)
 * [新特性](/feature)
 * [应用商店](/market)

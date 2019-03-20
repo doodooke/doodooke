@@ -93,6 +93,9 @@ const createStore = () => {
                 if (app.context.env) {
                     commit("SET_ENV", app.context.env);
                 }
+                if (app.$cookies.get("market")) {
+                    commit("SET_MARKET_COMPARE", app.$cookies.get("market"));
+                }
 
                 const u_agent = req.headers["user-agent"];
                 let browser_name = '';

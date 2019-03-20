@@ -305,10 +305,6 @@ export default {
                     data.push(item);
                 }
             });
-            if (!data.length) {
-                this.$message.warning("请输入调试路径");
-                return;
-            }
             const res = await this.$axios.$post(
                 "/api/admin/system/saveDebugPaths",
                 {
