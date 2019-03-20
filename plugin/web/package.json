@@ -1,6 +1,6 @@
 {
   "name": "doodoo-plugin-web",
-  "version": "2.3.1",
+  "version": "3.0.0-alpha.3",
   "description": "> TODO: description",
   "author": "heqing <786699892@qq.com>",
   "homepage": "",
@@ -42,5 +42,6 @@
     "vuera": "^0.2.3",
     "vuex": "^3.0.1",
     "yn": "^2.0.0"
-  }
+  },
+  "gitHead": "1e6ecb43d1448d1a87604de95e02904eb31e8cc5"
 }

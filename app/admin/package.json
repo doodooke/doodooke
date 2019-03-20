@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "2.3.2",
+  "version": "3.0.0-alpha.3",
   "description": "超管模块",
   "author": "heqing <786699892@qq.com>",
   "homepage": "",
@@ -13,17 +13,22 @@
     {
       "name": "用户管理",
       "icon": "icon-kehu-copy",
-      "sub": [{
-        "name": "超管管理",
-        "url": "/admin/user/admin"
-      }]
-    }, {
+      "sub": [
+        {
+          "name": "超管管理",
+          "url": "/admin/user/admin"
+        }
+      ]
+    },
+    {
       "name": "超管配置",
       "icon": "icon-shezhi-copy",
-      "sub": [{
-        "name": "超管配置",
-        "url": "/admin/config"
-      }]
+      "sub": [
+        {
+          "name": "超管配置",
+          "url": "/admin/config"
+        }
+      ]
     }
   ],
   "scripts": {
@@ -33,7 +38,7 @@
     "address": "^1.0.3",
     "axios": "^0.18.0",
     "const": "^1.0.0",
-    "doodoo-plugin-web": "^2.3.1",
+    "doodoo-plugin-web": "^3.0.0-alpha.3",
     "download": "^7.1.0",
     "fs-extra": "^7.0.1",
     "glob": "^7.1.3",
@@ -47,5 +52,6 @@
     "transliteration": "^1.6.6",
     "uuid": "^3.3.2",
     "yn": "^2.0.0"
-  }
+  },
+  "gitHead": "1e6ecb43d1448d1a87604de95e02904eb31e8cc5"
 }
