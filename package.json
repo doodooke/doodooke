@@ -2,6 +2,7 @@
   "name": "doodooke",
   "version": "3.0.0-alpha.3",
   "scripts": {
+    "link": "node ./bin/linkNode.js",
     "preinstall": "yarn config set registry https://registry.npm.taobao.org",
     "bootstrap": "yarn install && lerna bootstrap",
     "bootstrap:production": "yarn install --production && lerna bootstrap",
@@ -9,12 +10,17 @@
     "web:dev": "lerna exec --scope doodoo-plugin-web -- npm run dev",
     "web:build": "lerna exec --scope doodoo-plugin-web -- npm run build",
     "web:generate": "lerna exec --scope doodoo-plugin-web -- npm run generate",
-    "dev": "cross-env NODE_ENV=development NUXT_BUILD=true ./bin/doodoo.sh app.js",
-    "api:dev": "cross-env NODE_ENV=development ./bin/doodoo.sh app.js",
-    "api:docker": "cross-env NODE_ENV=docker ./bin/doodoo.sh app.js",
+    "predev": "node ./bin/linkNode.js",
+    "dev": "cross-env NODE_ENV=development NUXT_BUILD=true ./node app.js",
+    "preapi:dev": "node ./bin/linkNode.js",
+    "api:dev": "cross-env NODE_ENV=development ./node app.js",
+    "preapi:docker": "node ./bin/linkNode.js",
+    "api:docker": "cross-env NODE_ENV=docker ./node app.js",
     "api:doc": "apidoc -i app -o www/apidoc -t www/template",
     "eslint": "eslint ./",
-    "eslint:fix": "eslint --fix ./"
+    "eslint:fix": "eslint --fix ./",
+    "premigrate": "node ./bin/linkNode.js",
+    "migrate": "./node ./bin/migrate.js"
   },
   "files": [
     "app.js",

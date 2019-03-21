@@ -1,6 +1,5 @@
 const fse = require("fs-extra");
 const path = require("path");
-const shell = require("shelljs");
 const removeDirs = [
 	'../app',
 	'../../plugin/minialipay',
@@ -24,7 +23,7 @@ const removeDirs = [
 	}
 
 	// 执行upgrateEnvToYml
-	shell.exec("./bin/upgrateEnvToYml.js");
+	require("bin/upgrateEnvToYml.js");
 
 	// 生成install.lock
 	await fse.ensureFile("install.lock");

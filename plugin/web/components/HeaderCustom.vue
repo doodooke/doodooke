@@ -6,7 +6,7 @@
                 <el-dropdown-item style="text-align:center" disabled>
                     <img :src="getAvaterUrl($store.state.custom.avater_url)" style="width:30px;height:30px;border-radius:50%;margin-top:10px;">
                 </el-dropdown-item>
-                <el-dropdown-item class="text_ellipsis" style="width:100%;text-align:center;color: #606266;margin-top:-6px;" disabled>{{$store.state.custom.nickname}}</el-dropdown-item>
+                <el-dropdown-item class="text_ellipsis" style="width:100%;text-align:center;color: #606266;margin-top:-6px;" disabled>{{$store.state.custom.nickname || '匿名'}}</el-dropdown-item>
                 <el-dropdown-item style="margin-top:12px;" @click.native="go('/app/apps')">
                     切换应用
                 </el-dropdown-item>

@@ -46,13 +46,13 @@ module.exports = async () => {
         return;
     }
 
-    // 必须使用doodoo.sh或者./node启动
+    // 必须使用pm2或者./node启动
     if (fs.existsSync("./node") && !process.env.DOODOO_CORE_VERSION) {
-        throw new Error("Use ./bin/doodoo.sh or start with ./node");
+        throw new Error("Use pm2 start pm2.config.js or start with ./node");
     }
-    // 必须使用doodoo.sh或者./node.exe启动
+    // 必须使用pm2或者./node.exe启动
     if (fs.existsSync("./node.exe") && !process.env.DOODOO_CORE_VERSION) {
-        throw new Error("Use ./bin/doodoo.sh or start with ./node.exe");
+        throw new Error("Use pm2 start pm2.config.js or start with ./node.exe");
     }
 
     // 检测升级node
@@ -83,9 +83,16 @@ module.exports = async () => {
         console.log("[doodoo-upgrade] 温馨提示：开始升级node，升级完成请重启");
         await downloadZip(
             `http://upgrade.doodooke.com/node/${nodeLatestVersion}/${os}.zip`,
-            "./",
+            "./bin",
             "Node"
         );
+
+        if (process.platform === "win32") {
+            fs.symlinkSync("./bin/node.exe", "./node");
+        } else {
+            fs.symlinkSync("./bin/node", "./node");
+        }
+
         process.exit();
     }
 

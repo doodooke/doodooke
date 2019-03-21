@@ -8,3 +8,5 @@ logs
 dist
 shell/openSource
 SECURITY_CODE.key
+node
+bin/node

@@ -102,7 +102,7 @@ module.exports = class extends doodoo.Controller {
         });
         await _redis({ redis: redis })
         // 升级migrate
-        shell.exec("./bin/migrate.js latest");
+        shell.exec("npm run migrate latest");
 
         await this.model("admin")
             .forge({

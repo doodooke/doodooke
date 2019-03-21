@@ -38,6 +38,28 @@ let debugClient = {};
 let debugRequest = {};
 doodoo.debugPaths = [];
 
+class MyDuplex extends Duplex {
+    constructor(options) {
+        super(options);
+        this.chunks = [];
+    }
+
+    _write(chunk, encoding, callback) {
+        this.chunks.push(chunk);
+        callback();
+    }
+
+    _read(size) {
+        const chunk = this.chunks.shift();
+        if (chunk) {
+            this.push(chunk);
+        } else {
+            this.push(null)
+        }
+    }
+}
+
+
 // 检测完成
 process.on("startServer", async () => {
     // 兼容1.x代码
@@ -76,11 +98,9 @@ process.on("startServer", async () => {
                         ctx.respond = false;
                     }
                     if (debugClient[_token]) {
-                        let body = '';
-                        ctx.req.on('data', (chunk) => {
-                            body += chunk;
-                        });
+                        const p = new MyDuplex();
                         ctx.req.on('end', () => {
+                            const body = p.chunks.toString();
                             debugClient[_token].emit("req", {
                                 uid: uid,
                                 url: ctx.url,
@@ -91,6 +111,8 @@ process.on("startServer", async () => {
                                 body: body
                             });
                         });
+                        ctx.req.pipe(p)
+                        ctx.req = p;
 
                         const address = debugClient[_token].handshake.address
                         const sid = debugClient[_token].id

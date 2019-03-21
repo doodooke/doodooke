@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const argv = require('yargs').argv;
 const yaml = require('js-yaml');
 const fs = require('fs');
@@ -22,7 +20,7 @@ const knex = require('knex')({
 });
 
 /**
- * ./bin/migrate.js make [name] --scope admin
+ * npm run migrate make [name] -- --scope admin
  */
 if (argv._[0] === "make") {
     const scope = argv.scope;
@@ -39,7 +37,7 @@ if (argv._[0] === "make") {
 }
 
 /**
- * ./bin/migrate.js latest
+ * npm run migrate latest
  */
 if (argv._[0] === "latest") {
     const directorys = glob.sync("app/*/migrations");
@@ -52,7 +50,7 @@ if (argv._[0] === "latest") {
 }
 
 /**
- * ./bin/migrate.js rollback
+ * npm run migrate rollback
  */
 if (argv._[0] === "rollback") {
     const directorys = glob.sync("app/*/migrations");
