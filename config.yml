@@ -1,7 +1,7 @@
 
 app:
     port: '3000'
-    host: 'https://www.xxx.com'
+    host: 'http://127.0.0.1:3000'
     prefix: /api
     free_days: '7'
 verify:

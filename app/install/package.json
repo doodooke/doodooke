@@ -1,6 +1,6 @@
 {
   "name": "install",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "description": "安装配置",
   "author": "qingful",
   "homepage": "",
@@ -14,7 +14,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "doodoo-plugin-web": "^3.0.0-alpha.3",
+    "doodoo-plugin-web": "^3.0.0-alpha.4",
     "js-yaml": "^3.12.2",
     "lodash": "^4.17.11",
     "md5": "^2.2.1",
