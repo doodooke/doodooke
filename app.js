@@ -12,6 +12,7 @@ const _ = require("lodash");
 const fse = require("fs-extra");
 const uuid = require('uuid');
 const shortid = require('shortid');
+const { Duplex } = require('stream');
 const pathToRegexp = require("path-to-regexp");
 const rewrite = require("./rewrite");
 
