@@ -25,7 +25,7 @@
           </el-col>
           <el-col :span="4" class="col-list" @click.native="getPlugin">
             <i class="iconfont icon-chajian1"></i>
-            <span class="col-list-span">插件</span>
+            <span class="col-list-span">应用</span>
           </el-col>
           <el-col :span="4" class="col-list">
             <el-dropdown>
@@ -238,7 +238,7 @@ export default {
 
             // this.scoket.on("connection",()=>{
             await this.$axios.$get(
-                `/api/admin/system/connectPm2Logs?uid=${this.uid}`
+                `/api/admin/system/connectPm2Logs?uid=${this.uid}&type=wxLogin`
             );
             // })
             this.socket.on("pm2Logs", data => {

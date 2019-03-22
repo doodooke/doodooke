@@ -19,14 +19,14 @@
     "api:doc": "apidoc -i app -o www/apidoc -t www/template",
     "eslint": "eslint ./",
     "eslint:fix": "eslint --fix ./",
-    "premigrate": "node ./bin/linkNode.js",
-    "migrate": "./node ./bin/migrate.js"
+    "migrate": "node ./bin/migrate.js"
   },
   "files": [
     "app.js",
     "pm2.config.js",
     "upgrade.js",
     "rewrite.js",
+    "install.js",
     "yarn.lock",
     "bin/*"
   ],
@@ -54,6 +54,7 @@
     "apidoc": "^0.17.6",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
+    "clone-response": "^1.0.2",
     "cross-env": "^5.2.0",
     "doodoo-plugin-baas": "^1.0.5-alpha.0",
     "doodoo-plugin-chokidar": "^1.0.1-alpha.5",

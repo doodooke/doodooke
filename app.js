@@ -11,8 +11,11 @@ const fs = require("fs");
 const _ = require("lodash");
 const fse = require("fs-extra");
 const uuid = require('uuid');
+const http = require('http');
+const util = require('util');
 const shortid = require('shortid');
-const { Duplex } = require('stream');
+const getRawBody = require('raw-body');
+const cloneRequest = require('clone-response');
 const pathToRegexp = require("path-to-regexp");
 const rewrite = require("./rewrite");
 
@@ -38,28 +41,6 @@ console.log();
 let debugClient = {};
 let debugRequest = {};
 doodoo.debugPaths = [];
-
-class MyDuplex extends Duplex {
-    constructor(options) {
-        super(options);
-        this.chunks = [];
-    }
-
-    _write(chunk, encoding, callback) {
-        this.chunks.push(chunk);
-        callback();
-    }
-
-    _read(size) {
-        const chunk = this.chunks.shift();
-        if (chunk) {
-            this.push(chunk);
-        } else {
-            this.push(null)
-        }
-    }
-}
-
 
 // 检测完成
 process.on("startServer", async () => {
@@ -95,26 +76,29 @@ process.on("startServer", async () => {
                     };
 
                     const _token = ctx.query.uniqueToken || ctx.get("uniqueToken") || "default";
-                    if (!copy) {
-                        ctx.respond = false;
-                    }
                     if (debugClient[_token]) {
-                        const p = new MyDuplex();
-                        ctx.req.on('end', () => {
-                            const body = p.chunks.toString();
-                            debugClient[_token].emit("req", {
-                                uid: uid,
-                                url: ctx.url,
-                                path: ctx.path,
-                                query: ctx.query,
-                                method: ctx.method,
-                                headers: ctx.headers,
-                                body: body
-                            });
-                        });
-                        ctx.req.pipe(p)
-                        ctx.req = p;
+                        if (!copy) {
+                            ctx.respond = false;
+                        }
 
+                        const clonedResponse = cloneRequest(ctx.req);
+                        const body = await getRawBody(ctx.req, {
+                            length: ctx.length,
+                            limit: "1mb",
+                            encoding: "utf8"
+                        });
+                        
+                        debugClient[_token].emit("req", {
+                            uid: uid,
+                            url: ctx.url,
+                            path: ctx.path,
+                            query: ctx.query,
+                            method: ctx.method,
+                            headers: ctx.headers,
+                            body: body
+                        });
+
+                        ctx.req = clonedResponse;
                         const address = debugClient[_token].handshake.address
                         const sid = debugClient[_token].id
                         if (copy) {

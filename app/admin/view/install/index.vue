@@ -1,5 +1,6 @@
 <template>
   <div v-loading="loading" element-loading-text="正在下载中">
+    <el-alert title="您已进入多多客应用商店，请使用多多客账号登录使用" type="warning" center show-icon :closable="false"></el-alert>
     <iframe
       id="myIframe"
       :src="src"
@@ -99,7 +100,7 @@ export default {
     methods: {
         changeFrameHeight() {
             var ifm = document.getElementById("myIframe");
-            ifm.height = document.documentElement.clientHeight;
+            ifm.height = document.documentElement.clientHeight - 40;
         }
     }
 };
@@ -107,9 +108,6 @@ export default {
 <style>
 .el-loading-spinner {
     top: 200px;
-}
-body {
-    overflow: hidden;
 }
 </style>
 
