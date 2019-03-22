@@ -1,12 +1,13 @@
 {
   "name": "doodooke",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "scripts": {
     "link": "node ./bin/linkNode.js",
     "preinstall": "yarn config set registry https://registry.npm.taobao.org",
     "bootstrap": "yarn install && lerna bootstrap",
     "bootstrap:production": "yarn install --production && lerna bootstrap",
     "upgrade:yarnlock": "find . -name yarn.lock | xargs rm -rf",
+    "clean": "rm -rf node_modules && lerna clean -y",
     "web:dev": "lerna exec --scope doodoo-plugin-web -- npm run dev",
     "web:build": "lerna exec --scope doodoo-plugin-web -- npm run build",
     "web:generate": "lerna exec --scope doodoo-plugin-web -- npm run generate",
