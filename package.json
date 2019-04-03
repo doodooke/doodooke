@@ -1,13 +1,13 @@
 {
   "name": "doodooke",
-  "version": "3.0.0-alpha.5",
+  "version": "3.0.0-alpha.6",
   "scripts": {
     "link": "node ./bin/linkNode.js",
     "preinstall": "yarn config set registry https://registry.npm.taobao.org",
     "bootstrap": "yarn install && lerna bootstrap",
     "bootstrap:production": "yarn install --production && lerna bootstrap",
     "upgrade:yarnlock": "find . -name yarn.lock | xargs rm -rf",
-    "clean": "rm -rf node_modules && lerna clean -y",
+    "clean": "lerna clean -y && rm -rf node_modules",
     "web:dev": "lerna exec --scope doodoo-plugin-web -- npm run dev",
     "web:build": "lerna exec --scope doodoo-plugin-web -- npm run build",
     "web:generate": "lerna exec --scope doodoo-plugin-web -- npm run generate",
@@ -27,9 +27,9 @@
     "pm2.config.js",
     "upgrade.js",
     "rewrite.js",
-    "install.js",
     "yarn.lock",
-    "bin/*"
+    "bin/*",
+    "migrations/*"
   ],
   "publishConfig": {
     "registry": "http://registry.doodooke.com"
@@ -55,6 +55,7 @@
     "apidoc": "^0.17.6",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
+    "bluebird": "^3.5.3",
     "clone-response": "^1.0.2",
     "cross-env": "^5.2.0",
     "doodoo-plugin-baas": "^1.0.5-alpha.0",
@@ -74,6 +75,7 @@
     "lodash": "^4.17.11",
     "path-to-regexp": "^3.0.0",
     "progress": "^2.0.3",
+    "redis": "^2.8.0",
     "semver": "^5.6.0",
     "shortid": "^2.2.14",
     "socket.io": "^2.1.1",

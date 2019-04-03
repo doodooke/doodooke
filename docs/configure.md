@@ -93,7 +93,8 @@ open:
 ![](./thumb/wx_kaifang2.jpg)
 ![](./thumb/wx_kaifang3.png)
 
-### 支付宝
+### 支付宝开放平台
+!> https://open.alipay.com
 ```
 alipay:
     open_appid: '2018111362164099'    //支付宝第三方appid
@@ -146,7 +147,8 @@ lbs:
 ```
 ![](./thumb/libs_map_1.png)
 
-### 百度小程序
+### 百度开放平台
+!> https://smartprogram.baidu.com
 ```
 swan:
     appid: xxx    //百度小程序第三方平台ID

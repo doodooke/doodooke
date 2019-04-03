@@ -230,7 +230,10 @@ export default {
         },
         async socketConnect() {
             this.socket = io.connect(
-                this.$store.state.env.APP_HOST + `?uid=${this.uid}`
+                this.$store.state.env.APP_HOST + `?uid=${this.uid}&type=wxLogin`,
+                {
+                    transports: ['websocket', 'polling']
+                }
             );
             this.socket.on("error", error => {
                 console.error(error);
@@ -238,7 +241,7 @@ export default {
 
             // this.scoket.on("connection",()=>{
             await this.$axios.$get(
-                `/api/admin/system/connectPm2Logs?uid=${this.uid}&type=wxLogin`
+                `/api/admin/system/connectPm2Logs?uid=${this.uid}`
             );
             // })
             this.socket.on("pm2Logs", data => {

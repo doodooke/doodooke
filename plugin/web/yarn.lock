@@ -4432,9 +4432,9 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt@^2.2.0:
+nuxt@2.3.4:
   version "2.3.4"
-  resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.3.4.tgz#61f5fe856ebbeced89f04a3734baa4ee91cc3cfa"
+  resolved "https://registry.npmjs.org/nuxt/-/nuxt-2.3.4.tgz#61f5fe856ebbeced89f04a3734baa4ee91cc3cfa"
   integrity sha512-kPVdkcIH1EDdiHlcV6WJba0UgzK+05Rrnaw1lt2ZhP2KObnbBQLleA65bh4IvfE9gXt03U3i/t8LDczxdWvaEA==
   dependencies:
     "@nuxt/builder" "2.3.4"

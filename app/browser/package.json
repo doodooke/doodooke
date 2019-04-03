@@ -1,19 +1,20 @@
 {
-  "name": "doodoo-plugin-migrate",
+  "name": "browser",
   "version": "3.0.0-alpha.4",
   "description": "> TODO: description",
-  "author": "heqing <786699892@qq.com>",
+  "author": "jqg <jqg612@163.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/doodoo-plugin-migrate.js",
+  "main": "lib/browser.js",
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.oneqing.com/doodooke/doodooke.git"
+  },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "clone-response": "^1.0.2",
-    "doodoo-plugin-web": "^3.0.0-alpha.4",
-    "raw-body": "^2.3.3",
-    "xml2js": "^0.4.19"
+    "doodoo-plugin-web": "^3.0.0-alpha.4"
   },
   "gitHead": "1e6ecb43d1448d1a87604de95e02904eb31e8cc5"
 }

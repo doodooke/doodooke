@@ -20,16 +20,21 @@ const knex = require('knex')({
 });
 
 /**
+ * npm run migrate make [name]
  * npm run migrate make [name] -- --scope admin
  */
 if (argv._[0] === "make") {
     const scope = argv.scope;
-    if (!scope) {
-        throw new Error("Missing required argument: scope");
+
+    let directory;
+    if (scope) {
+        directory = `app/${scope}/migrations`
+    } else {
+        directory = "migrations";
     }
 
     knex.migrate.make(argv._[1], {
-        directory: `app/${scope}/migrations`
+        directory: directory
     }).then(() => {
         console.log("Ok")
         process.exit()
@@ -42,7 +47,7 @@ if (argv._[0] === "make") {
 if (argv._[0] === "latest") {
     const directorys = glob.sync("app/*/migrations");
     knex.migrate.latest({
-        directory: directorys
+        directory: directorys.concat(["migrations"])
     }).then(() => {
         console.log("Ok")
         process.exit()
@@ -55,7 +60,7 @@ if (argv._[0] === "latest") {
 if (argv._[0] === "rollback") {
     const directorys = glob.sync("app/*/migrations");
     knex.migrate.rollback({
-        directory: directorys
+        directory: directorys.concat(["migrations"])
     }).then(() => {
         console.log("Ok")
         process.exit()

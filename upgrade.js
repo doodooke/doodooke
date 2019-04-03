@@ -47,11 +47,11 @@ module.exports = async () => {
     }
 
     // 必须使用pm2或者./node启动
-    if (fs.existsSync("./node") && !process.env.DOODOO_CORE_VERSION) {
+    if (fs.existsSync("./bin/node") && !process.env.DOODOO_CORE_VERSION) {
         throw new Error("Use pm2 start pm2.config.js or start with ./node");
     }
     // 必须使用pm2或者./node.exe启动
-    if (fs.existsSync("./node.exe") && !process.env.DOODOO_CORE_VERSION) {
+    if (fs.existsSync("./bin/node.exe") && !process.env.DOODOO_CORE_VERSION) {
         throw new Error("Use pm2 start pm2.config.js or start with ./node.exe");
     }
 
@@ -87,6 +87,7 @@ module.exports = async () => {
             "Node"
         );
 
+        fs.unlinkSync("./node");
         if (process.platform === "win32") {
             fs.symlinkSync("./bin/node.exe", "./node");
         } else {

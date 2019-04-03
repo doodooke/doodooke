@@ -153,14 +153,11 @@ module.exports = {
                 content: webConfig.HEAD_META_KEYWORDS
             }
         ],
-        script: [
-            {
-                src:
-                    "https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js"
+        script: [{
+                src: "/js/polyfill.min.js"
             },
             {
-                src:
-                    "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"
+                src: "/js/socket.io.js"
             },
             {
                 src:
@@ -177,8 +174,7 @@ module.exports = {
             {
                 rel: "stylesheet",
                 type: "text/css",
-                href:
-                    "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css"
+                href: "/css/animate.css"
             },
             {
                 rel: "stylesheet",
@@ -246,21 +242,7 @@ module.exports = {
         path: "/sitemap.xml",
         hostname: configData.app.host,
         cacheTime: 1000 * 60 * 15,
-        gzip: true,
-        generate: false, // Enable me when using nuxt generate
-        exclude: ["**"],
-        routes: [
-            "/",
-            "/portal",
-            "/portal/diy",
-            "/portal/shop",
-            "/public/login",
-            "/public/register",
-            "/public/forget_pwd",
-            "/cms/cms",
-            "/www/diy.html",
-            "/www/shop.html"
-        ]
+        gzip: true
     },
 
     proxy: {

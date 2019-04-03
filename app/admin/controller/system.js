@@ -76,16 +76,14 @@ module.exports = class extends base {
         const apps = pm2Json.apps;
 
         const sid = await this.redis.getAsync(`wxLogin:uid:${uid}:sid`);
-        if (sid && io.sockets.sockets[sid]) {
-            const socket = io.sockets.sockets[sid];
-
+        if (sid) {
             for (const app of apps) {
                 const child = shell.exec(`pm2 logs ${app.name}`, {
                     async: true,
                     silent: true
                 });
                 child.stdout.on("data", function (data) {
-                    socket.emit("pm2Logs", data);
+                    io.to(sid).emit("pm2Logs", data);
                 });
             }
             this.success();
@@ -117,11 +115,14 @@ module.exports = class extends base {
     async saveDebugPaths() {
         const { paths } = this.post;
 
+        let _paths;
         if (_.isArray(paths)) {
-            doodoo.debugPaths = paths;
+            _paths = paths;
         } else {
-            doodoo.debugPaths = [paths];
+            _paths = [paths];
         }
+
+        io._adapter.pubClient.publish("debugPaths", JSON.stringify(_paths));
 
         this.success()
     }

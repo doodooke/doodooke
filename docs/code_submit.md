@@ -1,8 +1,15 @@
 ## 准备工作
 1. 小程序代码包
-2. 小程序开发者工具
-3. 第三方平台添加的开发小程序，并设置自己为开发者
-4. 安装 Taro 开发工具 `@tarojs/cli`
+2. 创建第三方平台
+
+    [微信小程序第三方说明点我](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419318292&token=&lang=zh_CN)
+
+    [支付宝小程序第三方说明点我](https://docs.alipay.com/mini/isv/fiavig)
+    
+    [百度小程序第三方说明点我](https://smartprogram.baidu.com/docs/develop/third/pro/)
+3. 小程序开发者工具
+4. 第三方平台添加的开发小程序，并设置自己为开发者
+5. 安装 Taro 开发工具 `@tarojs/cli`
 
     使用 npm 或者 yarn 全局安装，或者直接使用npx
 ```
@@ -22,7 +29,7 @@ $ cnpm install
 # OR 使用 npm 安装依赖
 $ npm install
 ```
-5. 使用命令生成多端小程序代码包
+6. 使用命令生成多端小程序代码包
 
     微信小程序
 

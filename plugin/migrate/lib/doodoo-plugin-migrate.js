@@ -2,6 +2,7 @@ const getRawBody = require("raw-body");
 const xml2js = require("xml2js");
 const _url = require("url");
 const fs = require("fs");
+const cloneRequest = require('clone-response');
 let _host;
 if (process.env.OPEN_DOMAIN) {
     _host = _url.parse(process.env.OPEN_DOMAIN).host;
@@ -71,6 +72,7 @@ doodoo.use(async (ctx, next) => {
         ctx.is("application/xml", "text/xml", "xml") &&
         ctx.method === "POST"
     ) {
+        ctx.rawReq = cloneRequest(ctx.req);
         // 取原始数据
         const xml = await getRawBody(ctx.req, {
             length: ctx.length,
@@ -81,6 +83,7 @@ doodoo.use(async (ctx, next) => {
         // 解析xml
         const result = await parseXML(xml);
         ctx.xml = result.xml;
+        ctx.req = ctx.rawReq
     }
 
 

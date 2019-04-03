@@ -19,6 +19,7 @@ module.exports = {
 	"/api/app/home/base/getWxaInfo": "/api/weapp/home/base/getWxaInfo",
 	"/api/app/home/fast": "/api/weapp/home/fast",
 	"/api/app/home/public/getTemplateWxaQrcode": "/api/weapp/home/public/getTemplateWxaQrcode",
+	"/api/shop/api/shop/fxhb": "/api/fxhb/api/fxhb",
 
 	// 二次开发
 }
