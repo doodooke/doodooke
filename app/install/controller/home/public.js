@@ -104,14 +104,19 @@ module.exports = class extends doodoo.Controller {
         // 升级migrate
         shell.exec("npm run migrate latest");
 
-        await this.model("admin")
+        // 插入admin，需要重新创建model
+        const Admin = doodoo.bookshelf.Model.extend({
+            tableName: "admin",
+            hasTimestamps: true
+        });
+        await Admin
             .forge({
                 nickname: admin_username,
                 password: newPwd,
                 status: 1
             })
             .save();
-
+        
         for (let key in _configData) {
             for (let _key in _configData[key]) {
                 process.env[_.toUpper(key) + "_" + _.toUpper(_key)] = _configData[key][_key]
