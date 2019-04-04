@@ -38,8 +38,12 @@ module.exports = class extends base {
      *
      */
     async pm2Restart() {
-        shell.exec("pm2 reload pm2.config.js");
-        this.success();
+        if (process.env.PM2_USAGE) {
+            shell.exec("pm2 reload pm2.config.js");
+            this.success();
+        } else {
+            this.fail("您当前系统不是pm2启动的，请手动重启");
+        }
     }
 
     /**
@@ -55,8 +59,12 @@ module.exports = class extends base {
      *
      */
     async webBuildAndPm2Restart() {
-        shell.exec("npm run web:build && pm2 reload pm2.config.js");
-        this.success();
+        if (process.env.PM2_USAGE) {
+            shell.exec("npm run web:build && pm2 reload pm2.config.js");
+            this.success();
+        } else {
+            this.fail("您当前系统不是pm2启动的，请手动编译重启");
+        }
     }
 
     /**
@@ -75,21 +83,25 @@ module.exports = class extends base {
         const { uid } = this.query;
         const apps = pm2Json.apps;
 
-        const sid = await this.redis.getAsync(`wxLogin:uid:${uid}:sid`);
-        if (sid) {
-            for (const app of apps) {
-                const child = shell.exec(`pm2 logs ${app.name}`, {
-                    async: true,
-                    silent: true
-                });
-                child.stdout.on("data", function (data) {
-                    io.to(sid).emit("pm2Logs", data);
-                });
+        if (process.env.PM2_USAGE) {
+            const sid = await this.redis.getAsync(`wxLogin:uid:${uid}:sid`);
+            if (sid) {
+                for (const app of apps) {
+                    const child = shell.exec(`pm2 logs ${app.name}`, {
+                        async: true,
+                        silent: true
+                    });
+                    child.stdout.on("data", function (data) {
+                        io.to(sid).emit("pm2Logs", data);
+                    });
+                }
+                this.success();
+            } else {
+                this.fail();
             }
-            this.success();
-            return;
+        } else {
+            this.fail("您当前系统不是pm2启动的，请前往命令行查看日志");
         }
-        this.fail();
     }
 
     /**
