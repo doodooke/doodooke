@@ -1,54 +1,106 @@
 <template>
-    <el-row>
-        <el-dialog :visible.sync="showModal" title="图片上传管理器" @close='cancelImage' width="700px" :modal-append-to-body="false">
-            <el-row style="margin-top:-24px">
-                <el-upload :action="uploadUrl" :on-success="handleAddSuccess" multiple drag :show-file-list="false" :headers="uploadHeaders()" style="width:200px">
-                    <i class="el-icon-upload"></i>
-                    <div class="el-upload__text">将文件拖到此处，或
-                        <em>点击上传</em>
-                    </div>
-                </el-upload>
+  <el-row>
+    <el-dialog
+      :visible.sync="showModal"
+      title="图片上传管理器"
+      @close="cancelImage"
+      width="700px"
+      :modal-append-to-body="false"
+      :append-to-body="true"
+    >
+      <el-row style="margin-top:-24px">
+        <el-upload
+          :action="uploadUrl"
+          :on-success="handleAddSuccess"
+          multiple
+          drag
+          :show-file-list="false"
+          :headers="uploadHeaders()"
+          style="width:200px"
+        >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">
+            将文件拖到此处，或
+            <em>点击上传</em>
+          </div>
+        </el-upload>
+      </el-row>
+      <el-row>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="我的图片" name="0">
+            <el-row style="min-height:324px">
+              <el-row v-if="file.length">
+                <el-col
+                  :span="4"
+                  style="text-align: center;float: left;margin-bottom:8px"
+                  v-for="(item,index) in file"
+                  :key="index"
+                >
+                  <img
+                    class="upload-img"
+                    :src="item.url"
+                    @click="selectImage(item,0)"
+                    style="width:100px;height:100px"
+                  >
+                </el-col>
+              </el-row>
+              <el-row v-else style="text-align:center;line-height: 120px;">
+                <span style="font-size: 16px">暂无数据</span>
+              </el-row>
             </el-row>
             <el-row>
-                <el-tabs v-model="activeName" @tab-click="handleClick">
-                    <el-tab-pane label="我的图片" name="0">
-                        <el-row style="min-height:324px">
-                            <el-row v-if='file.length'>
-                                <el-col :span="4" style="text-align: center;float: left;margin-bottom:8px" v-for="(item,index) in file" :key="index">
-                                    <img class='upload-img' :src="item.url" @click="selectImage(item,0)" style="width:100px;height:100px">
-                                </el-col>
-                            </el-row>
-                            <el-row v-else style='text-align:center;line-height: 120px;'>
-                                <span style='font-size: 16px'>暂无数据</span>
-                            </el-row>
-                        </el-row>
-                        <el-row>
-                            <template>
-                                <el-pagination background :total="pagination.rowCount" :page-size="pagination.pageSize" :current-page="pagination.page" layout="prev,pager,next" style="float: right;margin: 10px" @current-change="changePage"></el-pagination>
-                            </template>
-                        </el-row>
-                    </el-tab-pane>
-                    <el-tab-pane label="图片库" name="1">
-                        <el-row style="min-height:324px">
-                            <el-row v-if='icons.length'>
-                                <el-col :span="2" style="text-align: center;float: left;margin-bottom:8px" v-for="(item,index) in icons" :key="index">
-                                    <img class='upload-img' :src="item" @click="selectImage(item,1)" style="width:45px;height:45px">
-                                </el-col>
-                            </el-row>
-                            <el-row v-else style='text-align:center;line-height: 120px;'>
-                                <span style='font-size: 16px'>暂无数据</span>
-                            </el-row>
-                        </el-row>
-                        <el-row>
-                            <template>
-                                <el-pagination background :total="pagination.rowCount" :page-size="pagination.pageSize" :current-page="pagination.page" layout="prev,pager,next" style="float: right;margin: 10px" @current-change="changePage"></el-pagination>
-                            </template>
-                        </el-row>
-                    </el-tab-pane>
-                </el-tabs>
+              <template>
+                <el-pagination
+                  background
+                  :total="pagination.rowCount"
+                  :page-size="pagination.pageSize"
+                  :current-page="pagination.page"
+                  layout="prev,pager,next"
+                  style="float: right;margin: 10px"
+                  @current-change="changePage"
+                ></el-pagination>
+              </template>
             </el-row>
-        </el-dialog>
-    </el-row>
+          </el-tab-pane>
+          <el-tab-pane label="图片库" name="1">
+            <el-row style="min-height:324px">
+              <el-row v-if="icons.length">
+                <el-col
+                  :span="2"
+                  style="text-align: center;float: left;margin-bottom:8px"
+                  v-for="(item,index) in icons"
+                  :key="index"
+                >
+                  <img
+                    class="upload-img"
+                    :src="item"
+                    @click="selectImage(item,1)"
+                    style="width:45px;height:45px"
+                  >
+                </el-col>
+              </el-row>
+              <el-row v-else style="text-align:center;line-height: 120px;">
+                <span style="font-size: 16px">暂无数据</span>
+              </el-row>
+            </el-row>
+            <el-row>
+              <template>
+                <el-pagination
+                  background
+                  :total="pagination.rowCount"
+                  :page-size="pagination.pageSize"
+                  :current-page="pagination.page"
+                  layout="prev,pager,next"
+                  style="float: right;margin: 10px"
+                  @current-change="changePage"
+                ></el-pagination>
+              </template>
+            </el-row>
+          </el-tab-pane>
+        </el-tabs>
+      </el-row>
+    </el-dialog>
+  </el-row>
 </template>
 
 <script>

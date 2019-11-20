@@ -64,7 +64,7 @@
             </el-row>
             <el-row
               v-if="qrcode_img"
-            >{{selectType == "wx" ? '微信':selectType == "swan"?'百度':'支付宝'}}扫描二维码预览</el-row>
+            >{{selectType == "wx" ? '微信':selectType == "swan"?'百度':selectType == "alipay"?'支付宝':"微信"}}扫描二维码预览</el-row>
             <el-row style="margin:10px 0;" v-else>您还没有绑定小程序</el-row>
           </el-col>
           <el-col :span="16">
@@ -141,6 +141,7 @@
           style="width:72.5px;margin-bottom:16px;cursor:pointer;text-align:center"
           :style="{marginRight:index%5==4?'0':'24px'}"
           @click="selectXcx(item,index,1)"
+          v-if="item.type != 'mp'"
         >
           <img
             :src="getAvaterUrl(item.head_img)"
@@ -429,6 +430,14 @@ export default {
                 return res.data.package_id;
             }
         },
+        //h5预览二维码
+        async getMpQrcode(item) {
+            this.qrcode_img = this.getAppWxaTokenUrl(
+                `/h5/home/base/getWxaPathQrcode?page=${encodeURIComponent(
+                    `pages/index/index?id=${this.$store.state.pageId}`
+                )}`
+            );
+        },
         toAuth() {
             this.$confirm("当前应用未绑定小程序，请去先绑定小程序", "提示", {
                 confirmButtonText: "确定",
@@ -460,6 +469,9 @@ export default {
             }
             if (this.selectType == "swan") {
                 this.getSwanQrcode();
+            }
+            if (this.selectType == "mp") {
+                this.getMpQrcode(item);
             }
         },
         //绑定微信

@@ -38,10 +38,11 @@ module.exports = async () => {
 
     // 页面配置项
     doodoo.router.get("/public/home/public/envweb", async (ctx, next) => {
-        const _domain = ctx.query.host || _url.parse(process.env.APP_HOST).host;
-        const _domains = _domain.split(".");
-        _domains.shift();
-        const domain = _domains.join(".");
+        const domain = ctx.query.host || _url.parse(process.env.APP_HOST).host;
+        // const _domains = _domain.split(".");
+        // console.log('_domains', _domains)
+        // _domains.shift();
+        // const domain = _domains.join(".");
         console.log("domain:", domain);
         await ctx.hook.run("envweb", domain, ctx);
         ctx.success(ctx.state.envweb);

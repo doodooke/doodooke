@@ -1,6 +1,6 @@
 {
   "name": "doodoo-plugin-web",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.8",
   "description": "> TODO: description",
   "author": "heqing <786699892@qq.com>",
   "homepage": "",
@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
+    "generate": "nuxt generate",
     "start": "nuxt start"
   },
   "dependencies": {
@@ -36,6 +37,7 @@
     "vue-amap": "^0.5.8",
     "vue-bus": "^1.1.0",
     "vue-count-to": "^1.0.13",
+    "vue-draggable-resizable": "^2.0.0-rc1",
     "vue-echarts-v3": "^1.0.19",
     "vue-router": "^3.0.1",
     "vuedraggable": "^2.16.0",

@@ -81,7 +81,11 @@ const createStore = () => {
                 app,
                 req
             }) {
-                const xHost = req.headers["x-host"];
+                let headers = {};
+                if (req && req.headers) {
+                    headers = req.headers;
+                }
+                const xHost = headers["x-host"];
                 if (xHost) {
                     commit("SET_AGENT", isAgent(xHost, app.context.env.DOMAIN));
                     commit("SET_HOST", xHost);
@@ -97,7 +101,7 @@ const createStore = () => {
                     commit("SET_MARKET_COMPARE", app.$cookies.get("market"));
                 }
 
-                const u_agent = req.headers["user-agent"];
+                const u_agent = headers["user-agent"];
                 let browser_name = '';
                 if (u_agent) {
                     if (u_agent.indexOf('Firefox') > -1) {

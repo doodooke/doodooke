@@ -6757,6 +6757,11 @@ vue-count-to@^1.0.13:
   resolved "https://registry.yarnpkg.com/vue-count-to/-/vue-count-to-1.0.13.tgz#3e7573ea6e64c2b2972f64e0a2ab2e23c7590ff3"
   integrity sha512-6R4OVBVNtQTlcbXu6SJ8ENR35M2/CdWt3Jmv57jOUM+1ojiFmjVGvZPH8DfHpMDSA+ITs+EW5V6qthADxeyYOQ==
 
+vue-draggable-resizable@^2.0.0-rc1:
+  version "2.0.0-rc1"
+  resolved "http://registry.npm.taobao.org/vue-draggable-resizable/download/vue-draggable-resizable-2.0.0-rc1.tgz#e07fd12102d092d3731732d02cb60d879618917c"
+  integrity sha1-4H/RIQLQktNzFzLQLLYNh5YYkXw=
+
 vue-echarts-v3@^1.0.19:
   version "1.0.19"
   resolved "https://registry.yarnpkg.com/vue-echarts-v3/-/vue-echarts-v3-1.0.19.tgz#6814e7e426aafed80edfa5df321db51c00789802"

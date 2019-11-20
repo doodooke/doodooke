@@ -7,6 +7,7 @@
       width="800px"
       top="20px"
       :modal-append-to-body="false"
+      :append-to-body="true"
     >
       <el-tabs v-model="tabname" type="card" @tab-click="changeTabs">
         <el-tab-pane label="页面" name="1">
@@ -67,7 +68,8 @@
         v-show="!jizanData.length"
         style="margin-bottom:24px"
       >
-        <p>暂无活动，请先去
+        <p>
+          暂无活动，请先去
           <nuxt-link to="/jizan/config">设置活动</nuxt-link>
         </p>
       </el-alert>
@@ -119,7 +121,8 @@
         v-show="!wxaData.length"
         style="margin-bottom:24px"
       >
-        <p>暂无小程序，请先去
+        <p>
+          暂无小程序，请先去
           <nuxt-link to="/miniapps">设置小程序</nuxt-link>
         </p>
       </el-alert>
@@ -160,7 +163,8 @@
         v-show="!phoneData.length"
         style="margin-bottom:24px"
       >
-        <p>暂无联系人，请先去
+        <p>
+          暂无联系人，请先去
           <nuxt-link to="/contacts">设置联系人</nuxt-link>
         </p>
       </el-alert>
@@ -201,7 +205,8 @@
         v-show="!pluginData.length"
         style="margin-bottom:24px"
       >
-        <p>暂无小程序插件，请先去
+        <p>
+          暂无小程序插件，请先去
           <nuxt-link to="/plugin">设置小程序插件</nuxt-link>
         </p>
       </el-alert>
@@ -242,7 +247,8 @@
         v-show="!productData.length"
         style="margin-top:-24px"
       >
-        <p>暂无商品，请先去
+        <p>
+          暂无商品，请先去
           <nuxt-link to="/plugin">设置商品</nuxt-link>
         </p>
       </el-alert>
@@ -307,7 +313,8 @@
         v-show="!articleData.length"
         style="margin-top:-24px"
       >
-        <p>暂无文章，请先去
+        <p>
+          暂无文章，请先去
           <nuxt-link to="/article">添加文章</nuxt-link>
         </p>
       </el-alert>
@@ -382,7 +389,8 @@
         v-if="!voteData.length"
         style="margin-bottom:24px"
       >
-        <p>暂无活动，请先去
+        <p>
+          暂无活动，请先去
           <nuxt-link to="/vote/config">设置活动</nuxt-link>
         </p>
       </el-alert>
@@ -471,6 +479,7 @@ export default {
             }
             if (this.tabname == 2) {
                 this.umpSelect = 18;
+                this.umpSelectIndex = 0;
             }
         },
         async getPage() {
@@ -487,7 +496,7 @@ export default {
             });
         },
         //选择营销组件
-        selectUmp(id,index) {
+        selectUmp(id, index) {
             this.umpSelect = id;
             this.umpSelectIndex = index;
         },
@@ -641,6 +650,13 @@ export default {
                 //集赞
                 this.voteModal = true;
                 this.getVote();
+            }
+            if (this.umpSelect == 20) {
+                //商品分类
+                this.$emit("on-select", {
+                    targetUrl: "/pages/shop/menu/menu",
+                    targetType: "page"
+                });
             }
         },
         //集赞

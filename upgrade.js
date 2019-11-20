@@ -4,6 +4,7 @@ const ProgressBar = require("progress");
 const glob = require("glob");
 const semver = require("semver");
 const fs = require("fs");
+const { isSymlink } = require('path-type');
 
 async function downloadZip(url, dest, tag) {
     const response = await axios({
@@ -47,12 +48,18 @@ module.exports = async () => {
     }
 
     // 必须使用pm2或者./node启动
-    if (fs.existsSync("./bin/node") && !process.env.DOODOO_CORE_VERSION) {
-        throw new Error("Use pm2 start pm2.config.js or start with ./node");
+    if (fs.existsSync("./node") && !process.env.DOODOO_CORE_VERSION) {
+        const isSymlink = await isSymlink('./node')
+        if (!isSymlink) {
+            throw new Error("Use pm2 start pm2.config.js or start with ./node");
+        }
     }
     // 必须使用pm2或者./node.exe启动
-    if (fs.existsSync("./bin/node.exe") && !process.env.DOODOO_CORE_VERSION) {
-        throw new Error("Use pm2 start pm2.config.js or start with ./node.exe");
+    if (fs.existsSync("./node.exe") && !process.env.DOODOO_CORE_VERSION) {
+        const isSymlink = await isSymlink('./node.exe')
+        if (!isSymlink) {
+            throw new Error("Use pm2 start pm2.config.js or start with ./node.exe");
+        }
     }
 
     // 检测升级node
