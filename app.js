@@ -148,9 +148,6 @@ process.on("startServer", async () => {
             await next();
         }
     });
-    if (fs.existsSync("./plugin/sentry")) {
-        app.plugin("sentry");
-    }
     if (app.env === "development") {
         app.plugin("chokidar");
     }

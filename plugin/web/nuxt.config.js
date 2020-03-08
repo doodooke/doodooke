@@ -32,11 +32,11 @@ for (let key in webConfigData) {
 const webConfig = _.merge(
   webConfigData,
   _webConfigData, {
-    APP_HOST: configData.app.host,
-    APP_PREFIX: configData.app.prefix,
-    DOMAIN: _url.parse(configData.app.host).host,
-    API_DOMAIN: configData.app.host + configData.app.prefix
-  }
+  APP_HOST: configData.app.host,
+  APP_PREFIX: configData.app.prefix,
+  DOMAIN: _url.parse(configData.app.host).host,
+  API_DOMAIN: configData.app.host + configData.app.prefix
+}
 );
 const appDir = "app";
 
@@ -50,11 +50,11 @@ function createRoutes(srcDir) {
     const file = path.resolve(appDir, views[key]);
     const _path = "/" +
       views[key]
-      .replace(/\\/g, "/")
-      .replace(/\/view/, "")
-      .replace(/\/_/g, "/:")
-      .replace(/.vue$/, "")
-      .replace(/.index$/, "");
+        .replace(/\\/g, "/")
+        .replace(/\/view/, "")
+        .replace(/\/_/g, "/:")
+        .replace(/.vue$/, "")
+        .replace(/.index$/, "");
     routes.push({
       name: views[key],
       path: _path,
@@ -98,9 +98,9 @@ function createLayouts() {
   for (const key in layouts) {
     _layouts[
       path
-      .basename(layouts[key])
-      .replace(/\\/g, "/")
-      .replace(/.vue$/, "")
+        .basename(layouts[key])
+        .replace(/\\/g, "/")
+        .replace(/.vue$/, "")
     ] = relativeTo(
       path.resolve(__dirname, ".nuxt"),
       path.resolve(appDir, layouts[key])
@@ -140,61 +140,61 @@ module.exports = {
   head: {
     title: webConfig.HEAD_TITLE,
     meta: [{
-        charset: "utf-8"
-      },
-      {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1"
-      },
-      {
-        hid: "description",
-        name: "description",
-        content: webConfig.HEAD_META_DESCRIPTION
-      },
-      {
-        hid: "keywords",
-        name: "keywords",
-        content: webConfig.HEAD_META_KEYWORDS
-      }
+      charset: "utf-8"
+    },
+    {
+      name: "viewport",
+      content: "width=device-width, initial-scale=1"
+    },
+    {
+      hid: "description",
+      name: "description",
+      content: webConfig.HEAD_META_DESCRIPTION
+    },
+    {
+      hid: "keywords",
+      name: "keywords",
+      content: webConfig.HEAD_META_KEYWORDS
+    }
     ],
     script: [{
-        src: "/js/polyfill.min.js"
-      },
-      {
-        src: "/js/socket.io.js"
-      },
-      {
-        src: "https://hm.baidu.com/hm.js?be01837c791802c529c8c6890dfe5079"
-      },
-      {
-        src: "/cnzz.js"
-      }
+      src: "/js/polyfill.min.js"
+    },
+    {
+      src: "/js/socket.io.js"
+    },
+    {
+      src: "https://hm.baidu.com/hm.js?be01837c791802c529c8c6890dfe5079"
+    },
+    {
+      src: "/cnzz.js"
+    }
     ].concat(HEAD_SCRIPT),
     link: [{
-        rel: "icon",
-        type: "image/x-icon",
-        href: "/favicon.ico"
-      },
-      {
-        rel: "stylesheet",
-        type: "text/css",
-        href: "/css/animate.css"
-      },
-      {
-        rel: "stylesheet",
-        type: "text/css",
-        href: "https://unpkg.com/element-ui@2.6.1/lib/theme-chalk/index.css"
-      },
-      {
-        rel: "stylesheet",
-        type: "text/css",
-        href: "/common.css"
-      },
-      {
-        rel: "stylesheet",
-        type: "text/css",
-        href: "//at.alicdn.com/t/font_704506_m9kwvbg4jh.css"
-      }
+      rel: "icon",
+      type: "image/x-icon",
+      href: "/favicon.ico"
+    },
+    {
+      rel: "stylesheet",
+      type: "text/css",
+      href: "/css/animate.css"
+    },
+    {
+      rel: "stylesheet",
+      type: "text/css",
+      href: "https://unpkg.com/element-ui@2.6.1/lib/theme-chalk/index.css"
+    },
+    {
+      rel: "stylesheet",
+      type: "text/css",
+      href: "/common.css"
+    },
+    {
+      rel: "stylesheet",
+      type: "text/css",
+      href: "//at.alicdn.com/t/font_704506_m9kwvbg4jh.css"
+    }
     ].concat(HEAD_LINK)
   },
   /*
@@ -243,7 +243,7 @@ module.exports = {
   },
 
   router: {
-    middleware: ["auth", "router", "browser","check"]
+    middleware: ["auth", "router", "browser"]
   },
 
   sitemap: {
@@ -268,64 +268,64 @@ module.exports = {
   css: [],
 
   plugins: [{
-      src: "~plugins/element.js",
-      ssr: true
-    },
-    {
-      src: "~plugins/axios.js",
-      ssr: true
-    },
-    {
-      src: "~plugins/util.js",
-      ssr: true
-    },
-    {
-      src: "~plugins/upload.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/link.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/editor.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/amap.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/particles.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/echarts.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/region.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/error.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/ga.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/dragx.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/bus.js",
-      ssr: false
-    },
-    {
-      src: "~plugins/freedrag.js",
-      ssr: false
-    }
+    src: "~plugins/element.js",
+    ssr: true
+  },
+  {
+    src: "~plugins/axios.js",
+    ssr: true
+  },
+  {
+    src: "~plugins/util.js",
+    ssr: true
+  },
+  {
+    src: "~plugins/upload.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/link.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/editor.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/amap.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/particles.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/echarts.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/region.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/error.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/ga.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/dragx.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/bus.js",
+    ssr: false
+  },
+  {
+    src: "~plugins/freedrag.js",
+    ssr: false
+  }
   ]
 };

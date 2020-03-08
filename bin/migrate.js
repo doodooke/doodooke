@@ -2,10 +2,19 @@ const argv = require('yargs').argv;
 const yaml = require('js-yaml');
 const fs = require('fs');
 const glob = require("glob");
-const env = yaml.safeLoad(fs.readFileSync('config.yml', 'utf8'));
+const _ = require("lodash");
+function ymlLoad(file) {
+    if (fs.existsSync(file)) {
+        return yaml.safeLoad(fs.readFileSync(file, "utf8"));
+    }
+}
+const env = _.merge(
+    ymlLoad("config.yml"),
+    ymlLoad(`${process.env.NODE_ENV || "development"}.config.yml`)
+);
 
 const knex = require('knex')({
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
         host: env.mysql.host,
         user: env.mysql.user,

@@ -1,6 +1,6 @@
 {
   "name": "doodooke",
-  "version": "3.0.0-alpha.7",
+  "version": "3.0.2",
   "scripts": {
     "link": "node ./bin/linkNode.js",
     "preinstall": "yarn config set registry https://registry.npm.taobao.org",
@@ -60,11 +60,11 @@
     "cross-env": "^5.2.0",
     "doodoo-plugin-baas": "^1.0.5-alpha.0",
     "doodoo-plugin-chokidar": "^1.0.1-alpha.5",
-    "doodoo-plugin-mysql": "1.0.2",
+    "doodoo-plugin-mysql": "^1.1.0",
     "doodoo-plugin-nuxt": "^1.0.2",
     "doodoo-plugin-proxy": "^1.0.1",
     "doodoo-plugin-redis": "^1.0.2",
-    "doodoo.js": "^2.0.1-alpha.14",
+    "doodoo.js": "^2.0.5",
     "dotenv": "^6.1.0",
     "download": "^7.1.0",
     "glob": "^7.1.3",

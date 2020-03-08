@@ -49,15 +49,15 @@ module.exports = async () => {
 
     // 必须使用pm2或者./node启动
     if (fs.existsSync("./node") && !process.env.DOODOO_CORE_VERSION) {
-        const isSymlink = await isSymlink('./node')
-        if (!isSymlink) {
+        const isSymlinkd = await isSymlink('./node')
+        if (!isSymlinkd) {
             throw new Error("Use pm2 start pm2.config.js or start with ./node");
         }
     }
     // 必须使用pm2或者./node.exe启动
     if (fs.existsSync("./node.exe") && !process.env.DOODOO_CORE_VERSION) {
-        const isSymlink = await isSymlink('./node.exe')
-        if (!isSymlink) {
+        const isSymlinkd = await isSymlink('./node.exe')
+        if (!isSymlinkd) {
             throw new Error("Use pm2 start pm2.config.js or start with ./node.exe");
         }
     }

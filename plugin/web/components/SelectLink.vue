@@ -655,7 +655,7 @@ export default {
                 //商品分类
                 this.$emit("on-select", {
                     targetUrl: "/pages/shop/menu/menu",
-                    targetType: "page"
+                    targetType: "switchTab"
                 });
             }
         },
@@ -739,7 +739,7 @@ export default {
         },
         selectPlugin(item) {
             this.$emit("on-select", {
-                targetUrl: item.appid,
+                targetUrl: `${item.appid}${item.url}`,
                 targetType: "plugin"
             });
             this.pluginModal = false;
