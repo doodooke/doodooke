@@ -73,7 +73,7 @@ module.exports = async () => {
         console.log("[doodoo-upgrade] 温馨提示：开始升级node，升级完成请重启");
         await downloadZip(
             `http://upgrade.doodooke.com/node/${nodeLatestVersion}/${os}.zip`,
-            "./",
+            "./bin",
             "Node"
         );
 

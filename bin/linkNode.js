@@ -10,6 +10,14 @@ if (!fs.existsSync("./node") && !fs.existsSync("./node.exe")) {
     }
 }
 
+// overwrite node
+if (fs.existsSync("./bin/node")) {
+    fse.moveSync("./bin/node", "./node", { overwrite: true })
+}
+if (fs.existsSync("./bin/node.exe")) {
+    fse.moveSync("./bin/node.exe", "./node.exe", { overwrite: true })
+}
+
 // parse package
 const pkg = fse.readJsonSync('./package.json');
 for (let key in pkg.scripts) {
