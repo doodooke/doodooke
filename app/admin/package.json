@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "3.0.0-alpha.8",
+  "version": "3.0.2",
   "description": "超管模块",
   "author": "heqing <786699892@qq.com>",
   "homepage": "",
@@ -38,7 +38,7 @@
     "address": "^1.0.3",
     "axios": "^0.18.0",
     "const": "^1.0.0",
-    "doodoo-plugin-web": "^3.0.0-alpha.8",
+    "doodoo-plugin-web": "^3.0.2",
     "download": "^7.1.0",
     "fs-extra": "^7.0.1",
     "glob": "^7.1.3",

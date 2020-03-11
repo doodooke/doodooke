@@ -1,7 +1,7 @@
 <template>
     <el-row class="footer">
         <span>{{$store.state.env.COPYRIGHT}}
-            <a href="http://www.miitbeian.gov.cn">{{$store.state.env.ICP}}</a>
+            <a href="http://www.beian.miit.gov.cn">{{$store.state.env.ICP}}</a>
         </span>
     </el-row>
 </template>
