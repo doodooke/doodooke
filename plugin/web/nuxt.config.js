@@ -183,7 +183,7 @@ module.exports = {
     {
       rel: "stylesheet",
       type: "text/css",
-      href: "https://unpkg.com/element-ui@2.6.1/lib/theme-chalk/index.css"
+      href: "https://cdn.bootcss.com/element-ui/2.6.1/theme-chalk/index.css"
     },
     {
       rel: "stylesheet",
@@ -305,10 +305,6 @@ module.exports = {
   },
   {
     src: "~plugins/region.js",
-    ssr: false
-  },
-  {
-    src: "~plugins/error.js",
     ssr: false
   },
   {

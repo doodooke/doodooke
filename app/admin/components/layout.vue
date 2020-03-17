@@ -1,138 +1,138 @@
 <template>
-  <div id="layout" v-loading="loading" :element-loading-text="loadingText">
-    <qingful-header :logo="logo">
-      <el-col slot="center" :span="12" :offset="2">
-        <el-row>
-          <el-col :span="4" class="col-list" @click.native="homePage">
-            <i class="iconfont icon-shouye"></i>
-            <span class="col-list-span">首页</span>
-          </el-col>
-          <el-col :span="4" class="col-list" @click.native="webBuild">
-            <i class="iconfont icon-bianyi"></i>
-            <span class="col-list-span">编译</span>
-          </el-col>
-          <el-col :span="4" class="col-list" @click.native="reStart">
-            <i class="iconfont icon-zhongqi"></i>
-            <span class="col-list-span">重启</span>
-          </el-col>
-          <!-- <el-col :span="6" class="col-list">
+    <div id="layout" v-loading="loading" :element-loading-text="loadingText">
+        <qingful-header :logo="logo">
+            <el-col slot="center" :span="12" :offset="2">
+                <el-row>
+                    <el-col :span="4" class="col-list" @click.native="homePage">
+                        <i class="iconfont icon-shouye"></i>
+                        <span class="col-list-span">首页</span>
+                    </el-col>
+                    <el-col :span="4" class="col-list" @click.native="webBuild">
+                        <i class="iconfont icon-bianyi"></i>
+                        <span class="col-list-span">编译</span>
+                    </el-col>
+                    <el-col :span="4" class="col-list" @click.native="reStart">
+                        <i class="iconfont icon-zhongqi"></i>
+                        <span class="col-list-span">重启</span>
+                    </el-col>
+                    <!-- <el-col :span="6" class="col-list">
                             <i class="iconfont icon-shouye"></i>
                             <span class="col-list-span">编译并重启</span>
-          </el-col>-->
-          <el-col :span="4" class="col-list" @click.native="getLogs">
-            <i class="iconfont icon-rizhi"></i>
-            <span class="col-list-span">日志</span>
-          </el-col>
-          <el-col :span="4" class="col-list" @click.native="getPlugin">
-            <i class="iconfont icon-chajian1"></i>
-            <span class="col-list-span">应用</span>
-          </el-col>
-          <el-col :span="4" class="col-list">
-            <el-dropdown>
-              <span style="display:flex;">
-                <i class="iconfont icon-gengduo"></i>
-                <span class="col-list-span" style="font-size:16px">更多</span>
-              </span>
-              <el-dropdown-menu slot="dropdown" style="width:100px;text-align:center">
-                <el-dropdown-item @click.native="getSecurityCode">安全码</el-dropdown-item>
-                <el-dropdown-item @click.native="debug">本地调试</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+                    </el-col>-->
+                    <el-col :span="4" class="col-list" @click.native="getLogs">
+                        <i class="iconfont icon-rizhi"></i>
+                        <span class="col-list-span">日志</span>
+                    </el-col>
+                    <el-col :span="4" class="col-list" @click.native="getPlugin">
+                        <i class="iconfont icon-chajian1"></i>
+                        <span class="col-list-span">应用</span>
+                    </el-col>
+                    <el-col :span="4" class="col-list">
+                        <el-dropdown>
+                            <span style="display:flex;">
+                                <i class="iconfont icon-gengduo"></i>
+                                <span class="col-list-span" style="font-size:16px">更多</span>
+                            </span>
+                            <el-dropdown-menu slot="dropdown" style="width:100px;text-align:center">
+                                <el-dropdown-item @click.native="getSecurityCode">安全码</el-dropdown-item>
+                                <el-dropdown-item @click.native="debug">本地调试</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
 
-            <el-dialog title="安全码" :visible.sync="showCode">
-              <div style="margin-top:-40px">{{securityCode}}</div>
-            </el-dialog>
-          </el-col>
-        </el-row>
-      </el-col>
-      <el-col slot="right" :span="3" :offset="3">
-        <el-row style="color: #657180;font-size:14px;text-align: right;">
-          <el-row style="line-height:70px;" v-if="!$cookies.get('admin')">
-            <el-button
-              type="primary"
-              style="height:32px;width:84px;border-radius:0;padding: 0;"
-              @click="goLogin"
-            >立即登录</el-button>
-          </el-row>
-          <el-dropdown placement="bottom" v-else>
-            <img
-              :src="getAvaterUrl($store.state.custom.avater_url)"
-              style="width:30px;height:30px;border-radius:50%;margin-top: 20px;"
-            >
-            <el-dropdown-menu slot="dropdown" style="width:100px">
-              <el-dropdown-item style="text-align:center" disabled>
-                <img
-                  :src="getAvaterUrl($store.state.custom.avater_url)"
-                  style="width:30px;height:30px;border-radius:50%;margin-top:10px;"
-                >
-              </el-dropdown-item>
-              <el-dropdown-item
-                class="text_ellipsis"
-                style="width:100%;text-align:center;color: #606266;margin-top:-6px;"
-                disabled
-              >{{$cookies.get("admin")}}</el-dropdown-item>
-              <el-dropdown-item divided @click.native="go('/admin/public/login')">退出登录</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </el-row>
-      </el-col>
-    </qingful-header>
+                        <el-dialog title="安全码" :visible.sync="showCode">
+                            <div style="margin-top:-40px">{{securityCode}}</div>
+                        </el-dialog>
+                    </el-col>
+                </el-row>
+            </el-col>
+            <el-col slot="right" :span="3" :offset="3">
+                <el-row style="color: #657180;font-size:14px;text-align: right;">
+                    <el-row style="line-height:70px;" v-if="!$cookies.get('admin')">
+                        <el-button
+                            type="primary"
+                            style="height:32px;width:84px;border-radius:0;padding: 0;"
+                            @click="goLogin"
+                        >立即登录</el-button>
+                    </el-row>
+                    <el-dropdown placement="bottom" v-else>
+                        <img
+                            :src="getAvaterUrl($store.state.custom.avater_url)"
+                            style="width:30px;height:30px;border-radius:50%;margin-top: 20px;"
+                        />
+                        <el-dropdown-menu slot="dropdown" style="width:100px">
+                            <el-dropdown-item style="text-align:center" disabled>
+                                <img
+                                    :src="getAvaterUrl($store.state.custom.avater_url)"
+                                    style="width:30px;height:30px;border-radius:50%;margin-top:10px;"
+                                />
+                            </el-dropdown-item>
+                            <el-dropdown-item
+                                class="text_ellipsis"
+                                style="width:100%;text-align:center;color: #606266;margin-top:-6px;"
+                                disabled
+                            >{{$cookies.get("admin")}}</el-dropdown-item>
+                            <el-dropdown-item divided @click.native="go('/admin/public/login')">退出登录</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </el-row>
+            </el-col>
+        </qingful-header>
 
-    <slot></slot>
+        <slot></slot>
 
-    <qingful-footer></qingful-footer>
-    <!-- 返回顶部 -->
-    <qingful-gotop></qingful-gotop>
+        <qingful-footer></qingful-footer>
+        <!-- 返回顶部 -->
+        <qingful-gotop></qingful-gotop>
 
-    <el-dialog
-      title
-      :show-close="false"
-      :visible.sync="showLogs"
-      custom-class="logsModal"
-      @close="closeSocket"
-    >
-      <div id="logs" ref="logs">
-        <pre style="white-space: pre-wrap;word-wrap: break-word;line-height:20px">
+        <el-dialog
+            title
+            :show-close="false"
+            :visible.sync="showLogs"
+            custom-class="logsModal"
+            @close="closeSocket"
+        >
+            <div id="logs" ref="logs">
+                <pre style="white-space: pre-wrap;word-wrap: break-word;line-height:20px">
             {{logsData}}
         </pre>
-      </div>
-    </el-dialog>
+            </div>
+        </el-dialog>
 
-    <el-dialog title="本地调试" :visible.sync="showDebug" width="560px">
-      <el-row>
-        <el-row
-          style="display:flex;align-items:center;margin-bottom:16px;"
-          v-for="(item,index) in debugPaths"
-          :key="index"
-        >
-          <el-input
-            v-model="item.path"
-            placeholder="请输入调试路径"
-            style="width:400px;margin-right:12px;"
-          ></el-input>
-          <el-tooltip :content="item.copy?'复制':'转发'" placement="top">
-            <el-switch v-model="item.copy" style="margin-right:12px;"></el-switch>
-          </el-tooltip>
-          <div>
-            <i
-              class="iconfont icon-Add debug-icon-add"
-              v-if="index == debugPaths.length-1"
-              @click="addPaths(item)"
-            ></i>
-            <i
-              class="iconfont icon-reduce debug-icon-reduce"
-              v-if="debugPaths.length > 1"
-              @click="reducePaths(index)"
-            ></i>
-          </div>
-        </el-row>
-      </el-row>
-      <p slot="footer">
-        <el-button @click="showDebug = false">取消</el-button>
-        <el-button type="primary" @click="saveDebugPaths">保存</el-button>
-      </p>
-    </el-dialog>
-  </div>
+        <el-dialog title="本地调试" :visible.sync="showDebug" width="560px">
+            <el-row>
+                <el-row
+                    style="display:flex;align-items:center;margin-bottom:16px;"
+                    v-for="(item,index) in debugPaths"
+                    :key="index"
+                >
+                    <el-input
+                        v-model="item.path"
+                        placeholder="请输入调试路径"
+                        style="width:400px;margin-right:12px;"
+                    ></el-input>
+                    <el-tooltip :content="item.copy?'复制':'转发'" placement="top">
+                        <el-switch v-model="item.copy" style="margin-right:12px;"></el-switch>
+                    </el-tooltip>
+                    <div>
+                        <i
+                            class="iconfont icon-Add debug-icon-add"
+                            v-if="index == debugPaths.length-1"
+                            @click="addPaths(item)"
+                        ></i>
+                        <i
+                            class="iconfont icon-reduce debug-icon-reduce"
+                            v-if="debugPaths.length > 1"
+                            @click="reducePaths(index)"
+                        ></i>
+                    </div>
+                </el-row>
+            </el-row>
+            <p slot="footer">
+                <el-button @click="showDebug = false">取消</el-button>
+                <el-button type="primary" @click="saveDebugPaths">保存</el-button>
+            </p>
+        </el-dialog>
+    </div>
 </template>
 
 <script>
@@ -158,7 +158,8 @@ export default {
             securityCode: "",
             showCode: false,
             showDebug: false,
-            debugPaths: []
+            debugPaths: [],
+            socket: {}
         };
     },
     methods: {
@@ -230,20 +231,20 @@ export default {
         },
         async socketConnect() {
             this.socket = io.connect(
-                this.$store.state.env.APP_HOST + `?uid=${this.uid}&type=wxLogin`,
+                this.$store.state.env.APP_HOST +
+                    `?uid=${this.uid}&type=wxLogin`,
                 {
-                    transports: ['websocket', 'polling']
+                    transports: ["websocket", "polling"]
                 }
             );
             this.socket.on("error", error => {
                 console.error(error);
             });
-
-            // this.scoket.on("connection",()=>{
-            await this.$axios.$get(
-                `/api/admin/system/connectPm2Logs?uid=${this.uid}`
-            );
-            // })
+            this.socket.on("connect", socket => {
+                this.$axios.$get(
+                    `/api/admin/system/connectPm2Logs?uid=${this.uid}`
+                );
+            });
             this.socket.on("pm2Logs", data => {
                 this.logsData += data;
 
