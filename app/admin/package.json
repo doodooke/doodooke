@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "description": "超管模块",
   "author": "heqing <786699892@qq.com>",
   "homepage": "",
@@ -19,16 +19,6 @@
           "url": "/admin/user/admin"
         }
       ]
-    },
-    {
-      "name": "超管配置",
-      "icon": "icon-shezhi-copy",
-      "sub": [
-        {
-          "name": "超管配置",
-          "url": "/admin/config"
-        }
-      ]
     }
   ],
   "scripts": {
@@ -38,7 +28,7 @@
     "address": "^1.0.3",
     "axios": "^0.18.0",
     "const": "^1.0.0",
-    "doodoo-plugin-web": "^3.0.2",
+    "doodoo-plugin-web": "^3.0.4",
     "download": "^7.1.0",
     "fs-extra": "^7.0.1",
     "glob": "^7.1.3",

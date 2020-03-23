@@ -1,19 +1,20 @@
 <template>
-<qingful-layout>
-    <nuxt />
-</qingful-layout>
+    <qingful-layout>
+        <nuxt />
+    </qingful-layout>
 </template>
 
 <script>
 import Layout from "../components/layout.vue";
 export default {
     components: {
-        "qingful-layout": Layout,
+        "qingful-layout": Layout
     },
     head() {
         return {
             title: this.$store.state.env.HEAD_TITLE,
-            meta: [{
+            meta: [
+                {
                     hid: "description",
                     name: "description",
                     content: this.$store.state.env.HEAD_META_DESCRIPTION

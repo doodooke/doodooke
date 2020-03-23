@@ -15,53 +15,152 @@
                     <el-row style="margin-bottom:16px" v-for="(item,index) in select" :key="index">
                         <el-select style="width:180px" v-model="item.func" @change="selectArr">
                             <el-option-group label="函数">
-                                <el-option v-for="(i,index) in searchConfigData.functions" :key="index" :label="i" :value="i"></el-option>
+                                <el-option
+                                    v-for="(i,index) in searchConfigData.functions"
+                                    :key="index"
+                                    :label="i"
+                                    :value="i"
+                                ></el-option>
                             </el-option-group>
                             <el-option-group label="集合">
-                                <el-option v-for="(i,index) in searchConfigData.grouping" :key="index" :label="i" :value="i"></el-option>
+                                <el-option
+                                    v-for="(i,index) in searchConfigData.grouping"
+                                    :key="index"
+                                    :label="i"
+                                    :value="i"
+                                ></el-option>
                             </el-option-group>
                         </el-select>
-                        <el-select style="width:180px;margin:0 10px" v-model='item.column' @change="selectArr">
-                            <el-option v-for="(i,index) in searchConfigData.fields" :key="index" :label="i.Field" :value="i.Field"></el-option>
+                        <el-select
+                            style="width:180px;margin:0 10px"
+                            v-model="item.column"
+                            @change="selectArr"
+                        >
+                            <el-option
+                                v-for="(i,index) in searchConfigData.fields"
+                                :key="index"
+                                :label="i.Field"
+                                :value="i.Field"
+                            ></el-option>
                         </el-select>
-                        <el-button icon="el-icon-delete" circle v-if="select.length>1" @click="searchDel(1,index)"></el-button>
+                        <el-button
+                            icon="el-icon-delete"
+                            circle
+                            v-if="select.length>1"
+                            @click="searchDel(1,index)"
+                        ></el-button>
                     </el-row>
                 </el-col>
                 <el-col :span="17" v-if="activeName == 2">
-                    <el-row style="margin-bottom:16px" v-for='(item,index) in where' :key='index'>
+                    <el-row style="margin-bottom:16px" v-for="(item,index) in where" :key="index">
                         <el-select style="width:180px" v-model="item.column" @change="whereArr">
-                            <el-option v-for="(i,index) in searchConfigData.fields" :key="index" :label="i.Comment || i.Field" :value="i.Field"></el-option>
+                            <el-option
+                                v-for="(i,index) in searchConfigData.fields"
+                                :key="index"
+                                :label="i.Comment || i.Field"
+                                :value="i.Field"
+                            ></el-option>
                         </el-select>
-                        <el-select style="width:150px;margin:0 10px" v-model="item.func" @change="whereArr">
-                            <el-option v-for="(i,index) in searchConfigData.operators" :key="index" :label="i" :value="i"></el-option>
+                        <el-select
+                            style="width:150px;margin:0 10px"
+                            v-model="item.func"
+                            @change="whereArr"
+                        >
+                            <el-option
+                                v-for="(i,index) in searchConfigData.operators"
+                                :key="index"
+                                :label="i"
+                                :value="i"
+                            ></el-option>
                         </el-select>
                         <el-input style="width:180px;" v-model="item.value"></el-input>
-                        <el-button icon="el-icon-delete" circle v-if="where.length>1" style="margin-left:10px" @click="searchDel(2,index)"></el-button>
+                        <el-button
+                            icon="el-icon-delete"
+                            circle
+                            v-if="where.length>1"
+                            style="margin-left:10px"
+                            @click="searchDel(2,index)"
+                        ></el-button>
                     </el-row>
                 </el-col>
                 <el-col :span="9" v-if="activeName == 3">
-                    <el-row style="margin-bottom:16px" v-for='(item,index) in order' :key='index'>
-                        <el-select style="width:190px;margin-right:16px" v-model='item.column' @change='orderArr'>
-                            <el-option v-for="(i,index) in searchConfigData.fields" :key="index" :label="i.Comment || i.Field" :value="i.Field"></el-option>
+                    <el-row style="margin-bottom:16px" v-for="(item,index) in order" :key="index">
+                        <el-select
+                            style="width:190px;margin-right:16px"
+                            v-model="item.column"
+                            @change="orderArr"
+                        >
+                            <el-option
+                                v-for="(i,index) in searchConfigData.fields"
+                                :key="index"
+                                :label="i.Comment || i.Field"
+                                :value="i.Field"
+                            ></el-option>
                         </el-select>
                         <el-checkbox v-model="item.desc">降序</el-checkbox>
-                        <el-button icon="el-icon-delete" circle v-if="order.length>1" style="margin-left:10px" @click="searchDel(3,index)"></el-button>
+                        <el-button
+                            icon="el-icon-delete"
+                            circle
+                            v-if="order.length>1"
+                            style="margin-left:10px"
+                            @click="searchDel(3,index)"
+                        ></el-button>
                     </el-row>
                 </el-col>
                 <span style="font-size:14px">范围：</span>
-                <el-input-number style="width:100px;margin-right:16px" controls-position="right" :min="1" v-model="pagination.pageSize"></el-input-number>
+                <el-input-number
+                    style="width:100px;margin-right:16px"
+                    controls-position="right"
+                    :min="1"
+                    v-model="pagination.pageSize"
+                ></el-input-number>
                 <el-button type="primary" @click="search">选择</el-button>
             </el-row>
-            <el-table :data="tableData" stripe border style="margin-top:24px" @selection-change="SelectionChange">
-                <el-table-column type="selection" width="50" v-if="tableData.length && tableData[0].id" fixed="left"></el-table-column>
-                <el-table-column v-for="(item,index) in tableFields" :key="index" :label="item.Comment || item.Field" :prop="item.Field" header-align="center" align="center" :resizable="true" show-overflow-tooltip min-width="160"></el-table-column>
-                <el-table-column label="操作" align="center" header-align="center" fixed="right" v-if="tableData.length && tableData[0].id">
+            <el-table
+                :data="tableData"
+                stripe
+                border
+                style="margin-top:24px"
+                @selection-change="SelectionChange"
+            >
+                <el-table-column
+                    type="selection"
+                    width="50"
+                    v-if="tableData.length && tableData[0].id"
+                    fixed="left"
+                ></el-table-column>
+                <el-table-column
+                    v-for="(item,index) in tableFields"
+                    :key="index"
+                    :label="item.Comment || item.Field"
+                    :prop="item.Field"
+                    header-align="center"
+                    align="center"
+                    :resizable="true"
+                    show-overflow-tooltip
+                    min-width="160"
+                ></el-table-column>
+                <el-table-column
+                    label="操作"
+                    align="center"
+                    header-align="center"
+                    fixed="right"
+                    v-if="tableData.length && tableData[0].id"
+                >
                     <template slot-scope="scope">
                         <el-tooltip content="编辑">
-                            <i class="iconfont icon-bianji1" @click='tableEdit(scope.row)' style="font-size:26px;cursor:pointer;color:rgb(158, 167, 179)"></i>
+                            <i
+                                class="iconfont icon-bianji1"
+                                @click="tableEdit(scope.row)"
+                                style="font-size:26px;cursor:pointer;color:rgb(158, 167, 179)"
+                            ></i>
                         </el-tooltip>
                         <el-tooltip content="删除">
-                            <i class="iconfont icon-shanchu2" @click="tableDel(scope.row)" style="font-size:26px;cursor:pointer;color:rgb(158, 167, 179)"></i>
+                            <i
+                                class="iconfont icon-shanchu2"
+                                @click="tableDel(scope.row)"
+                                style="font-size:26px;cursor:pointer;color:rgb(158, 167, 179)"
+                            ></i>
                         </el-tooltip>
                     </template>
                 </el-table-column>
@@ -71,37 +170,83 @@
                     <el-button type="primary" @click="tableDel(0)">删除</el-button>
                 </el-col>
                 <el-col :span="12" style="text-align:right">
-                    <el-pagination background layout="total,prev,pager,next" :current-page="pagination.page" :total="pagination.rowCount" :page-size="pagination.pageSize" @current-change="changePage"></el-pagination>
+                    <el-pagination
+                        background
+                        layout="total,prev,pager,next"
+                        :current-page="pagination.page"
+                        :total="pagination.rowCount"
+                        :page-size="pagination.pageSize"
+                        @current-change="changePage"
+                    ></el-pagination>
                 </el-col>
             </el-row>
         </el-row>
         <el-row v-else>
             <el-row>
                 <el-table :data="newData" stripe :show-header="false" border>
-                    <el-table-column prop="column_name" header-align="center" align="center" width="120">
+                    <el-table-column
+                        prop="column_name"
+                        header-align="center"
+                        align="center"
+                        width="120"
+                    >
                         <template slot-scope="scope">
                             <el-row>
-                                <span v-if="scope.row.column_required" style="color:#f50;margin-right:3px">*</span>{{scope.row.column_comment || scope.row.column_name}}</el-row>
+                                <span
+                                    v-if="scope.row.column_required"
+                                    style="color:#f50;margin-right:3px"
+                                >*</span>
+                                {{scope.row.column_comment || scope.row.column_name}}
+                            </el-row>
                         </template>
                     </el-table-column>
                     <el-table-column prop="column_value" header-align="center">
                         <template slot-scope="scope">
-                            <el-input v-if="scope.row.column_input == 'string'" v-model="scope.row.column_value" type="textarea" :rows="3"></el-input>
+                            <el-input
+                                v-if="scope.row.column_input == 'string'"
+                                v-model="scope.row.column_value"
+                                type="textarea"
+                                :rows="3"
+                            ></el-input>
 
-                            <el-input-number v-if="scope.row.column_input == 'int'" v-model="scope.row.column_value" controls-position="right" :disabled="scope.row.column_name == 'id'"></el-input-number>
+                            <el-input-number
+                                v-if="scope.row.column_input == 'int'"
+                                v-model="scope.row.column_value"
+                                controls-position="right"
+                                :disabled="scope.row.column_name == 'id'"
+                            ></el-input-number>
 
-                            <el-date-picker v-if="scope.row.column_input == 'dateTimePicker'" v-model="scope.row.column_value" type="datetime" placeholder="选择日期时间">
-                            </el-date-picker>
+                            <el-date-picker
+                                v-if="scope.row.column_input == 'dateTimePicker'"
+                                v-model="scope.row.column_value"
+                                type="datetime"
+                                placeholder="选择日期时间"
+                            ></el-date-picker>
 
-                            <div @click="handleUpload(scope)" v-if="scope.row.column_input == 'upload'">
-                                <el-upload :action="uploadUrl" :on-success="handleAddSuccess" :headers="uploadHeaders()" :show-file-list="false">
+                            <div
+                                @click="handleUpload(scope)"
+                                v-if="scope.row.column_input == 'upload'"
+                            >
+                                <el-upload
+                                    :action="uploadUrl"
+                                    :on-success="handleAddSuccess"
+                                    :headers="uploadHeaders()"
+                                    :show-file-list="false"
+                                >
                                     <el-button size="small" style="margin-bottom:10px">点击上传</el-button>
                                 </el-upload>
-                                <el-input v-model="scope.row.column_value" type="textarea" :rows="3"></el-input>
+                                <el-input
+                                    v-model="scope.row.column_value"
+                                    type="textarea"
+                                    :rows="3"
+                                ></el-input>
                             </div>
 
                             <el-row v-if="scope.row.column_input == 'editor'">
-                                <el-button @click="editContent(scope)" style="margin-bottom:10px">编辑内容</el-button>
+                                <el-button
+                                    @click="editContent(scope)"
+                                    style="margin-bottom:10px"
+                                >编辑内容</el-button>
                                 <el-row v-html="scope.row.column_value"></el-row>
                             </el-row>
                         </template>
@@ -116,7 +261,15 @@
         <!-- 编辑器 -->
         <el-dialog title="编辑内容" :visible.sync="showEditor" width="800px">
             <el-row style="width:760px">
-                <Ueditor :config="editorConfig" ueditorPath='/ueditor' :plugins="editorPlugins" @onChange="updateEditorContent" :uploadImage="uploadImage" :value="initContent" :progress="progress" />
+                <Ueditor
+                    :config="editorConfig"
+                    ueditorPath="/ueditor"
+                    :plugins="editorPlugins"
+                    @onChange="updateEditorContent"
+                    :uploadImage="uploadImage"
+                    :value="initContent"
+                    :progress="progress"
+                />
             </el-row>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="showEditor = false">取 消</el-button>
@@ -346,7 +499,11 @@ export default {
                 data: obj
             });
             if (res && res.errmsg === "ok") {
-                this.$message.success("保存成功");
+                this.$notify({
+                    title: "温馨提示",
+                    message: "保存成功",
+                    type: "success"
+                });
                 if (type == 1) {
                     this.tabType = "1";
                     this.isEdit = false;
@@ -363,7 +520,12 @@ export default {
                 data_ids = row.id;
             } else {
                 if (!this.selectionData.length) {
-                    this.$message.warning("请选择数据");
+                    this.$notify({
+                        title: "温馨提示",
+                        message: "开始安装",
+                        type: "warning"
+                    });
+                    ("请选择数据");
                     return;
                 }
                 let ids = [];
@@ -377,7 +539,11 @@ export default {
                 `/api/admin/table/del?table=${this.tableName}&ids=${data_ids}`
             );
             if (res && res.errmsg === "ok") {
-                this.$message.success("删除成功");
+                this.$notify({
+                    title: "温馨提示",
+                    message: "删除成功",
+                    type: "success"
+                });
                 this.getData();
             }
         },

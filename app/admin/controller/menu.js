@@ -37,14 +37,14 @@ module.exports = class extends base {
                         if (!has) {
                             menuList.push(item);
                         }
-                    }else{
+                    } else {
                         menuList.push(item);
                     }
                 }
-                
+
             }
         }
-        
+
         this.success(menuList);
     }
 };

@@ -1,10 +1,10 @@
 <template>
-  <el-row>
-    <el-row>阅读许可协议</el-row>
-    <el-row class="content">
-      <el-row style="text-align:center;margin-bottom:20px;font-weight:500">多多客许可使用协议</el-row>
-      <el-row>
-        <pre style="white-space:pre-wrap;font-size:14px;">版权所有河南青否网络科技有限公司保留所有权利。
+    <el-row>
+        <el-row>阅读许可协议</el-row>
+        <el-row class="content">
+            <el-row style="text-align:center;margin-bottom:20px;font-weight:500">多多客许可使用协议</el-row>
+            <el-row>
+                <pre style="white-space:pre-wrap;font-size:14px;">版权所有河南青否网络科技有限公司保留所有权利。
 
 感谢您选择多多客doodooke微信小程序开源版，是目前国内最强大、最稳定的微信小程序第三方平台解决方案之一，基于 Nodejs + MySQL 的技术开发。
 
@@ -45,13 +45,13 @@
 协议发布时间： 2019年3月18日
 
 版本最新更新： 2019年3月18日</pre>
-      </el-row>
+            </el-row>
+        </el-row>
+        <el-row>
+            <el-checkbox v-model="checked">我已阅读并同意此协议</el-checkbox>
+            <el-button type="primary" class="btn-next" @click="next">继续</el-button>
+        </el-row>
     </el-row>
-    <el-row>
-      <el-checkbox v-model="checked">我已阅读并同意此协议</el-checkbox>
-      <el-button type="primary" class="btn-next" @click="next">继续</el-button>
-    </el-row>
-  </el-row>
 </template>
 <script>
 export default {
@@ -64,7 +64,12 @@ export default {
     methods: {
         next() {
             if (!this.checked) {
-                this.$message.warning("请先阅读协议并同意此协议");
+                this.$notify({
+                    title: "温馨提示",
+                    message: "开始安装",
+                    type: "warning"
+                });
+                ("请先阅读协议并同意此协议");
                 return;
             }
             this.$bus.emit("active", 1);

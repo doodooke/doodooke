@@ -1,12 +1,12 @@
 <template>
-  <el-row style="text-align:center">
-    <img src="../www/complete.png" alt class="img">
-    <el-row class="text">恭喜您已安装完成，现在可以</el-row>
-    <el-row>
-      <el-button type="primary" class="btn-admin" @click="next">进入管理后台</el-button>
-      <el-button type="primary" class="btn-buy" @click="buy">购买授权</el-button>
+    <el-row style="text-align:center">
+        <img src="../www/complete.png" alt class="img" />
+        <el-row class="text">恭喜您已安装完成，现在可以</el-row>
+        <el-row>
+            <el-button type="primary" class="btn-admin" @click="next">进入管理后台</el-button>
+            <el-button type="primary" class="btn-buy" @click="buy">购买授权</el-button>
+        </el-row>
     </el-row>
-  </el-row>
 </template>
 <script>
 export default {

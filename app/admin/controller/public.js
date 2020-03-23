@@ -32,8 +32,8 @@ function jwtSign(obj, expires_in, secret) {
  * @param {*} sqlFile
  */
 async function execSql(sqlFile) {
-    const sql = await new Promise(function(resolve, reject) {
-        fs.readFile(sqlFile, "utf-8", function(err, data) {
+    const sql = await new Promise(function (resolve, reject) {
+        fs.readFile(sqlFile, "utf-8", function (err, data) {
             if (err) throw err;
             resolve(data);
         });
@@ -242,40 +242,40 @@ module.exports = class extends doodoo.Controller {
      *
      */
 
-    async getVersion(){
+    async getVersion() {
         // 先获取app 模块
         const url = path.resolve(__dirname, "../../");
         const pluginUrl = path.resolve(__dirname, "../../../plugin");
         const dirArr = fs.readdirSync(url);
         const pluginArr = fs.readdirSync(pluginUrl);
-        const leng=pluginArr.length;
-        const newArr=[];
-        const appUrl= path.resolve(__dirname, "../../../");
-        const appInfo=require(`${appUrl}/package.json`.replace(/\\/g,"/"));
-        newArr.push({name:appInfo.name,version:appInfo.version,description:appInfo.description})
-        Array.prototype.push.apply(dirArr,pluginArr);
-       
-        
-        for(let x=0;x<dirArr.length;x++){
-            const pakUrl = dirArr.length-x<=leng?`${pluginUrl}/${dirArr[x]}/package.json`.replace(/\\/g,"/"):`${url}/${dirArr[x]}/package.json`.replace(/\\/g,"/");
-            const moduleUrl = dirArr.length-x<=leng?`${pluginUrl}/${dirArr[x]}`.replace(/\\/g, "/"):`${url}/${dirArr[x]}`.replace(/\\/g, "/");
+        const leng = pluginArr.length;
+        const newArr = [];
+        const appUrl = path.resolve(__dirname, "../../../");
+        const appInfo = require(`${appUrl}/package.json`.replace(/\\/g, "/"));
+        newArr.push({ name: appInfo.name, version: appInfo.version, description: appInfo.description })
+        Array.prototype.push.apply(dirArr, pluginArr);
+
+
+        for (let x = 0; x < dirArr.length; x++) {
+            const pakUrl = dirArr.length - x <= leng ? `${pluginUrl}/${dirArr[x]}/package.json`.replace(/\\/g, "/") : `${url}/${dirArr[x]}/package.json`.replace(/\\/g, "/");
+            const moduleUrl = dirArr.length - x <= leng ? `${pluginUrl}/${dirArr[x]}`.replace(/\\/g, "/") : `${url}/${dirArr[x]}`.replace(/\\/g, "/");
             const stat = fs.lstatSync(moduleUrl);
             if (!stat.isDirectory()) {
                 continue;
             }
             const list = require(pakUrl);
-            const row={
-                name:list.name,
-                version:list.version,
-                description:list.description
-            } 
-            
+            const row = {
+                name: list.name,
+                version: list.version,
+                description: list.description
+            }
+
             newArr.push(row);
         }
-        
+
         this.success(newArr)
-       
-    } 
+
+    }
 
 
 };

@@ -1,37 +1,44 @@
 <template>
-  <div id="layout">
-    <qingful-header :logo="logo">
-      <el-col slot="right" :span="6" :offset="14">
-        <el-row style="text-align: right;">
-          <el-row style="line-height:70px;">
-            <el-button type="primary" class="btn-portal" @click="go('/portal')">多多客官网</el-button>
-            <el-button type="primary" class="btn-github" @click="go('/portal')">GitHub</el-button>
-          </el-row>
-        </el-row>
-      </el-col>
-    </qingful-header>
-    <el-row class="content">
-      <div style="display:flex">
-        <div class="content-left">
-          <div class="content-left-title">安装步骤</div>
-          <div style="height:128px;">
-            <el-timeline class="content-left-timeline">
-              <el-timeline-item v-for="(item, index) in timeline" :key="index">
-                {{item.content}}
-                <div slot="dot" class="dot" :style="{borderColor:active==index?'#36f1cd':'#fff'}">
-                  <div class="dot-inner" :style="{background:active==index?'#36f1cd':'#fff'}"></div>
+    <div id="layout">
+        <qingful-header :logo="logo">
+            <el-col slot="right" :span="6" :offset="14">
+                <el-row style="text-align: right;">
+                    <el-row style="line-height:70px;">
+                        <el-button type="primary" class="btn-portal" @click="go('/portal')">多多客官网</el-button>
+                        <el-button type="primary" class="btn-github" @click="go('/portal')">GitHub</el-button>
+                    </el-row>
+                </el-row>
+            </el-col>
+        </qingful-header>
+        <el-row class="content">
+            <div style="display:flex">
+                <div class="content-left">
+                    <div class="content-left-title">安装步骤</div>
+                    <div style="height:128px;">
+                        <el-timeline class="content-left-timeline">
+                            <el-timeline-item v-for="(item, index) in timeline" :key="index">
+                                {{item.content}}
+                                <div
+                                    slot="dot"
+                                    class="dot"
+                                    :style="{borderColor:active==index?'#36f1cd':'#fff'}"
+                                >
+                                    <div
+                                        class="dot-inner"
+                                        :style="{background:active==index?'#36f1cd':'#fff'}"
+                                    ></div>
+                                </div>
+                            </el-timeline-item>
+                        </el-timeline>
+                    </div>
                 </div>
-              </el-timeline-item>
-            </el-timeline>
-          </div>
-        </div>
-        <div style="flex:1;background:#fff;padding:32px 24px;">
-          <nuxt/>
-        </div>
-      </div>
-    </el-row>
-    <qingful-footer></qingful-footer>
-  </div>
+                <div style="flex:1;background:#fff;padding:32px 24px;">
+                    <nuxt />
+                </div>
+            </div>
+        </el-row>
+        <qingful-footer></qingful-footer>
+    </div>
 </template>
 
 <script>

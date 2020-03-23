@@ -14,6 +14,7 @@ work:
 fuwu:
     zixun: '服务咨询：09:00 - 18:00'
 wxLogin: false
+marketEntry: true
 wx:
     qrcode_url: 'https://open.weixin.qq.com/qr/code?username=gh_31d97ff84aa6'
     kefu: /www/img/kefu/weixin.png

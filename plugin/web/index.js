@@ -16,16 +16,6 @@ module.exports = async () => {
         await builder.build();
     }
 
-    if (fs.existsSync(path.resolve("plugin/migrate"))) {
-        // migrate必须在web前加载
-        await doodoo.usePlugin("migrate");
-    }
-
-    if (fs.existsSync(path.resolve("plugin/webdomain"))) {
-        // webdomain必须在nuxt前加载
-        await doodoo.usePlugin("webdomain");
-    }
-
     // static必须在nuxt前加载
     const wwws = glob.sync("*/www", {
         cwd: doodoo.getConf("app.root")

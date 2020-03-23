@@ -79,16 +79,16 @@ module.exports = class extends doodoo.Controller {
             mysql: mysql,
             redis: redis
         }, {
-                mysql: {
-                    charset: 'utf8mb4'
-                },
-                jwt: {
-                    secret: uuid(),
-                    expiresin: '7 days',
-                    admin_secret: uuid(),
-                    admin_expiresin: '7 days'
-                }
-            })
+            mysql: {
+                charset: 'utf8mb4'
+            },
+            jwt: {
+                secret: uuid(),
+                expiresin: '7 days',
+                admin_secret: uuid(),
+                admin_expiresin: '7 days'
+            }
+        })
         const configYaml = yaml.safeDump(_configData, {
             indent: 4
         })
@@ -116,7 +116,7 @@ module.exports = class extends doodoo.Controller {
                 status: 1
             })
             .save();
-        
+
         for (let key in _configData) {
             for (let _key in _configData[key]) {
                 process.env[_.toUpper(key) + "_" + _.toUpper(_key)] = _configData[key][_key]

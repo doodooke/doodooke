@@ -159,14 +159,10 @@ process.on("startServer", async () => {
     app.plugin("proxy");
     app.plugin("baas");
     app.plugin("static");
-
-    // 自动加载
-    const plugins = glob.sync("*", {
-        cwd: "plugin"
-    });
-    for (const key in plugins) {
-        app.plugin(plugins[key]);
-    }
+    app.plugin("context");
+    app.plugin("migrate");
+    app.plugin("webdomain");
+    app.plugin("web");
 
     // 启动
     const server = await app.start();

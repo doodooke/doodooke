@@ -10,3 +10,5 @@ shell/openSource
 SECURITY_CODE.key
 node
 bin/node
+development.config.yml
+.vscode

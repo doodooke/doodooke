@@ -165,19 +165,19 @@ module.exports = class extends base {
             if (row.column) {
                 whereOr += whereOr
                     ? " and `" +
-                      row.column +
-                      "` " +
-                      row.func +
-                      " '" +
-                      row.value +
-                      "'"
+                    row.column +
+                    "` " +
+                    row.func +
+                    " '" +
+                    row.value +
+                    "'"
                     : "`" +
-                      row.column +
-                      "` " +
-                      row.func +
-                      " '" +
-                      row.value +
-                      "'";
+                    row.column +
+                    "` " +
+                    row.func +
+                    " '" +
+                    row.value +
+                    "'";
             } else {
                 if (row.value) {
                     let orwhere = "";
@@ -189,19 +189,19 @@ module.exports = class extends base {
                     for (const field of fields) {
                         orwhere += orwhere
                             ? " or `" +
-                              field.Field +
-                              "` " +
-                              row.func +
-                              " '" +
-                              row.value +
-                              "'"
+                            field.Field +
+                            "` " +
+                            row.func +
+                            " '" +
+                            row.value +
+                            "'"
                             : "`" +
-                              field.Field +
-                              "` " +
-                              row.func +
-                              " '" +
-                              row.value +
-                              "'";
+                            field.Field +
+                            "` " +
+                            row.func +
+                            " '" +
+                            row.value +
+                            "'";
                     }
                     whereOr += orwhere + ")";
                 }

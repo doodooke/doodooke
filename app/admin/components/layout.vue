@@ -23,7 +23,12 @@
                         <i class="iconfont icon-rizhi"></i>
                         <span class="col-list-span">日志</span>
                     </el-col>
-                    <el-col :span="4" class="col-list" @click.native="getPlugin">
+                    <el-col
+                        :span="4"
+                        class="col-list"
+                        @click.native="getPlugin"
+                        v-if="$store.state.env.MARKETENTRY"
+                    >
                         <i class="iconfont icon-chajian1"></i>
                         <span class="col-list-span">应用</span>
                     </el-col>
@@ -182,7 +187,11 @@ export default {
                     );
                     if (res && res.errmsg === "ok") {
                         this.loading = false;
-                        this.$message.success(res.data);
+                        this.$notify({
+                            title: "温馨提示",
+                            message: res.data,
+                            type: "success"
+                        });
                     } else {
                         this.loading = false;
                     }
@@ -205,7 +214,11 @@ export default {
                     );
                     if (res && res.errmsg === "ok") {
                         this.loading = false;
-                        this.$message.success(res.data);
+                        this.$notify({
+                            title: "温馨提示",
+                            message: res.data,
+                            type: "success"
+                        });
                     } else {
                         this.loading = false;
                     }
@@ -291,7 +304,11 @@ export default {
         },
         addPaths(item) {
             if (!item.path) {
-                this.$message.warning("请输入调试路径");
+                this.$notify({
+                    title: "温馨提示",
+                    message: "请输入调试路径",
+                    type: "warning"
+                });
                 return;
             }
             this.debugPaths.push({
@@ -316,7 +333,11 @@ export default {
                 }
             );
             if (res && res.errmsg == "ok") {
-                this.$message.success("保存成功");
+                this.$notify({
+                    title: "温馨提示",
+                    message: "保存成功",
+                    type: "success"
+                });
                 this.showDebug = false;
             }
         }

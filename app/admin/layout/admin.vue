@@ -19,7 +19,8 @@ export default {
     head() {
         return {
             title: this.$store.state.env.HEAD_TITLE,
-            meta: [{
+            meta: [
+                {
                     hid: "description",
                     name: "description",
                     content: this.$store.state.env.HEAD_META_DESCRIPTION
@@ -34,7 +35,7 @@ export default {
     },
     data() {
         return {
-            menu: [],
+            menu: []
         };
     },
     async mounted() {

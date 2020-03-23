@@ -1,64 +1,70 @@
 <template>
-  <div v-loading="loading" :element-loading-text="loadingText">
-    <el-alert title="您已进入多多客应用商店，请使用多多客账号登录使用" type="warning" center show-icon :closable="false"></el-alert>
-    <iframe
-      id="myIframe"
-      :src="src"
-      scrolling="auto"
-      frameborder="0"
-      style="min-width:1200px;width:100%;background-color:#ffffff;"
-    ></iframe>
-    <el-dialog title="安全码" :visible.sync="showCode">
-      <div>{{securityCode}}</div>
-    </el-dialog>
-    <el-dialog
-      title
-      :show-close="false"
-      :visible.sync="showLogs"
-      custom-class="logsModal"
-      @close="closeSocket"
-    >
-      <div id="logs" ref="logs">
-        <pre style="white-space: pre-wrap;word-wrap: break-word;line-height:20px">
+    <div v-loading="loading" :element-loading-text="loadingText">
+        <el-alert
+            title="您已进入多多客应用商店，请使用多多客账号登录使用"
+            type="warning"
+            center
+            show-icon
+            :closable="false"
+        ></el-alert>
+        <iframe
+            id="myIframe"
+            :src="src"
+            scrolling="auto"
+            frameborder="0"
+            style="min-width:1200px;width:100%;background-color:#ffffff;"
+        ></iframe>
+        <el-dialog title="安全码" :visible.sync="showCode">
+            <div>{{securityCode}}</div>
+        </el-dialog>
+        <el-dialog
+            title
+            :show-close="false"
+            :visible.sync="showLogs"
+            custom-class="logsModal"
+            @close="closeSocket"
+        >
+            <div id="logs" ref="logs">
+                <pre style="white-space: pre-wrap;word-wrap: break-word;line-height:20px">
             {{logsData}}
         </pre>
-      </div>
-    </el-dialog>
-    <el-dialog title="本地调试" :visible.sync="showDebug" width="560px">
-      <el-row>
-        <el-row
-          style="display:flex;align-items:center;margin-bottom:16px;"
-          v-for="(item,index) in debugPaths"
-          :key="index"
-        >
-          <el-input
-            v-model="item.path"
-            placeholder="请输入调试路径"
-            style="width:400px;margin-right:12px;"
-          ></el-input>
-          <el-tooltip :content="item.copy?'复制':'转发'" placement="top">
-            <el-switch v-model="item.copy" style="margin-right:12px;"></el-switch>
-          </el-tooltip>
-          <div>
-            <i
-              class="iconfont icon-Add debug-icon-add"
-              v-if="index == debugPaths.length-1"
-              @click="addPaths(item)"
-            ></i>
-            <i
-              class="iconfont icon-reduce debug-icon-reduce"
-              v-if="debugPaths.length > 1"
-              @click="reducePaths(index)"
-            ></i>
-          </div>
-        </el-row>
-      </el-row>
-      <p slot="footer">
-        <el-button @click="showDebug = false">取消</el-button>
-        <el-button type="primary" @click="saveDebugPaths">保存</el-button>
-      </p>
-    </el-dialog>
-  </div>
+            </div>
+        </el-dialog>
+        <el-dialog title="本地调试" :visible.sync="showDebug" width="560px">
+            <el-row>
+                <el-row
+                    style="display:flex;align-items:center;margin-bottom:16px;"
+                    v-for="(item,index) in debugPaths"
+                    :key="index"
+                >
+                    <el-input
+                        v-model="item.path"
+                        placeholder="请输入调试路径"
+                        style="width:400px;margin-right:12px;"
+                    ></el-input>
+                    <el-tooltip :content="item.copy?'复制':'转发'" placement="top">
+                        <el-switch v-model="item.copy" style="margin-right:12px;"></el-switch>
+                    </el-tooltip>
+                    <div>
+                        <i
+                            class="iconfont icon-Add debug-icon-add"
+                            v-if="index == debugPaths.length-1"
+                            @click="addPaths(item)"
+                        ></i>
+                        <i
+                            class="iconfont icon-reduce debug-icon-reduce"
+                            v-if="debugPaths.length > 1"
+                            @click="reducePaths(index)"
+                        ></i>
+                    </div>
+                </el-row>
+            </el-row>
+            <p slot="footer">
+                <el-button @click="showDebug = false">取消</el-button>
+                <el-button type="primary" @click="saveDebugPaths">保存</el-button>
+            </p>
+        </el-dialog>
+    </div>
 </template>
 <script>
 import layout from "../../components/layout.vue";
@@ -131,12 +137,19 @@ export default {
                     })
                         .then(async ({ value }) => {
                             if (!value) {
-                                this.$message.warning(
-                                    "请输入安全码 Security Code"
-                                );
+                                this.$notify({
+                                    title: "温馨提示",
+                                    message: "请输入安全码 Security Code",
+                                    type: "warning"
+                                });
                                 return;
                             }
-                            this.$message.warning("开始安装");
+                            this.$notify({
+                                title: "温馨提示",
+                                message: "开始安装",
+                                type: "warning"
+                            });
+                            ("开始安装");
                             this.loading = true;
                             this.loadingText = "正在下载中";
                             let url = `/api/admin/install/installModule?id=${
@@ -145,7 +158,11 @@ export default {
                             const res = await this.$axios.$get(url);
                             if (res && res.errmsg === "ok") {
                                 this.loading = false;
-                                this.$message.success(res.data);
+                                this.$notify({
+                                    title: "温馨提示",
+                                    message: res.data,
+                                    type: "success"
+                                });
                             } else {
                                 this.loading = false;
                             }
@@ -235,7 +252,11 @@ export default {
         },
         addPaths(item) {
             if (!item.path) {
-                this.$message.warning("请输入调试路径");
+                this.$notify({
+                    title: "温馨提示",
+                    message: "请输入调试路径",
+                    type: "warning"
+                });
                 return;
             }
             this.debugPaths.push({
@@ -260,7 +281,11 @@ export default {
                 }
             );
             if (res && res.errmsg == "ok") {
-                this.$message.success("保存成功");
+                this.$notify({
+                    title: "温馨提示",
+                    message: "保存成功",
+                    type: "success"
+                });
                 this.showDebug = false;
             }
         }
