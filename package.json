@@ -1,6 +1,6 @@
 {
   "name": "doodooke",
-  "version": "3.0.4",
+  "version": "3.0.6",
   "scripts": {
     "link": "node ./bin/linkNode.js",
     "preinstall": "yarn config set registry https://registry.npm.taobao.org",
