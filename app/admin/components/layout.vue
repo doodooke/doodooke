@@ -27,7 +27,7 @@
                         :span="4"
                         class="col-list"
                         @click.native="getPlugin"
-                        v-if="$store.state.env.MARKETENTRY"
+                        v-if="$store.state.env.marketEntry"
                     >
                         <i class="iconfont icon-chajian1"></i>
                         <span class="col-list-span">应用</span>
