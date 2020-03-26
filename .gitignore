@@ -12,3 +12,4 @@ node
 bin/node
 development.config.yml
 .vscode
+docker

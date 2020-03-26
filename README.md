@@ -31,6 +31,14 @@ QQ交流群：874449168(交流群①)(群内含文档、视频教程下载)
 1. 通过开发环境安装，调试，配置完成之后，执行以下命令编译启动`npm run web:build && pm2 start pm2.config.js`
 
 
+### docker安装（推荐）
+
+1. 手动下载zip代码或者使用命令下载`git clone https://gitee.com/doodooke/doodoo.git`
+
+2. 进入代码根目录，然后执行命令`docker-compose up`（如果提示强制断开，请联系客服）
+
+3. 打开浏览器访问`http://127.0.0.1:3000`，会跳转到安装界面，完成安装（mysql主机地址：mysql，mysql默认账号密码：root/xxx，redis主机地址：redis）。
+
 ## 协议规定的约束和限制
 
 1. 未获得商业授权之前，不得将本软件用于商业用途（包括但不限于二次开发销售，以营利为目的的商业用途等）
