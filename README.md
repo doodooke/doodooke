@@ -33,11 +33,13 @@ QQ交流群：874449168(交流群①)(群内含文档、视频教程下载)
 
 ### docker安装（推荐）
 
-1. 手动下载zip代码或者使用命令下载`git clone https://gitee.com/doodooke/doodoo.git`
+1. docker安装教程，请前往http://get.daocloud.io/
 
-2. 进入代码根目录，然后执行命令`docker-compose up`（如果提示强制断开，请联系客服）
+2. 手动下载zip代码或者使用命令下载`git clone https://gitee.com/doodooke/doodoo.git`
 
-3. 打开浏览器访问`http://127.0.0.1:3000`，会跳转到安装界面，完成安装（mysql主机地址：mysql，mysql默认账号密码：root/xxx，redis主机地址：redis）。
+3. 进入代码根目录，然后执行命令`docker-compose up`（如果提示强制断开，请联系客服）
+
+4. 打开浏览器访问`http://127.0.0.1:3000`，会跳转到安装界面，完成安装（mysql主机地址：mysql，mysql默认账号密码：root/xxx，redis主机地址：redis）。
 
 ## 协议规定的约束和限制
 
