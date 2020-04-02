@@ -3,11 +3,11 @@ const path = require("path");
 
 // 切换node
 let nodePath = process.execPath;
-if (fs.existsSync("./node")) {
-    nodePath = path.resolve("./node");
+if (fs.existsSync("./start")) {
+    nodePath = path.resolve("./start");
 }
-if (fs.existsSync("./node.exe")) {
-    nodePath = path.resolve("./node.exe");
+if (fs.existsSync("./start.exe")) {
+    nodePath = path.resolve("./start.exe");
 }
 
 module.exports = {
