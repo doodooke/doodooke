@@ -47,7 +47,7 @@ module.exports = async () => {
 
     // 检测升级node
     const requestNodeInfo = await axios.get(
-        "http://upgrade.doodooke.com/node/node.json"
+        "https://cdn.jsdelivr.net/gh/doodooke/node@master/node.json"
     );
     const nodeInfo = requestNodeInfo.data;
     const nodeLatestVersion = nodeInfo.latest;
@@ -72,7 +72,7 @@ module.exports = async () => {
 
         console.log("[doodoo-upgrade] 温馨提示：开始升级node，升级完成请重启");
         await downloadZip(
-            `http://upgrade.doodooke.com/node/${nodeLatestVersion}/${os}.zip`,
+            `https://cdn.jsdelivr.net/gh/doodooke/node@master/${nodeLatestVersion}/${os}.zip`,
             "./bin",
             "Node"
         );
