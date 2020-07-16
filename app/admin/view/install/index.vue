@@ -149,7 +149,6 @@ export default {
                                 message: "开始安装",
                                 type: "warning"
                             });
-                            ("开始安装");
                             this.loading = true;
                             this.loadingText = "正在下载中";
                             let url = `/api/admin/install/installModule?id=${

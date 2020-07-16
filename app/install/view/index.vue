@@ -66,10 +66,9 @@ export default {
             if (!this.checked) {
                 this.$notify({
                     title: "温馨提示",
-                    message: "开始安装",
+                    message: "请先阅读协议并同意此协议",
                     type: "warning"
                 });
-                ("请先阅读协议并同意此协议");
                 return;
             }
             this.$bus.emit("active", 1);

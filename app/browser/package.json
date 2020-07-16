@@ -1,6 +1,6 @@
 {
   "name": "browser",
-  "version": "3.0.4",
+  "version": "3.1.4",
   "description": "> TODO: description",
   "author": "jqg <jqg612@163.com>",
   "homepage": "",
@@ -14,7 +14,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "doodoo-plugin-web": "^3.0.4"
+    "doodoo-plugin-web": "^3.1.4"
   },
   "gitHead": "1e6ecb43d1448d1a87604de95e02904eb31e8cc5"
 }

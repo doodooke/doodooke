@@ -14,7 +14,7 @@
     "predev": "node ./bin/link.js",
     "dev": "cross-env NODE_ENV=development NUXT_BUILD=true ./start app.js",
     "preapi:dev": "node ./bin/link.js",
-    "api:dev": "cross-env NODE_ENV=development ./start app.js",
+    "api:dev": "nodemon --exec cross-env NODE_ENV=development ./start app.js",
     "preapi:docker": "node ./bin/link.js",
     "api:docker": "cross-env NODE_ENV=docker ./start app.js",
     "api:doc": "apidoc -i app -o www/apidoc -t www/template",
@@ -49,6 +49,7 @@
     "eslint-loader": "^2.1.1",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-vue": "^4.7.1",
+    "nodemon": "^2.0.3",
     "prettier": "^1.14.3"
   },
   "dependencies": {
@@ -59,7 +60,6 @@
     "clone-response": "^1.0.2",
     "cross-env": "^5.2.0",
     "doodoo-plugin-baas": "^1.0.5-alpha.0",
-    "doodoo-plugin-chokidar": "^1.0.1-alpha.5",
     "doodoo-plugin-mysql": "^1.1.0",
     "doodoo-plugin-nuxt": "^1.0.2",
     "doodoo-plugin-proxy": "^1.0.1",
@@ -71,7 +71,7 @@
     "js-yaml": "^3.12.2",
     "knex": "^0.16.3",
     "koa-cors": "^0.0.16",
-    "lerna": "^3.4.3",
+    "lerna": "^3.22.1",
     "lodash": "^4.17.11",
     "path-to-regexp": "^3.0.0",
     "path-type": "^4.0.0",

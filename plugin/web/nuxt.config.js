@@ -131,6 +131,11 @@ if (webConfig.HEAD_LINK) {
 }
 
 module.exports = {
+  server: {
+    port: 8000, // default: 3000
+    host: '0.0.0.0' // default: localhost
+  },
+  
   rootDir: "plugin/web",
 
   env: webConfig,
@@ -162,9 +167,6 @@ module.exports = {
     },
     {
       src: "/js/socket.io.js"
-    },
-    {
-      src: "https://hm.baidu.com/hm.js?be01837c791802c529c8c6890dfe5079"
     },
     {
       src: "/cnzz.js"

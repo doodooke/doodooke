@@ -1,6 +1,6 @@
 {
   "name": "doodoo-plugin-migrate",
-  "version": "3.0.4",
+  "version": "3.1.4",
   "description": "> TODO: description",
   "author": "heqing <786699892@qq.com>",
   "homepage": "",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "clone-response": "^1.0.2",
-    "doodoo-plugin-web": "^3.0.4",
+    "doodoo-plugin-web": "^3.1.4",
     "raw-body": "^2.3.3",
     "xml2js": "^0.4.19"
   },

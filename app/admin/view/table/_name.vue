@@ -522,10 +522,9 @@ export default {
                 if (!this.selectionData.length) {
                     this.$notify({
                         title: "温馨提示",
-                        message: "开始安装",
+                        message: "请选择数据",
                         type: "warning"
                     });
-                    ("请选择数据");
                     return;
                 }
                 let ids = [];

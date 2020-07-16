@@ -128,10 +128,9 @@ export default {
             if (!this.form.id && !this.form.password) {
                 this.$notify({
                     title: "温馨提示",
-                    message: "开始安装",
+                    message: "请输入密码",
                     type: "warning"
                 });
-                ("请输入密码");
                 return;
             }
             let data = {

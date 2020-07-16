@@ -10,6 +10,7 @@ shell/openSource
 SECURITY_CODE.key
 node
 bin/node
+start
 development.config.yml
 .vscode
 docker

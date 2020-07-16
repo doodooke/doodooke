@@ -148,10 +148,6 @@ process.on("startServer", async () => {
             await next();
         }
     });
-    if (app.env === "development") {
-        app.plugin("chokidar");
-    }
-
     if (fs.existsSync("install.lock")) {
         app.plugin("mysql");
         app.plugin("redis");
